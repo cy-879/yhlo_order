@@ -1,64 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.FrameWorkController">
+<BorderPane fx:id="borderPane" prefHeight="600" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.FrameWorkController">
     <top>
-        <MenuBar maxWidth="1000.0" prefHeight="32.0" prefWidth="800.0">
+        <MenuBar prefHeight="40.0" prefWidth="800.0">
             <menus>
                 <Menu mnemonicParsing="false" text="订单">
-                    <items>
-                        <MenuItem mnemonicParsing="false" onAction="#normal" text="一般订单" />
-                        <MenuItem mnemonicParsing="false" onAction="#roles" text="多角订单" />
-                    </items>
+
+                   <items>
+                       <Menu mnemonicParsing="false" text="一般订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" onAction="#normal" text="ZOR5 流通子公司订单" />
+                               <MenuItem mnemonicParsing="false" text="ZRE1 退货订单" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="多角订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZOR3 多角贸易订单（审核）" />
+                               <MenuItem mnemonicParsing="false" onAction="#roles" text="ZRE1 退货订单" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="寄售订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZKB5 寄售发货" />
+                               <MenuItem mnemonicParsing="false" text="ZKA1 寄售拣货退货" />
+                               <MenuItem mnemonicParsing="false" text="ZKB3 寄售发货（多角）" />
+                               <MenuItem mnemonicParsing="false" text="ZKR1 寄售结算退货" />
+                               <MenuItem mnemonicParsing="false" text="ZKE5 寄售结算" />
+                               <MenuItem mnemonicParsing="false" text="ZKR1 寄售结算退货" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="借项订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZDR1 借项凭证请求" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="其他订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZFD1 样品订单（审核）" />
+                           </items>
+                       </Menu>
+                      <Menu mnemonicParsing="false" text="销售订单查询" />
+                      <Menu mnemonicParsing="false" text="批量结案" />
+                      <Menu mnemonicParsing="false" text="未清订单" />
+                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="发货">
+
+                <Menu mnemonicParsing="false" text="交货单管理">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <MenuItem mnemonicParsing="false" text="发货管理" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="报表">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" text="待开发 " />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="发票管理">
+                <Menu mnemonicParsing="false" text="基础数据">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="一般数据">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="产品资料" onAction="#productData"/>
+                        <MenuItem mnemonicParsing="false" text="客户资料" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="系统管理">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="用户设置" />
+                        <MenuItem mnemonicParsing="false" onAction="#config" text="配置同步" />
+                        <MenuItem mnemonicParsing="false" onAction="#DataSyn" text="主数据同步" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="退出系统" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="用户设置">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="更改密码" />
+                        <MenuItem mnemonicParsing="false" text="清除本地缓存" />
+                        <MenuItem mnemonicParsing="false" text="重置环境" />
+                        <MenuItem mnemonicParsing="false" text="清除异常登录" />
+                        <MenuItem mnemonicParsing="false" text="重新登录" />
+                        <MenuItem mnemonicParsing="false" text="皮肤设置" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="系统">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#homePage" text="返回首页" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#goWebview" text="外部网站" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
     <center>
-        <AnchorPane>
+        <StackPane>
+            <children>
+                <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
+                    <content>
+
+                    </content>
+                </ScrollPane>
+            </children>
+
+        </StackPane>
+       <!-- <AnchorPane prefHeight="500" >
             <fx:include fx:id="main" source="/views/Main.fxml" />
             <fx:include fx:id="normal" source="/views/Normal.fxml" />
             <fx:include fx:id="roles" source="/views/Roles.fxml" />
-        </AnchorPane>
+        </AnchorPane>-->
+       <!-- <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+            <content>
+                <fx:include fx:id="main" source="/views/Main.fxml" />
+                <fx:include fx:id="normal" source="/views/Normal.fxml" />
+                <fx:include fx:id="roles" source="/views/Roles.fxml" />
+            </content>
+        </ScrollPane>-->
     </center>
+   <bottom>
+      <GridPane prefHeight="60" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="主机地址：" textAlignment="CENTER" />
+            <Label text="登录时间：" textAlignment="CENTER" GridPane.columnIndex="1" />
+            <Label text="登录用户：" textAlignment="CENTER" GridPane.columnIndex="2" />
+            <Label text="用户部门：" textAlignment="CENTER" GridPane.columnIndex="3" />
+         </children>
+      </GridPane>
+   </bottom>
+
+
+    
 </BorderPane>

@@ -58,36 +58,36 @@ public class LoginController implements Initializable {
             return;
         }
 
-        UsernamePasswordToken token = new UsernamePasswordToken(userAccount, password, false);
-        Subject subject = SecurityUtils.getSubject();
-        try
-        {
-            subject.login(token);
-
-        }
-        catch (AuthenticationException e)
-        {
-            String msg = "用户或密码错误";
-            if (StringUtils.isNotEmpty(e.getMessage()))
-            {
-                msg = e.getMessage();
-            }
-            ResultUtil.getWarringResult(msg);
-        }
-
-        // 查询用户信息
-//        SysUser user = sysUserService.selectUserByLoginName(userAccount);
-//        if (null == user) {
-//            ResultUtil.getWarringResult("用户不存在！");
-//            return;
-//        }
+//        UsernamePasswordToken token = new UsernamePasswordToken(userAccount, password, false);
+//        Subject subject = SecurityUtils.getSubject();
+//        try
+//        {
+//            subject.login(token);
 //
-//        String encryptPassword = encryptPassword(user.getLoginName(),password,user.getSalt());
-//
-//        if (!encryptPassword.equals(user.getPassword())) {
-//            ResultUtil.getWarringResult("密码不正确！");
-//            return;
 //        }
+//        catch (AuthenticationException e)
+//        {
+//            String msg = "用户或密码错误";
+//            if (StringUtils.isNotEmpty(e.getMessage()))
+//            {
+//                msg = e.getMessage();
+//            }
+//            ResultUtil.getWarringResult(msg);
+//        }
+
+         //查询用户信息
+        SysUser user = sysUserService.selectUserByLoginName(userAccount);
+        if (null == user) {
+            ResultUtil.getWarringResult("用户不存在！");
+            return;
+        }
+
+        String encryptPassword = encryptPassword(user.getLoginName(),password,user.getSalt());
+
+        if (!encryptPassword.equals(user.getPassword())) {
+            ResultUtil.getWarringResult("密码不正确！");
+            return;
+        }
 
         skipMain();
     }
@@ -102,6 +102,7 @@ public class LoginController implements Initializable {
         mainStage.getScene().getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
         mainStage.getIcons().add(CommonUtil.getLogo());
         mainStage.setTitle("订单系统");
+        //mainStage.setResizable(false);
         mainStage.show();
 
         Window window = textUserAccount.getScene().getWindow();

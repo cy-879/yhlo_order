@@ -10,7 +10,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+import static com.sun.javafx.application.LauncherImpl.launchApplication;
+
+
+@EnableScheduling //开启定时任务
 @MapperScan(basePackages = {"com.yhlo.oa.mapper"})
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}, scanBasePackages = {"com.yhlo.oa"})
 public class YhloOaApplication extends Application {
@@ -19,7 +24,8 @@ public class YhloOaApplication extends Application {
         // 先加载spring
         SpringApplication.run(YhloOaApplication.class, args);
         // 再启动主页面
-        launch(args);
+        //launch(args);
+        launchApplication(YhloOaApplication.class, FxAppPreloader.class, args);
     }
 
     @Override
@@ -31,7 +37,17 @@ public class YhloOaApplication extends Application {
         primaryStage.setTitle("订单管理系统");
         primaryStage.resizableProperty().setValue(Boolean.FALSE);//禁用最大化
         primaryStage.setScene(scene);
+        //设置窗口不可拉伸
+        primaryStage.setResizable(false);
         primaryStage.getIcons().add(CommonUtil.getLogo());
         primaryStage.show();
+    }
+
+
+    @Override
+    public void stop() throws Exception {
+        // Platform.exit();
+        // springContext.stop();
+        System.exit(0);
     }
 }

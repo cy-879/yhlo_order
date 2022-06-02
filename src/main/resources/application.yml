@@ -70,3 +70,15 @@ shiro:
   rememberMe:
     # 是否开启记住我
     enabled: true
+
+
+#定时任务配置
+kafka:
+  cron:
+    #每10分钟执行一次，物料主数据
+    global_material: 0 */100 * * * ?
+    #每10分钟执行一次，客户主数据
+    global_customer: 0 */100 * * * ?
+    #每10分钟执行一次，客户物料
+    global_customer_material: 0 */10 * * * ?
+

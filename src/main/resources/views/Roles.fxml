@@ -1,10 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.yhlo.oa.controller.RolesController" prefHeight="600.0" prefWidth="1000.0">
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.RolesController">
+    <left>
+        <ScrollPane prefHeight="600.0" prefWidth="350.0">
+            <TableView fx:id="rolesOrderList" layoutX="14.0" prefHeight="600" prefWidth="350.0" />
+        </ScrollPane>
+    </left>
     <center>
-        <Label text="多角订单"></Label>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+            <children>
+
+                <Label layoutX="48.0" layoutY="49.0" text="合约订单号" /><!--x:35 y:35-->
+                <TextField fx:id="contractOrderNo" editable="false" layoutX="124.0" layoutY="42.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="84.0" text="销售订单号" />
+                <TextField fx:id="saleOrderNo" editable="false" layoutX="124.0" layoutY="77.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="119.0" text="售达方" />
+                <TextField fx:id="deliveryParty" layoutX="124.0" layoutY="112.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="154.0" text="送达方" />
+                <TextField fx:id="consignee" layoutX="124.0" layoutY="147.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="189.0" text="总含税金额" />
+                <TextField fx:id="totalTaxInclusiveAmount" layoutX="124.0" layoutY="182.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="224.0" text="优惠券" />
+                <TextField fx:id="coupon" layoutX="124.0" layoutY="217.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="259.0" text="运费" />
+                <TextField fx:id="freight" layoutX="124.0" layoutY="252.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="294.0" text="价格类型" />
+                <TextField fx:id="priceType" layoutX="124.0" layoutY="287.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="329.0" text="销售组织" />
+                <TextField fx:id="salesOrganization" layoutX="124.0" layoutY="322.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="364.0" text="备注" />
+                <TextField fx:id="remarks" layoutX="124.0" layoutY="357.0" prefHeight="30.0" prefWidth="270.0" />
+            </children>
+        </AnchorPane>
     </center>
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+        <items>
+            <Button fx:id="add" mnemonicParsing="false" text="新增" onAction="#toAdd">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-primary" />
+                </styleClass>
+            </Button>
+            <Button fx:id="update" mnemonicParsing="false" text="修改">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-primary" />
+                </styleClass>
+            </Button>
+
+            <Button fx:id="searchTable" mnemonicParsing="false" text="查询" onAction="#loadTable">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-primary" />
+                </styleClass>
+            </Button>
+
+            <Button fx:id="reloadTable" mnemonicParsing="false" text="刷新">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-primary" />
+                </styleClass>
+            </Button>
+
+            <Button fx:id="exportOrder" mnemonicParsing="false" text="导出">
+                <styleClass>
+                    <String fx:value="btn" />
+                    <String fx:value="btn-primary" />
+                </styleClass>
+            </Button>
+        </items>
+      </ToolBar>
+   </top>
 </BorderPane>

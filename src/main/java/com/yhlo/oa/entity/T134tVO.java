@@ -1,0 +1,31 @@
+package com.yhlo.oa.entity;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+/**
+ * @author cy
+ * @ClassName: T134tVO
+ * @Description:
+ * @date 2022/5/20
+ */
+
+@Data
+@ApiModel("物料类型")
+public class T134tVO {
+    @ApiModelProperty(value = "主键id")
+    private int id;
+    @ApiModelProperty(value = "表名")
+    private String zsap_tabel;
+    @ApiModelProperty(value = "表描述")
+    private String zsap_tabletxt;
+    @ApiModelProperty(value = "语言")
+    private String spras;
+    @ApiModelProperty(value = "物料类型")
+    private String mtart;
+    @ApiModelProperty(value = "物料类型描述")
+    private String mtbez;
+
+
+}

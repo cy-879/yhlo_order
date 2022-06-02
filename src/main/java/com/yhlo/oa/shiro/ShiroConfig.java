@@ -8,6 +8,8 @@ import com.yhlo.oa.constant.Constants;
 import com.yhlo.oa.shiro.realm.UserRealm;
 import com.yhlo.oa.util.CipherUtils;
 import com.yhlo.oa.util.StringUtils;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -30,6 +32,7 @@ import org.springframework.context.annotation.Configuration;
  * 
  * @author ruoyi
  */
+@Slf4j
 @Configuration
 public class ShiroConfig
 {
@@ -149,13 +152,13 @@ public class ShiroConfig
     /**
      * 自定义Realm
      */
-    @Bean
+    @Bean(name="userRealm")
     public UserRealm userRealm(EhCacheManager cacheManager)
     {
         UserRealm userRealm = new UserRealm();
         userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
         userRealm.setCacheManager(cacheManager);
-        System.err.println("自定义realm完成");
+        log.info("自定义realm完成");
         return userRealm;
     }
 
@@ -164,7 +167,7 @@ public class ShiroConfig
      * 安全管理器
      */
     @Bean
-    public SecurityManager securityManager(UserRealm userRealm)
+    public SecurityManager securityManager(@Qualifier("userRealm")UserRealm userRealm)
     {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         // 设置realm.
@@ -175,7 +178,7 @@ public class ShiroConfig
         securityManager.setCacheManager(getEhCacheManager());
         // session管理器
       //  securityManager.setSessionManager(sessionManager());
-        System.err.println("安全管理器注册完成");
+        log.info("安全管理器注册完成");
         return securityManager;
     }
 

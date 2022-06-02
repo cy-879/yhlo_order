@@ -4,11 +4,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import java.lang.String?>
-<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.202" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.NormalController">
+<?import java.net.URL?>
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.NormalController">
    <left>
-       <AnchorPane prefHeight="600.0" prefWidth="300.0">
-               <TableView fx:id="orderList" prefHeight="565"/>
-       </AnchorPane>
+       <ScrollPane prefHeight="600.0" prefWidth="350.0">
+           <TableView fx:id="orderList" layoutX="14.0" prefHeight="600" prefWidth="350.0" />
+       </ScrollPane>
    </left>
    <center>
        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -44,4 +45,45 @@
            </children>
        </AnchorPane>
    </center>
+
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="800.0" BorderPane.alignment="CENTER" >
+            <items>
+                <Button fx:id="add" mnemonicParsing="false" text="新增" >
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+                <Button fx:id="update" mnemonicParsing="false" text="修改">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="searchTable" mnemonicParsing="false" text="查询" onAction="#loadTable">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="reloadTable" mnemonicParsing="false" text="刷新">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="exportOrder" mnemonicParsing="false" text="导出">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+            </items>
+        </ToolBar>
+    </top>
+
 </BorderPane>

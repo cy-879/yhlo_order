@@ -15,6 +15,8 @@ public class BaseEntity implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
+    private String gid;
+
     /** 搜索值 */
     private String searchValue;
 
@@ -110,5 +112,13 @@ public class BaseEntity implements Serializable
     public void setParams(Map<String, Object> params)
     {
         this.params = params;
+    }
+
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
     }
 }

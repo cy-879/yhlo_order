@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.AddRolesController">
+   <children>
+      <VBox layoutX="50" layoutY="10.0" prefHeight="400.0" prefWidth="500.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="采购订单号" />
+                  <ComboBox fx:id="cbb" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="销售订单号" />
+                  <TextField editable="true" prefHeight="30.0" prefWidth="366.0" fx:id="xsddText" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="售达方" />
+                  <TextField fx:id="shoudfText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="送达方" />
+                  <TextField fx:id="songdfText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="总含税金额" />
+                  <TextField fx:id="zonghsjeText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="优惠券" />
+                  <TextField fx:id="youhqText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="运费" />
+                  <TextField fx:id="yunfText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="价格类型" />
+                  <TextField fx:id="jiaglxText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="销售组织" />
+                  <TextField editable="true" prefHeight="30.0" prefWidth="366.0" fx:id="xiaoszzText" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">
+               <children>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="主订单号" />
+                  <TextField fx:id="zhuddhText" editable="true" prefHeight="30.0" prefWidth="366.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#addRolesOrder" text="保存">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="closeButton" mnemonicParsing="false" text="关闭" onAction="#handleCloseButtonAction">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-primary" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

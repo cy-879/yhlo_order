@@ -8,7 +8,9 @@ import com.yhlo.oa.util.DataTypeWrapper;
 import com.yhlo.oa.util.NodeUtil;
 import com.yhlo.oa.util.ResultUtil;
 import com.yhlo.oa.util.SpringBeanUtil;
+import de.felixroske.jfxsupport.FXMLController;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URL;
@@ -30,7 +33,7 @@ import java.util.ResourceBundle;
  * @description: 一般订单
  **/
 @Slf4j
-@RestController
+@FXMLController
 public class NormalController implements Initializable {
 
     public TextField orderNo;
@@ -39,6 +42,7 @@ public class NormalController implements Initializable {
     public TextField createTime;
     public TableView<OrderVO> orderList;
 
+    @Autowired
     private NormalOrderService normalOrderService;
 
     private final static String[] ROWS = {"orderNo", "status", "createBy", "createTime"};
@@ -47,7 +51,39 @@ public class NormalController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         normalOrderService = SpringBeanUtil.getBean(NormalOrderServiceImpl.class);
 
-        log.info("进入多角订单！");
+        log.info("进入一般订单");
+       // loadTable();
+        /*ObservableList<OrderVO> items = orderList.getItems();
+        items.clear();
+        items.addAll(getDataList());
+
+        orderList.setRowFactory(tv -> {
+            tv.setOnMouseClicked(event -> {
+                OrderVO order = tv.getSelectionModel().getSelectedItem();
+                if (event.getClickCount() == 1 && null != order) {
+                    this.getDetailInfo(order);
+                }
+            });
+            return new TableRow<>();
+        });
+
+        ObservableList<TableColumn<OrderVO, ?>> columns = orderList.getColumns();
+        columns.clear();
+        // 将列的值与当前的javabean的属性进行绑定
+        List<KeyList> keyList = DataTypeWrapper.getKeyList(OrderVO.class);
+        for (int i = 0; i < ROWS.length; i++) {
+            String key = ROWS[i];
+            Optional<KeyList> keys = keyList.stream().filter(e-> e.getKey().equals(key)).findFirst();
+            TableColumn<OrderVO, Object> column = new TableColumn();
+            column.setText(keys.get().getLabel());
+            column.setCellValueFactory(new PropertyValueFactory(key));
+            columns.add(column);
+        }*/
+    }
+
+
+    @FXML
+    private void loadTable(){
         ObservableList<OrderVO> items = orderList.getItems();
         items.clear();
         items.addAll(getDataList());
@@ -76,7 +112,7 @@ public class NormalController implements Initializable {
         }
     }
 
-    private List<OrderVO> getDataList() {
+    public List<OrderVO> getDataList() {
         return normalOrderService.queryOrderList();
     }
 
@@ -89,6 +125,7 @@ public class NormalController implements Initializable {
 
     public void updateData() {
         log.info("修改数据");
+
         OrderVO order = orderList.getSelectionModel().getSelectedItem();
         if (null == order) {
             ResultUtil.getWarringResult("请选择要修改订单！");
