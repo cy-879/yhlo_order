@@ -126,7 +126,7 @@ public class GeneralOrderController implements Initializable {
     public TextField dataIdField;
 
     private String xiaoszz;
-    private ShowRebatePolicyInfoVO shpi;
+    private ShowRebatePolicyInfoVO srpi;
 
 
     /**
@@ -3359,8 +3359,9 @@ public class GeneralOrderController implements Initializable {
      * @Date 2023/2/13 14:25
      */
     public void setRebatePolicyObject(ShowRebatePolicyInfoVO srp){
-        shpi = srp;
-        rebateNoAssembly.setText(shpi.getZzbname());
+        srpi = srp;
+        rebateNoAssembly.setText(srpi.getZzbname());
+
     }
 
 }
