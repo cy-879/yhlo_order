@@ -3,6 +3,7 @@ package com.yhlo.oa.webservice;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.yhlo.oa.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -38,83 +39,29 @@ import java.util.List;
 public class GetSapConfigTableInfo {
 
 
-   /* public static void main(String[] args) throws ServiceException, IOException {
-        //请求地址
-        String url = "http://sapdev.szyhlo.com:8000/sap/bc/srt/rfc/sap/zws_oms2erp/500/zws_oms2erp/zws_oms2erp";
+    /*public static void main(String[] args) throws ServiceException, IOException {
+        String date = DateUtils.dateTime();
+        String JSONSTR1 = "<![CDATA[[{\"VKORG\":\"3000\",\"KUNNR\":\"0000110000\","
+                +" \"HIENR\":\"\",\"MATNR\":\"000000000000383062\",\"AUART\":\"ZOR5\","
+                +" \"PRSDT\":\""+date+"\",\"KWMENG\":\"1\",\"KONMS\":\"ZHI\"}]]]>";
 
-        String username = "DDS"; //账号
-        String password = "Yhlo123456"; //密码
-        String Authorization = username + ":" + password;
+        String result = sendRequest("SD143",JSONSTR1);
+        result===[{"MATNR":"","KNUMH":"0000008470","DATBI":"9999-12-31",
+        "DATAB":"2021-08-01","KBETR":114.00,"KONWA":"CNY","KPEIN":1000,
+        "KMEIN":"ZHI","KONMS":"","TYPE":"S","MESSAGE":"查询成功"}]
+        System.err.println("result==="+result);
 
-        List<String> paramList = new ArrayList<>();
-        paramList.add("T001");
-        paramList.add("TVKO");
-        paramList.add("TVKOT");
-        paramList.add("TVKWZ");
-        paramList.add("TVKBT");
-        paramList.add("TVGRT");
-        paramList.add("TVKBZ");
-        paramList.add("TVBVK");
-        paramList.add("TVSTT");
-        paramList.add("TVTWT");
-        paramList.add("TSPAT");
-        paramList.add("TVZBT");
-        paramList.add("T042ZT");
-        paramList.add("T001W");
-        paramList.add("T001L");
-        paramList.add("T024E");
-        paramList.add("V_024");
-        paramList.add("T134T");
-        paramList.add("TWEWT");
-        paramList.add("T023T");
-        paramList.add("T179");
-        paramList.add("T005U");
-        paramList.add("T077X");
-        paramList.add("T171T");
-        paramList.add("T189T");
-        paramList.add("CSKT");
-        paramList.add("T005T");
-        paramList.add("TVSBT");
-        paramList.add("TVAUT");
-        paramList.add("TVAGT");
-
-        System.err.println(paramList);
-
-        String param = "TVKWZ";
-
-        String requestBody = "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\"  xmlns:urn=\"urn:sap-com:document:sap:rfc:functions\">\n" +
-                "   <soap:Header/>\n" +
-                "   <soap:Body>\n" +
-                "   <urn:ZWS_DD2SAP>\n" +
-                "       <IC_INTNR>SD135</IC_INTNR>\n" +
-                "           <JSONSTR1><![CDATA[[{\"ZSAP_TABLE\":\""+param+"\"}]]]></JSONSTR1>\n"+
-                "   </urn:ZWS_DD2SAP>\n" +
-                "   </soap:Body>\n" +
-                "</soap:Envelope>";
-        System.out.println("requestBody\n" + requestBody);
-        String responseBody = doPost(url, requestBody, Authorization);
-        //System.err.println("responseBody=="+responseBody);
-
-        Document doc = null;
-        try {
-            doc = DocumentHelper.parseText(responseBody.trim());
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
-
-        Element root = doc.getRootElement();// 指向根节点
-        String message = root.element("Body").element("ZWS_DD2SAPResponse").elementTextTrim("OUT1").trim();
-        JSONArray objects = JSON.parseArray(message);
-        System.out.println("\n反馈报文:" + objects);
-        if(objects.size()>0){
-            for(int i=0;i<objects.size();i++){
-                JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                System.out.println(job.get("ZSD_02")) ;   // 得到 每个对象中的属性值
-            }
-        }
-        System.err.println(sendRequest("TVKWZ"));
     }*/
 
+
+
+    /**
+     * @Author cy
+     * @Description
+     *  @param IC_INTNR 接口编号
+     *  @param JSONSTR1 接口入参
+     * @Date 2022/9/8 9:10
+     */
     public static String sendRequest(String IC_INTNR,String JSONSTR1){
 
 
@@ -135,6 +82,7 @@ public class GetSapConfigTableInfo {
         log.info("requestBody\n" + requestBody);
         String responseBody = doPost(url, requestBody, Authorization);
         //System.err.println("responseBody=="+responseBody);
+        log.info("responseBody：" + responseBody);
         String message = "";
         if(responseBody.contains("error")){
             return message;
@@ -181,7 +129,7 @@ public class GetSapConfigTableInfo {
             conn.setDoInput(true);
             //设置连接超时时间和读取超时时间
             conn.setConnectTimeout(3000);
-            conn.setReadTimeout(3000);
+            conn.setReadTimeout(100000);
             conn.setRequestProperty("Content-Type","application/soap+xml; charset=utf-8");
             conn.setRequestProperty("Accept", "application/soap+xml");
             //获取输出流，写入请求的json或者xml报文

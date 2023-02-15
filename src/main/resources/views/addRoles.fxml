@@ -12,6 +12,7 @@
                <children>
                   <Label prefHeight="30.0" prefWidth="100.0" text="采购订单号" />
                   <ComboBox fx:id="cbb" editable="true" prefHeight="30.0" prefWidth="366.0" />
+                  <ComboBox fx:id="cbb1" editable="true" prefHeight="30.0" prefWidth="366.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="300.0">

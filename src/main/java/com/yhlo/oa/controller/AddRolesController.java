@@ -2,32 +2,25 @@ package com.yhlo.oa.controller;
 
 import com.yhlo.oa.entity.Item;
 import com.yhlo.oa.entity.RolesOrderVO;
-import com.yhlo.oa.service.NormalOrderService;
 import com.yhlo.oa.service.RolesOrderService;
 import com.yhlo.oa.service.iml.RolesOrderServiceImpl;
 import com.yhlo.oa.util.AutoCompleteComboBoxListener;
 import com.yhlo.oa.util.Convert;
 import com.yhlo.oa.util.SpringBeanUtil;
-import com.yhlo.oa.util.StageManager;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * @author cy
@@ -41,6 +34,8 @@ public class AddRolesController implements Initializable {
 
     @FXML
     public ComboBox <String>cbb;//采购订单号
+    @FXML
+    public ComboBox cbb1;//采购订单号
     @FXML
     public TextField xsddText;//销售订单号
     @FXML
@@ -70,6 +65,17 @@ public class AddRolesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         rolesOrderService = SpringBeanUtil.getBean(RolesOrderServiceImpl.class);
         initComboBox();
+
+        cbb1.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if(null != newValue) {
+                    Map it = (Map) newValue;
+                    System.err.println("key===" + it.get("itemKey"));
+                }
+            }
+        });
     }
 
     /***
@@ -78,17 +84,22 @@ public class AddRolesController implements Initializable {
     public void initComboBox(){
 
        List<Item> itemList = rolesOrderService.getOrderItem();
-
+       List<Map> mpList = new ArrayList<Map>();
         if(null != itemList && itemList.size()>0){
             for (Item item :itemList ) {
+                Map m = new HashMap<>();
                 cbb.getItems().add(item.getItemKey());
+                m.put("itemKey",item.getItemKey());
+                m.put("itemValue",item.getItemValue());
+                mpList.add(m);
             }
         }
+
 
         cbb.setPromptText("请输入订单号搜索");
         cbb.setPlaceholder(new Label("空值"));
         AutoCompleteComboBoxListener auto = new AutoCompleteComboBoxListener<>(cbb);
-
+        AutoCompleteComboBoxListener.getComboBox(cbb1,FXCollections.observableList(mpList),"itemValue");
       /*  obsAll = cbb.getItems();
 
         TextField tf = cbb.editorProperty().get();

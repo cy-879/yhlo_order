@@ -9,6 +9,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.Locale;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
@@ -184,4 +186,42 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
         return Date.from(zdt.toInstant());
     }
+
+
+    /**
+     * 计算两个时间间隔多少秒
+     *
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public static Long intervalTime(Date startDate, Date endDate) {
+        long a = endDate.getTime();
+        long b = startDate.getTime();
+        Long c = ((a - b) / 1000);
+        return c;
+    }
+
+    /**
+     * @Author cy
+     * @Description CST日期格式转换成 Date Strig
+     * @Return
+     * @Date 2023/1/16 10:45
+     */
+    public static String parseCST(String str) {
+        SimpleDateFormat sim1 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+        if(str == null) {
+            return null;
+        }
+        if(str.contains("CST") || str.contains("cst")){
+            try {
+                Date date = sim1.parse(str);
+                return dateTime(date);
+            }catch (ParseException e ){
+                e.printStackTrace();
+            }
+        }
+        return str;
+    }
+
 }

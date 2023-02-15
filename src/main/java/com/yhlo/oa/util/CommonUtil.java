@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Optional;
@@ -66,6 +65,48 @@ public class CommonUtil {
 
 
     /**
+     * @Author cy
+     * @Description 提示语句
+     * @param headerText 提示语句
+     * @param errorContent 错误信息
+     * @Return
+     * @Date 2022/10/21 16:40
+     */
+    public static void _alertErrorMessage(String headerText,String errorContent){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("异常提示");
+        alert.setContentText(headerText);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(CommonUtil.getLogo());
+
+        StringWriter sw = new StringWriter();
+        sw.append(errorContent);
+
+        PrintWriter pw = new PrintWriter(sw);
+        String exceptionText = sw.toString();
+        Label label = new Label("异常信息：");
+
+        TextArea textArea = new TextArea(exceptionText);
+        textArea.setEditable(false);//不能编辑
+        textArea.setWrapText(true);//换行
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+        GridPane.setVgrow(textArea, Priority.ALWAYS);
+        GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+        GridPane expContent = new GridPane();
+        expContent.setMaxWidth(Double.MAX_VALUE);
+        expContent.add(label, 0, 0);
+        expContent.add(textArea, 0, 1);
+
+        // 在对话框窗格中设置可扩展异常。
+        alert.getDialogPane().setExpandableContent(expContent);
+
+        alert.showAndWait();
+    }
+
+
+    /**
      *异常提示弹出框
      * @param content 提示语句
      * @param ex 异常
@@ -79,16 +120,17 @@ public class CommonUtil {
 
         //Exception ex = new FileNotFoundException("Could not find file blabla.txt");
 
-        // Create expandable Exception.
+        // 创建可扩展异常
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
         String exceptionText = sw.toString();
 
-        Label label = new Label("The exception stacktrace was:");
+        Label label = new Label("异常信息：");
 
         TextArea textArea = new TextArea(exceptionText);
         textArea.setEditable(false);
+        textArea.setWrapText(true);
 
         textArea.setMaxWidth(Double.MAX_VALUE);
         textArea.setMaxHeight(Double.MAX_VALUE);
@@ -100,7 +142,7 @@ public class CommonUtil {
         expContent.add(label, 0, 0);
         expContent.add(textArea, 0, 1);
 
-        // Set expandable Exception into the dialog pane.
+        // 在对话框窗格中设置可扩展异常。
         alert.getDialogPane().setExpandableContent(expContent);
 
         alert.showAndWait();

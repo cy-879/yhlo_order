@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="root" prefHeight="450" prefWidth="800" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.ShowRebatePolicyInfoController">
+
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeView" text="传输">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+            </items>
+        </ToolBar>
+    </top>
+
+
+    <center>
+        <VBox prefHeight="400.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="30.0" prefWidth="${root.width}" style="-fx-background-color: #5bc0de">
+                   <children>
+                       <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="76.0" text="详细信息" textAlignment="CENTER">
+                           <HBox.margin>
+                               <Insets bottom="10.0" left="10.0" top="10.0" />
+                           </HBox.margin>
+                         <font>
+                            <Font size="14.0" />
+                         </font>
+                       </Label>
+                   </children>
+                </HBox>
+                <HBox prefHeight="300.0" prefWidth="${root.width}">
+                   <children>
+                      <TableView fx:id="tableView" prefHeight="300.0" prefWidth="${root.width}">
+                          <columns>
+                              <TableColumn fx:id="mColumnSelect" prefWidth="70" sortable="false" style="-fx-alignment:CENTER" text="选择">
+
+                              </TableColumn>
+                          </columns>
+                      </TableView>
+                   </children>
+                </HBox>
+            </children>
+        </VBox>
+
+    </center>
+
+
+    <stylesheets>
+        <URL value="@/css/bootstrapfx.css" />
+    </stylesheets>
+</BorderPane>

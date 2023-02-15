@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Set;
 import org.apache.commons.lang3.ArrayUtils;
@@ -531,6 +532,20 @@ public class Convert
     public static Float toFloat(Object value)
     {
         return toFloat(value, null);
+    }
+
+    /**
+     * @Author cy
+     * @Description
+     * @param value 被转换的值
+     * @param str 保留几位小数（代码） 如："0.00" 两位
+     * @Return 结果
+     * @Date 2022/10/25 14:15
+     */
+    public static Float toFloat2(Object value,String str)
+    {
+        DecimalFormat df = new DecimalFormat(str);
+        return toFloat(df.format(value), null);
     }
 
     /**

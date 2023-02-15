@@ -104,5 +104,8 @@ public interface GetSapConfigTableInfoMapper {
    public int insertTvagt(TvagtVO tv);
    public void deleteTvagt();
 
+   public int insertT142t(T142tVO t1);
+   public void deleteT142t();
+
 
 }

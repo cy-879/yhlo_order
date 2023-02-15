@@ -71,4 +71,6 @@ public interface GetSapConfigTableInfoService {
 
     public String insertTvagt(List<TvagtVO> list);
 
+    public String insertT142t(List<T142tVO> list);
+
 }

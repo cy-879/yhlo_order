@@ -151,6 +151,40 @@ public class SysUserServiceImpl implements SysUserService {
         return rows;
     }
 
+    @Override
+    public String addYhloUser(SysUser user) {
+        String rs = "ok，操作成功";
+        try {
+            userMapper.insertUser(user);
+        }catch (Exception e){
+            rs = "error,操作失败："+e.getMessage();
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
+    public String updateYhloUser(SysUser user) {
+        String rs = "ok，操作成功";
+        try {
+            userMapper.updateYhloUser(user);
+        }catch (Exception e){
+            rs = "error,操作失败："+e.getMessage();
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
+    public List<SysUser> getUserList() {
+        return userMapper.getUserList();
+    }
+
+    @Override
+    public List<SysUser> checkUserExists(String loginName) {
+        return userMapper.checkUserExists(loginName);
+    }
+
 
     /**
      * 修改用户密码

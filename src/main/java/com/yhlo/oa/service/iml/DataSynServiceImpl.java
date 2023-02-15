@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -48,8 +49,9 @@ public class DataSynServiceImpl implements DataSynService {
      * @Return
      * @Date 2022/5/26 10:53
      */
+
     //批处理
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertMara(List<It_MaraVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -61,11 +63,13 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_MaraVO> maList= queryMaraListByParam(list.get(i));
                 if(maList.size()>0){//表示数据库中已经存在了
                     for (It_MaraVO ma : maList) {
-                        deleteMara(ma);//删除已有的
+                        list.get(i).setId(ma.getId());
+                        dataMapper.updatetMara(list.get(i));
                     }
+                }else{
+                    mapper.insertMara(list.get(i));
                 }
 
-                mapper.insertMara(list.get(i));
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -75,8 +79,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -88,7 +94,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteMara(im);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -125,8 +131,9 @@ public class DataSynServiceImpl implements DataSynService {
      * @Return
      * @Date 2022/5/26 10:53
      */
+
     //批处理
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertMvke(List<It_MvkeVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -138,11 +145,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_MvkeVO> mvList= queryMvkeListByParam(list.get(i));
                 if(mvList.size()>0){//表示数据库中已经存在了
                     for (It_MvkeVO mv : mvList) {
-                        deleteMvke(mv);//删除已有的
+                        list.get(i).setId(mv.getId());
+                        dataMapper.updateMvke(list.get(i));
                     }
+                }else {
+                    mapper.insertMvke(list.get(i));
                 }
 
-                mapper.insertMvke(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -152,8 +162,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -177,7 +189,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteMvke(im);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -213,7 +225,7 @@ public class DataSynServiceImpl implements DataSynService {
      * @Date 2022/5/26 10:53
      */
     //批处理
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertMbew(List<It_MbewVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -225,11 +237,13 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_MbewVO> mbList = queryMbewListByParam(list.get(i));
                 if(mbList.size()>0){//表示数据库中已经存在了
                     for (It_MbewVO mb : mbList) {
-                        deleteMbew(mb);//删除已有的
+                        list.get(i).setId(mb.getId());
+                        dataMapper.updateMbew(list.get(i));
                     }
+                }else{
+                    mapper.insertMbew(list.get(i));
                 }
 
-                mapper.insertMbew(list.get(i));
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -239,8 +253,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -251,7 +267,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteMbew(im);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -268,7 +284,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertMarm(List<It_MarmVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -280,11 +296,13 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_MarmVO> maList = queryMarmListByParam(list.get(i));
                 if(maList.size()>0){//表示数据库中已经存在了
                     for (It_MarmVO ma : maList) {
-                        deleteMarm(ma);//删除已有的
+                        list.get(i).setId(ma.getId());
+                        dataMapper.updateMarm(list.get(i));
                     }
+                }else {
+                    mapper.insertMarm(list.get(i));
                 }
 
-                mapper.insertMarm(list.get(i));
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -294,8 +312,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -306,7 +326,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteMarm(im);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -323,7 +343,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertMard(List<It_MardVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -335,11 +355,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_MardVO> maList = queryMardListByParam(list.get(i));
                 if(maList.size()>0){//表示数据库中已经存在了
                     for (It_MardVO ma : maList) {
-                        deleteMard(ma);//删除已有的
+                        list.get(i).setId(ma.getId());
+                        dataMapper.updateMard(list.get(i));
                     }
+                }else{
+                    mapper.insertMard(list.get(i));
                 }
 
-                mapper.insertMard(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -349,8 +372,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -361,7 +386,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteMard(im);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -378,7 +403,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertMarc(List<It_MarcVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -390,11 +415,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_MarcVO> maList = queryMarcListByParam(list.get(i));
                 if(maList.size()>0){//表示数据库中已经存在了
                     for (It_MarcVO ma : maList) {
-                        deleteMarc(ma);//删除已有的
+                        list.get(i).setId(ma.getId());
+                        dataMapper.updateMarc(list.get(i));
                     }
+                }else{
+                    mapper.insertMarc(list.get(i));
                 }
 
-                mapper.insertMarc(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -404,8 +432,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -416,7 +446,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteMarc(im);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -433,7 +463,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertBut000(List<It_But000VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -445,11 +475,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_But000VO> ibList = queryBut000ListByParam(list.get(i));
                 if(ibList.size()>0){//表示数据库中已经存在了
                     for (It_But000VO ib : ibList) {
-                        deleteBut000(ib);//删除已有的
+                        list.get(i).setId(ib.getId());
+                        dataMapper.updateBut000(list.get(i));
                     }
+                }else{
+                    mapper.insertBut000(list.get(i));
                 }
 
-                mapper.insertBut000(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -459,8 +492,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -471,7 +506,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteBut000(ib);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -488,7 +523,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertKna1(List<It_Kna1VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -500,11 +535,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_Kna1VO> ikList = queryKna1ListByParam(list.get(i));
                 if(ikList.size()>0){//表示数据库中已经存在了
                     for (It_Kna1VO ik : ikList) {
-                        deleteKna1(ik);//删除已有的
+                        list.get(i).setId(ik.getId());
+                        dataMapper.updateKna1(list.get(i));
                     }
+                }else{
+                    mapper.insertKna1(list.get(i));
                 }
 
-                mapper.insertKna1(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -514,8 +552,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -526,7 +566,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteKna1(ik);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -544,7 +584,7 @@ public class DataSynServiceImpl implements DataSynService {
 
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertKnb1(List<It_Knb1VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -556,11 +596,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_Knb1VO> ikList = queryKnb1ListByParam(list.get(i));
                 if(ikList.size()>0){//表示数据库中已经存在了
                     for (It_Knb1VO ik : ikList) {
-                        deleteKnb1(ik);//删除已有的
+                        list.get(i).setId(ik.getId());
+                        dataMapper.updateKnb1(list.get(i));
                     }
+                }else{
+                    mapper.insertKnb1(list.get(i));
                 }
 
-                mapper.insertKnb1(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -570,8 +613,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -582,7 +627,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteKnb1(ik);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -599,7 +644,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertKnvv(List<It_KnvvVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -611,11 +656,13 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_KnvvVO> ikList = queryKnvvListByParam(list.get(i));
                 if(ikList.size()>0){//表示数据库中已经存在了
                     for (It_KnvvVO ik : ikList) {
-                        deleteKnvv(ik);//删除已有的
+                        list.get(i).setId(ik.getId());
+                        dataMapper.updateKnvv(list.get(i));
                     }
+                }else{
+                    mapper.insertKnvv(list.get(i));
                 }
 
-                mapper.insertKnvv(list.get(i));
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -625,8 +672,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -637,7 +686,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteKnvv(ik);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -654,7 +703,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertKnvp(List<It_KnvpVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -666,11 +715,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_KnvpVO> ikList = queryKnvpListByParam(list.get(i));
                 if(ikList.size()>0){//表示数据库中已经存在了
                     for (It_KnvpVO ik : ikList) {
-                        deleteKnvp(ik);//删除已有的
+                        list.get(i).setId(ik.getId());
+                        dataMapper.updateKnvp(list.get(i));
                     }
+                }else{
+                    mapper.insertKnvp(list.get(i));
                 }
 
-                mapper.insertKnvp(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -680,8 +732,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -692,7 +746,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteKnvp(ik);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -709,7 +763,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertAdrc(List<It_AdrcVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -721,11 +775,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_AdrcVO> iaList = queryAdrcListByParam(list.get(i));
                 if(iaList.size()>0){//表示数据库中已经存在了
                     for (It_AdrcVO ia : iaList) {
-                        deleteAdrc(ia);//删除已有的
+                        list.get(i).setId(ia.getId());
+                        dataMapper.updateAdrc(list.get(i));
                     }
+                }else{
+                    mapper.insertAdrc(list.get(i));
                 }
 
-                mapper.insertAdrc(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -735,8 +792,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -747,7 +806,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteAdrc(ia);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -764,7 +823,7 @@ public class DataSynServiceImpl implements DataSynService {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertZtsd_012(List<It_Ztsd_012VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -776,11 +835,14 @@ public class DataSynServiceImpl implements DataSynService {
                 List<It_Ztsd_012VO> izList = queryZtsd_012ListByParam(list.get(i));
                 if(izList.size()>0){//表示数据库中已经存在了
                     for (It_Ztsd_012VO iz : izList) {
-                        deleteZtsd_012(iz);//删除已有的
+                        list.get(i).setId(iz.getId());
+                        dataMapper.updateZtsd_012(list.get(i));
                     }
+                }else{
+                    mapper.insertZtsd_012(list.get(i));
                 }
 
-                mapper.insertZtsd_012(list.get(i));
+
                 if (i % 400 == 0 || i == list.size() - 1) {
                     session.commit();
                     //清理缓存，防止溢出
@@ -790,8 +852,10 @@ public class DataSynServiceImpl implements DataSynService {
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
@@ -802,7 +866,7 @@ public class DataSynServiceImpl implements DataSynService {
         try {
             dataMapper.deleteZtsd_012(iz);
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
         }
         return rs;
@@ -815,7 +879,128 @@ public class DataSynServiceImpl implements DataSynService {
 
     @Override
     public List<It_Ztsd_012VO> checkZtsd_012Exist(It_Ztsd_012VO iz) {
+
         return dataMapper.checkZtsd_012Exist(iz);
+    }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String insertZtsd_002(List<It_Ztsd_002VO> list) {
+        SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
+        DataSynMapper mapper = session.getMapper(DataSynMapper.class);
+        String rs = "ok，操作成功";
+        try {
+
+            for (int i = 0; i < list.size(); i++) {
+                List<It_Ztsd_002VO> izList = queryZtsd_002ListByParam(list.get(i));
+                if(izList.size()>0){//表示数据库中已经存在了
+                    for (It_Ztsd_002VO iz : izList) {
+                        list.get(i).setId(iz.getId());
+                        dataMapper.updateZtsd_002(list.get(i));
+                    }
+                }else{
+                    mapper.insertZtsd_002(list.get(i));
+                }
+
+
+                if (i % 400 == 0 || i == list.size() - 1) {
+                    session.commit();
+                    //清理缓存，防止溢出
+                    session.clearCache();
+                }
+            }
+            session.commit();
+            session.clearCache();
+        }catch (Exception e){
+            rs = "error,操作失败："+e.getMessage();
+            e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return rs;
+    }
+
+    @Override
+    public String deleteZtsd_002(It_Ztsd_002VO iz) {
+        String rs = "ok，操作成功";
+        try {
+            dataMapper.deleteZtsd_002(iz);
+        }catch (Exception e){
+            rs = "error,操作失败："+e.getMessage();
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
+    public List<It_Ztsd_002VO> queryZtsd_002ListByParam(It_Ztsd_002VO iz) {
+        return dataMapper.queryZtsd_002ListByParam(iz);
+    }
+
+    @Override
+    public List<It_Ztsd_002VO> checkZtsd_002Exist(It_Ztsd_002VO iz) {
+
+        return dataMapper.checkZtsd_002Exist(iz);
+    }
+
+
+    @Override
+    public List<Ztsd206_headVO> checkZtsd206_headExist(Ztsd206_headVO zt) {
+        return dataMapper.checkZtsd206_headExist(zt);
+    }
+
+    @Override
+    public List<Ztsd206_ItemVO> checkZtsd206_itemExist(Ztsd206_ItemVO zi) {
+        return dataMapper.checkZtsd206_itemExist(zi);
+    }
+
+    @Override
+    public List<Ztsd206_kunnr_ecVO> checkZtsd206_kunnr_ecExist(Ztsd206_kunnr_ecVO zk) {
+        return dataMapper.checkZtsd206_kunnr_ecExist(zk);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String insertZtsd206(List<Ztsd206_headVO> headList) {
+        SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
+        DataSynMapper mapper = session.getMapper(DataSynMapper.class);
+        String rs = "ok，操作成功";
+        try {
+
+            for (int i = 0; i < headList.size(); i++) {
+                mapper.insertZtsd206_head(headList.get(i));
+                List<Ztsd206_ItemVO> ziList = headList.get(i).getZiList();
+                List<Ztsd206_kunnr_ecVO> zkuList = headList.get(i).getZkuList();
+                if(ziList.size()>0){
+                    for (Ztsd206_ItemVO zi : ziList) {
+                        mapper.insertZtsd206_item(zi);
+                    }
+                }
+
+                if(zkuList.size()>0){
+                    for (Ztsd206_kunnr_ecVO zk : zkuList) {
+                        mapper.insertZtsd206_kunnr_ec(zk);
+                    }
+                }
+
+
+                if (i % 400 == 0 || i == headList.size() - 1) {
+                    session.commit();
+                    //清理缓存，防止溢出
+                    session.clearCache();
+                }
+            }
+
+            session.commit();
+            session.clearCache();
+        }catch (Exception e){
+            rs = "error,操作失败："+e.getMessage();
+            e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return rs;
     }
 
 

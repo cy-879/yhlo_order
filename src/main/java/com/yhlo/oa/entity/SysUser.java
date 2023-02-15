@@ -3,6 +3,9 @@ package com.yhlo.oa.entity;
 import java.util.Date;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -12,11 +15,15 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 
  * @author ruoyi
  */
+
+@Data
+@ApiModel("用户")
 public class SysUser extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
+    @ApiModelProperty(value = "用户ID")
     private Long userId;
 
     /** 部门ID */
@@ -29,12 +36,15 @@ public class SysUser extends BaseEntity
     private Long roleId;
 
     /** 登录名称 */
+    @ApiModelProperty(value = "工号")
     private String loginName;
 
     /** 用户名称 */
+    @ApiModelProperty(value = "用户名称")
     private String userName;
 
     /** 用户类型 */
+    @ApiModelProperty(value = "用户类型")
     private String userType;
 
     /** 用户邮箱 */
@@ -56,6 +66,7 @@ public class SysUser extends BaseEntity
     private String salt;
 
     /** 帐号状态（0正常 1停用） */
+    @ApiModelProperty(value = "帐号状态")
     private String status;
 
     /** 删除标志（0代表存在 2代表删除） */

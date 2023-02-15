@@ -3,7 +3,7 @@
     <!-- 日志存放路径 -->
     <property name="log.path" value="/orderLogs/logs" />
     <!-- 日志输出格式 -->
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -71,6 +71,33 @@
         </encoder>
     </appender>
 
+    <!--logstash配置-->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+       <!-- 本地地址-->
+        <!--<destination>10.4.4.206:8808</destination>-->
+        <!-- 服务器地址-->
+        <destination>192.168.0.140:8808</destination>
+        <!-- 日志输出编码 -->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "logLevel": "%level",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
     <!-- 系统模块日志级别控制  -->
     <logger name="com.example" level="info" />
     <!-- Spring日志级别控制  -->
@@ -84,10 +111,12 @@
     <root level="info">
         <appender-ref ref="file_info" />
         <appender-ref ref="file_error" />
+        <appender-ref ref="LOGSTASH"/>
     </root>
 
     <!--系统用户操作日志-->
     <logger name="sys-user" level="info">
         <appender-ref ref="sys-user"/>
+        <appender-ref ref="LOGSTASH"/>
     </logger>
 </configuration>

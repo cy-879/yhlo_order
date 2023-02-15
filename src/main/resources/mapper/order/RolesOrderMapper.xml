@@ -23,19 +23,19 @@
     </insert>
 
     <select id="queryOrderList" resultType="com.yhlo.oa.entity.RolesOrderVO">
-        SELECT ORDER_NO as orderNo,
-               CONTRACT_ORDER_NO   as contractOrderNo,
-               SALE_ORDER_NO   as saleOrderNo,
+        SELECT ddsSalesOrderNo as orderNo,
+               sapPurchaseOrderNo   as contractOrderNo,
+               sapSalesOrderNo   as saleOrderNo,
                CRATE_BY as createBy,
                date_format(CRATE_TIME,'%Y-%m-%d %H:%i:%S') as createTime
-        FROM ORDER_INFO
+        FROM yhlo_order
     </select>
 
 
     <select id="getOrderItem" resultType="com.yhlo.oa.entity.Item">
-        SELECT ORDER_NO as id,
-               ORDER_NO as itemKey,
-               ORDER_NO as itemValue
-        FROM ORDER_INFO
+        SELECT ddsSalesOrderNo as id,
+               ddsSalesOrderNo as itemKey,
+               ddsSalesOrderNo as itemValue
+        FROM yhlo_order
     </select>
 </mapper>

@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 940
   servlet:
     context-path: /
 
@@ -13,7 +13,10 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://localhost:3306/ordermg?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      # 本地地址
+#      url: jdbc:mysql://10.4.4.206:3306/ordermg?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+      # 服务器
+      url: jdbc:mysql://192.168.0.140:3306/ordermg?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
       username: root
       password: root
       # 初始连接数
@@ -76,9 +79,13 @@ shiro:
 kafka:
   cron:
     #每10分钟执行一次，物料主数据
-    global_material: 0 */100 * * * ?
+    global_material:  0 */10 * * * ?
     #每10分钟执行一次，客户主数据
-    global_customer: 0 */100 * * * ?
+    global_customer: 0 */10 * * * ?
     #每10分钟执行一次，客户物料
     global_customer_material: 0 */10 * * * ?
+    #每10分钟执行一次，返利策略
+    global_Rebate: 0 */10 * * * ?
 
+file:
+  profile: D:/orderFile/path

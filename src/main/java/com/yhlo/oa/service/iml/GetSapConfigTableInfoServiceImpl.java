@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,7 +30,7 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
     private SqlSessionFactory sqlSessionFactory;
 
     //批处理
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT001(List<T001VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -48,8 +49,10 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
        return rs;
     }
@@ -62,7 +65,7 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
 
 
     //批处理
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvko(List<TvkoVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -81,14 +84,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvkot(List<TvkotVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -107,14 +112,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvkwz(List<TvkwzVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -133,13 +140,15 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvkbt(List<TvkbtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -158,14 +167,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvgrt(List<TvgrtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -184,14 +195,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvkbz(List<TvkbzVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -210,14 +223,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvbvk(List<TvbvkVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -236,13 +251,15 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvstt(List<TvsttVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -261,14 +278,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvtwt(List<TvtwtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -287,13 +306,15 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTspat(List<TspatVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -312,14 +333,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvzbt(List<TvzbtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -338,14 +361,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT042zt(List<T042ztVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -364,14 +389,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT001w(List<T001wVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -390,14 +417,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT001l(List<T001lVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -416,14 +445,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT024e(List<T024eVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -442,14 +473,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertV_024(List<V_024VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -468,14 +501,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT134t(List<T134tVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -494,14 +529,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTwewt(List<TwewtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -520,14 +557,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String insertT023t(List<T023tVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
         GetSapConfigTableInfoMapper mapper = session.getMapper(GetSapConfigTableInfoMapper.class);
@@ -545,14 +584,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT179(List<T179VO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -571,14 +612,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT005u(List<T005uVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -597,14 +640,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT077x(List<T077xVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -623,14 +668,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT171t(List<T171tVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -649,14 +696,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT189t(List<T189tVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -675,14 +724,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertCskt(List<CsktVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -701,14 +752,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertT005t(List<T005tVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -727,14 +780,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvsbt(List<TvsbtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -753,14 +808,16 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvaut(List<TvautVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -779,13 +836,15 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public String insertTvagt(List<TvagtVO> list) {
         SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
@@ -804,11 +863,42 @@ public class GetSapConfigTableInfoServiceImpl implements GetSapConfigTableInfoSe
             session.commit();
             session.clearCache();
         }catch (Exception e){
-            rs = "error,操作失败"+e.getMessage().toString();
+            rs = "error,操作失败："+e.getMessage();
             e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return rs;
     }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String insertT142t(List<T142tVO> list) {
+        SqlSession session = sqlSessionFactory.openSession(ExecutorType.BATCH,false);
+        GetSapConfigTableInfoMapper mapper = session.getMapper(GetSapConfigTableInfoMapper.class);
+        String rs = "ok，操作成功";
+        try {
+            gtMapper.deleteT142t();//清空该表所有的数据
+            for (int i = 0; i < list.size(); i++) {
+                mapper.insertT142t(list.get(i));
+                if (i % 400 == 0 || i == list.size() - 1) {
+                    session.commit();
+                    //清理缓存，防止溢出
+                    session.clearCache();
+                }
+            }
+            session.commit();
+            session.clearCache();
+        }catch (Exception e){
+            rs = "error,操作失败："+e.getMessage();
+            e.printStackTrace();
+            //手动回滚事务
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return rs;
+    }
+
 
 
     @Override

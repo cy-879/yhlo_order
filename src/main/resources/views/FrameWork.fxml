@@ -12,7 +12,12 @@
                    <items>
                        <Menu mnemonicParsing="false" text="一般订单">
                            <items>
-                               <MenuItem mnemonicParsing="false" onAction="#normal" text="ZOR5 流通子公司订单" />
+                               <Menu mnemonicParsing="false" text="ZOR5 流通子公司订单">
+                                   <items>
+                                       <MenuItem mnemonicParsing="false" text="订单创建" onAction="#generalOrder" />
+                                       <MenuItem mnemonicParsing="false" text="订单审核" onAction="#generalOrderApproval" />
+                                   </items>
+                               </Menu>
                                <MenuItem mnemonicParsing="false" text="ZRE1 退货订单" />
                            </items>
                        </Menu>
@@ -61,25 +66,23 @@
                 <Menu mnemonicParsing="false" text="基础数据">
                     <items>
                         <MenuItem mnemonicParsing="false" text="产品资料" onAction="#productData"/>
-                        <MenuItem mnemonicParsing="false" text="客户资料" />
+                        <MenuItem mnemonicParsing="false" text="客户资料" onAction="#customerData"/>
+                        <Menu mnemonicParsing="false" text="返利政策">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="新增返利政策" onAction="#rebatePolicy" />
+                                <MenuItem mnemonicParsing="false" text="返利政策列表" onAction="#rebatePolicySearch"/>
+                                <MenuItem mnemonicParsing="false" text="返利单使用记录"  />
+                                <MenuItem mnemonicParsing="false" text="返利单审核列表" onAction="#rebatePolicyApproval" />
+                            </items>
+                        </Menu>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="系统管理">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="用户设置" />
+                        <MenuItem mnemonicParsing="false" text="用户管理"  onAction="#userManagement"/>
                         <MenuItem mnemonicParsing="false" onAction="#config" text="配置同步" />
                         <MenuItem mnemonicParsing="false" onAction="#DataSyn" text="主数据同步" />
                         <MenuItem mnemonicParsing="false" onAction="#exit" text="退出系统" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="用户设置">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="更改密码" />
-                        <MenuItem mnemonicParsing="false" text="清除本地缓存" />
-                        <MenuItem mnemonicParsing="false" text="重置环境" />
-                        <MenuItem mnemonicParsing="false" text="清除异常登录" />
-                        <MenuItem mnemonicParsing="false" text="重新登录" />
-                        <MenuItem mnemonicParsing="false" text="皮肤设置" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="系统">
@@ -87,13 +90,18 @@
                         <MenuItem mnemonicParsing="false" onAction="#homePage" text="返回首页" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#goWebview" text="外部网站" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#OpenNewWindow" text="复制窗口" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
     </top>
     <center>
-        <StackPane>
+        <TabPane fx:id="tabPane" prefHeight="560">
+
+        </TabPane>
+        <!--<StackPane>
             <children>
                 <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
                     <content>
@@ -102,42 +110,13 @@
                 </ScrollPane>
             </children>
 
-        </StackPane>
-       <!-- <AnchorPane prefHeight="500" >
-            <fx:include fx:id="main" source="/views/Main.fxml" />
-            <fx:include fx:id="normal" source="/views/Normal.fxml" />
-            <fx:include fx:id="roles" source="/views/Roles.fxml" />
-        </AnchorPane>-->
-       <!-- <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
-            <content>
-                <fx:include fx:id="main" source="/views/Main.fxml" />
-                <fx:include fx:id="normal" source="/views/Normal.fxml" />
-                <fx:include fx:id="roles" source="/views/Roles.fxml" />
-            </content>
-        </ScrollPane>-->
+        </StackPane>-->
+
     </center>
    <bottom>
-      <GridPane prefHeight="60" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="主机地址：" textAlignment="CENTER" />
-            <Label text="登录时间：" textAlignment="CENTER" GridPane.columnIndex="1" />
-            <Label text="登录用户：" textAlignment="CENTER" GridPane.columnIndex="2" />
-            <Label text="用户部门：" textAlignment="CENTER" GridPane.columnIndex="3" />
-         </children>
-      </GridPane>
+
    </bottom>
 
 
-    
+
 </BorderPane>

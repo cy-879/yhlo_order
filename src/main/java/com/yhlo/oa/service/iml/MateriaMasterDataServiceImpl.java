@@ -26,7 +26,7 @@ public class MateriaMasterDataServiceImpl implements MateriaMasterDataService {
 
 
     @Override
-    public PageInfo<It_MaraVO> geteMaraPageList(Integer currentPage, Integer pageSize,String matnr) {
+    public PageInfo<It_MaraVO> getMaraPageList(Integer currentPage, Integer pageSize,String matnr) {
         PageHelper.startPage(currentPage, pageSize);
         List<It_MaraVO> it_maraVOS = mapper.queryMaraList(matnr);
         return new PageInfo<>(it_maraVOS);

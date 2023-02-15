@@ -1,10 +1,7 @@
 package com.yhlo.oa.controller;
 
-import com.yhlo.oa.entity.OrderVO;
 import com.yhlo.oa.entity.RolesOrderVO;
-import com.yhlo.oa.service.NormalOrderService;
 import com.yhlo.oa.service.RolesOrderService;
-import com.yhlo.oa.service.iml.NormalOrderServiceImpl;
 import com.yhlo.oa.service.iml.RolesOrderServiceImpl;
 import com.yhlo.oa.util.CommonUtil;
 import com.yhlo.oa.util.SpringBeanUtil;
@@ -16,11 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

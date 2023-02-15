@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.MainController">
+    <Text layoutX="78.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="你好," wrappingWidth="90.17578125" />
+    <Label fx:id="userName" layoutX="145.0" layoutY="64.0" text="Label" />
+    <Pane layoutX="78.0" layoutY="102.0" prefHeight="160.0" prefWidth="650.0" style="-fx-border-color: gray;">
+        <children>
+            <Label layoutX="51.0" layoutY="50.0" text="今日订单金额" />
+            <Label fx:id="todayAmount" layoutX="164.0" layoutY="50.0" text="Label" />
+            <Label layoutX="354.0" layoutY="50.0" text="本月订单金额" />
+            <Label fx:id="monthAmount" layoutX="474.0" layoutY="50.0" text="Label" />
+            <Label layoutX="354.0" layoutY="90.0" text="本年订单金额" />
+            <Label fx:id="yearAmount" layoutX="474.0" layoutY="90.0" text="Label" />
+        </children>
+    </Pane>
+    <Pane layoutX="78.0" layoutY="261.0" prefHeight="169.0" prefWidth="650.0" style="-fx-border-color: gray;">
+
+        <children>
+            <Label layoutX="51.0" layoutY="39.0" text="今日订单数量" />
+            <Label fx:id="todayOrderNums" layoutX="167.0" layoutY="39.0" text="Label" />
+            <Label layoutX="355.0" layoutY="49.0" text="本月订单数量" />
+            <Label fx:id="monthOrderNums" layoutX="480.0" layoutY="49.0" text="Label" />
+            <Label layoutX="355.0" layoutY="113.0" text="本年订单数量" />
+            <Label fx:id="yearOrderNums" layoutX="480.0" layoutY="113.0" text="Label" />
+        </children>
+    </Pane>
+</Pane>

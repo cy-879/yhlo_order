@@ -913,6 +913,34 @@ public class GetSapConfigTableController implements Initializable {
             return;
         }
 
+
+        if("T142T".equals(param.trim())){//存储条件
+            List<T142tVO> dataList = new ArrayList<T142tVO>();
+            String result = GetSapConfigTableInfo.sendRequest("SD135",JSONSTR1);
+            if(!"".equals(result)&& !"error".equals(result) ){
+                JSONArray objects = JSON.parseArray(result);
+                if(objects.size()>0){
+                    for(int i=0;i<objects.size();i++){
+                        T142tVO tv = new T142tVO();
+                        JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                        tv.setZsap_tabel((String) job.get("ZSAP_TABLE"));
+                        tv.setZsap_tabletxt((String) job.get("ZSAP_TABLETXT"));
+                        tv.setRaube((String) job.get("ZSD_01"));
+                        tv.setRbtxt((String) job.get("ZSD_02"));
+                        dataList.add(tv);
+                    }
+                }
+            }
+
+            String rs = gtService.insertT142t(dataList);
+            if(rs.indexOf("error")!=-1){
+                CommonUtil._alertInformation("存储条件因-同步失败");
+            }else{
+                CommonUtil._alertInformation("存储条件-同步成功");
+            }
+            return;
+        }
+
     }
 
 

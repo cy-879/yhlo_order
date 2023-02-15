@@ -14,7 +14,19 @@ public enum FxmlView {
             return "/views/Main.fxml";
         }
 
-    }, 
+    },
+    VIEW_UNAUTH {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.unauth.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/unauth.fxml";
+        }
+
+    },
     VIEW_FRAMEWORK {
         @Override
 		public String title() {
@@ -51,15 +63,39 @@ public enum FxmlView {
         }
 
     },
-    VIEW_NORMAL {
+    VIEW_GENERALORDER {
         @Override
         public String title() {
-            return getStringFromResourceBundle("module.normal.title");
+            return getStringFromResourceBundle("module.GeneralOrder.title");
         }
 
         @Override
         public String fxml() {
-            return "/views/Normal.fxml";
+            return "/views/GeneralOrder.fxml";
+        }
+
+    },
+    VIEW_GENERALORDER_UPDATE {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.GeneralOrderUpdate.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/GeneralOrderUpdate.fxml";
+        }
+
+    },
+    VIEW_GENERALORDERAPPROVAL {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.generalOrderApproval.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/GeneralOrderApproval.fxml";
         }
 
     },
@@ -106,6 +142,61 @@ public enum FxmlView {
         @Override
         public String fxml() {
             return "/views/MateriaMasterData.fxml";
+        }
+
+    },VIEW_CUSTOMERDATA {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.customerData.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/CustomerMasterData.fxml";
+        }
+
+    },VIEW_REBATEPOLICY {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.rebatePolicy.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/RebatePolicy.fxml";
+        }
+
+    },VIEW_REBATEPOLICYSEARCH {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.rebatePolicySearch.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/RebatePolicySearch.fxml";
+        }
+
+    },VIEW_REBATEPOLICYAPPROVAL {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.RebatePolicyApproval.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/RebatePolicyApproval.fxml";
+        }
+
+    },VIEW_USERMANAGEMENT {
+        @Override
+        public String title() {
+            return getStringFromResourceBundle("module.userManagement.title");
+        }
+
+        @Override
+        public String fxml() {
+            return "/views/UserManagement.fxml";
         }
 
     };

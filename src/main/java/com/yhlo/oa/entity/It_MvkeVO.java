@@ -34,6 +34,8 @@ public class It_MvkeVO {
     private String lvorm;
     @ApiModelProperty(value = "指定分销链的物料状态")
     private String vmsta;
+    @ApiModelProperty(value = "物料的税分类")
+    private String taxm1;
     @ApiModelProperty(value = "创建/更改时间")
     private String create_time;
     @ApiModelProperty(value = "最后修改时间")

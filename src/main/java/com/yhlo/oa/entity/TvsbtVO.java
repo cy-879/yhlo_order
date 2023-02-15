@@ -20,11 +20,11 @@ public class TvsbtVO {
     private String zsap_tabel;
     @ApiModelProperty(value = "表描述")
     private String zsap_tabletxt;
-    @ApiModelProperty(value = "spras")
+    @ApiModelProperty(value = "语言")
     private String spras;
-    @ApiModelProperty(value = "vsbed")
+    @ApiModelProperty(value = "装运条件代码")
     private String vsbed;
-    @ApiModelProperty(value = "vtext")
+    @ApiModelProperty(value = "装运条件描述")
     private String vtext;
 
 

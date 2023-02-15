@@ -1,12 +1,10 @@
 package com.yhlo.oa.controller;
 
+import com.github.pagehelper.util.StringUtil;
 import com.yhlo.oa.entity.SysUser;
 import com.yhlo.oa.service.SysUserService;
 import com.yhlo.oa.service.iml.SysUserServiceImpl;
-import com.yhlo.oa.util.CommonUtil;
-import com.yhlo.oa.util.ResultUtil;
-import com.yhlo.oa.util.SpringBeanUtil;
-import com.yhlo.oa.util.StringUtils;
+import com.yhlo.oa.util.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -23,8 +21,10 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.prefs.Preferences;
 
 /**
  * @create: 2022-03-31 17:45
@@ -47,8 +47,18 @@ public class LoginController implements Initializable {
         String userAccount = textUserAccount.getText();
 
         // 用户名或密码为空 错误
-        if (StringUtils.isEmpty(userAccount) || StringUtils.isEmpty(password)) {
-            ResultUtil.getWarringResult("用户名或密码为空,请检查！");
+       /* if (StringUtils.isEmpty(userAccount) || StringUtils.isEmpty(password)) {
+            CommonUtil._alertInformation("用户名或密码为空,请检查！");
+            return;
+        }*/
+
+        if (StringUtils.isEmpty(userAccount)) {
+            ToastUtil.toast("请输入用户名", 1500);
+            return;
+        }
+
+        if (StringUtils.isEmpty(password)) {
+            ToastUtil.toast("请输入密码", 1500);
             return;
         }
 
@@ -78,16 +88,26 @@ public class LoginController implements Initializable {
          //查询用户信息
         SysUser user = sysUserService.selectUserByLoginName(userAccount);
         if (null == user) {
-            ResultUtil.getWarringResult("用户不存在！");
+            CommonUtil._alertInformation("用户不存在！");
             return;
         }
 
         String encryptPassword = encryptPassword(user.getLoginName(),password,user.getSalt());
 
         if (!encryptPassword.equals(user.getPassword())) {
-            ResultUtil.getWarringResult("密码不正确！");
+            CommonUtil._alertInformation("密码不正确！");
             return;
         }
+
+        Preferences userPreferences = Preferences.userRoot();
+        String hostAddress = InetAddress.getLocalHost().getHostAddress();
+
+        userPreferences.put("userName",user.getUserName());
+        userPreferences.put("loginName",user.getLoginName());
+        userPreferences.put("userType",user.getUserType());
+        userPreferences.put("userIp",hostAddress);
+
+        log.info("当前登陆人IP地址："+hostAddress);
 
         skipMain();
     }
@@ -99,7 +119,8 @@ public class LoginController implements Initializable {
     private void skipMain() throws IOException {
         Stage mainStage = new Stage();
         mainStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/views/FrameWork.fxml")), 1000, 600));
-        mainStage.getScene().getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
+        mainStage.getScene().getStylesheets().add("/css/bootstrapfx.css");
+       // mainStage.getScene().getStylesheets().add("org/kordamp/bootstrapfx/bootstrapfx.css");
         mainStage.getIcons().add(CommonUtil.getLogo());
         mainStage.setTitle("订单系统");
         //mainStage.setResizable(false);

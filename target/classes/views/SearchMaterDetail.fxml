@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="root" prefHeight="450" prefWidth="800" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.SearchMaterDetailController">
+
+    <!--<top>
+        <ToolBar prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="searchTable" mnemonicParsing="false" text="查询" onAction="#searchTable">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="exportOrder" mnemonicParsing="false" text="导出">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeView" text="关闭">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-danger" />
+                    </styleClass>
+                </Button>
+                <TextField  fx:id="matnrTextField" disable="true" layoutX="71.0" layoutY="7.0" prefHeight="23.0" prefWidth="170.0" />
+            </items>
+        </ToolBar>
+    </top>-->
+
+
+    <center>
+        <VBox prefHeight="400.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="300.0" prefWidth="${root.width}">
+                   <children>
+                      <TabPane fx:id="tabPane" prefHeight="300.0" prefWidth="${root.width}" tabClosingPolicy="UNAVAILABLE">
+                        <tabs>
+                          <Tab fx:id="saleTab" text="销售">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="856.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="856.0">
+                                      <content>
+                                          <TableView fx:id="saleTableView" prefHeight="256.0" prefWidth="845.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="costTab" text="成本">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="856.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="856.0">
+                                      <content>
+                                          <TableView fx:id="costTableView" prefHeight="256.0" prefWidth="845.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="unitTab" text="单位">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="856.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="856.0">
+                                      <content>
+                                          <TableView fx:id="unitTableView" prefHeight="256.0" prefWidth="845.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="stockTab" text="库存">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="856.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="856.0">
+                                      <content>
+                                          <TableView fx:id="stockTableView" prefHeight="256.0" prefWidth="845.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="factoryTab" text="工厂">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="856.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="856.0">
+                                      <content>
+                                          <TableView fx:id="factoryTableView" prefHeight="256.0" prefWidth="845.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                        </tabs>
+                      </TabPane>
+                   </children>
+                </HBox>
+            </children>
+        </VBox>
+
+    </center>
+
+
+    <stylesheets>
+        <URL value="@/css/bootstrapfx.css" />
+    </stylesheets>
+</BorderPane>

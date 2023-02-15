@@ -100,6 +100,37 @@ public interface SysUserMapper
      */
     public int insertUser(SysUser user);
 
+
+    /**
+     * 新增亚辉龙用户信息
+     * @param user 用户信息
+     * @return 结果
+     */
+    public int addYhloUser(SysUser user);
+
+    /**
+     * 修改亚辉龙用户信息
+     * @param user 用户信息
+     * @return 结果
+     */
+    public int updateYhloUser(SysUser user);
+
+    /**
+     * @Author cy
+     * @Description 获取用户列表
+     * @Return
+     * @Date 2022/12/14 14:29
+     */
+    public List<SysUser> getUserList();
+
+    /**
+     * @Author cy
+     * @Description 校验用于是否存在
+     * @Return
+     * @Date 2022/12/14 14:29
+     */
+    public List<SysUser> checkUserExists(String loginName);
+
     /**
      * 校验用户名称是否唯一
      * 

@@ -76,4 +76,14 @@ public class It_But000VO {
     private String last_modified_time;
 
 
+    private Checkbox cb = new Checkbox();
+
+    public Checkbox getCb() {
+        return cb;
+    }
+
+    public void setSelected(Checkbox cb) {
+        this.cb = cb;
+    }
+
 }

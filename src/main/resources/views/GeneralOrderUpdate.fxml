@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" prefHeight="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.GeneralOrderUpdateController">
+    <center>
+        <VBox>
+            <children>
+                <HBox prefHeight="260.0" prefWidth="${root.width}">
+                    <children>
+                        <BorderPane prefHeight="260.0" prefWidth="${root.width}">
+                            <top>
+                                <ToolBar prefHeight="30.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+                                    <items>
+                                        <Button fx:id="editBt" layoutX="80.0" layoutY="470.0" mnemonicParsing="false" onAction="#editData" text="保存">
+                                            <styleClass>
+                                                <String fx:value="btn-sm" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+                                    </items>
+                                </ToolBar>
+                            </top>
+                            <center>
+                                <VBox prefHeight="230.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="订单类型：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="orderTypeAssembly" editable="false" prefHeight="23.0" prefWidth="160.0" text="ZOR5 流通子公司订单">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="订单参考：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="orderReferenceAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="SAP销售订单号：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="sapSalesOrderNoAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="DDS销售订单号：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="ddsSalesOrderNoAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                        </HBox>
+
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="销售组织：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="salesOrgAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="产品组：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="productGroupAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="分销渠道：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="distributionChannelAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="客户名称：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="customerNameAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="客户代码：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="customerCodeAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                        </HBox>
+
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="送达方名称：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="songdfmcAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="送达方代码：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="songdfdmAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="销售部门：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="saleDeptAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="付款条件：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="termOfPaymentAssembly" disable="false" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="终端客户：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="endCustomerAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                        </HBox>
+
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="业务员：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="salesmanAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="凭证日期：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <DatePicker fx:id="documentDateAssembly" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </DatePicker>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="总金额：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="totalAmountAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="未税金额：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <TextField fx:id="amountNotTaxedAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="71.0" text="装运条件：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="shippingConditionsAssembly" editable="true" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+
+                                        </HBox>
+
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="审核状态：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="approvalStatusAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="72.0" text="交货状态：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <ComboBox fx:id="deliveryStatusAssembly" editable="false" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </ComboBox>
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="98.0" text="是否认领：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+                                            <CheckBox fx:id="claimAssembly" prefHeight="23.0" prefWidth="160.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </CheckBox>
+
+                                        </HBox>
+
+
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="93.0" text="唛头/订单摘要：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+
+                                            <TextField fx:id="orderSummaryAssembly" editable="true" prefHeight="23.0" prefWidth="911.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+
+                                            <TextField fx:id="dataIdField" editable="true" prefHeight="23.0" prefWidth="200.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+
+                                        </HBox>
+
+                                        <HBox prefHeight="30.0" prefWidth="${root.width}">
+                                            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="15.0" prefWidth="93.0" text="发货信息备注：" textAlignment="CENTER">
+                                                <HBox.margin>
+                                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                                </HBox.margin>
+                                            </Label>
+
+                                            <TextField fx:id="shippingRemarksAssembly" editable="true" prefHeight="23.0" prefWidth="911.0">
+                                                <HBox.margin>
+                                                    <Insets bottom="2.0" right="2.0" top="2.0" />
+                                                </HBox.margin>
+                                            </TextField>
+                                        </HBox>
+
+                                    </children>
+
+                                </VBox>
+                            </center>
+
+                        </BorderPane>
+                    </children>
+                </HBox>
+                <HBox prefHeight="340.0">
+                    <children>
+                        <BorderPane prefHeight="340.0" prefWidth="${root.width}">
+                            <top>
+                                <ToolBar prefHeight="30.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+                                    <items>
+                                        <Button fx:id="addBt" defaultButton="true" mnemonicParsing="false" onAction="#addDetail">
+                                            <styleClass>
+                                                <String fx:value="btn-xs" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+                                        <Button fx:id="delBt" defaultButton="true" mnemonicParsing="false" onAction="#deleteDetail">
+                                            <styleClass>
+                                                <String fx:value="btn-xs" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+
+                                        <Button fx:id="copyBt" defaultButton="true" mnemonicParsing="false" onAction="#copyDetail">
+                                            <styleClass>
+                                                <String fx:value="btn-xs" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+                                        <Button fx:id="importBt" defaultButton="true" mnemonicParsing="false" onAction="#ipmortDetail" text="导入">
+                                            <styleClass>
+                                                <String fx:value="btn-xs" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+
+                                        <Button fx:id="exportTlBt" defaultButton="true" mnemonicParsing="false" onAction="#exportTemplet" text="下载模板">
+                                            <styleClass>
+                                                <String fx:value="btn-xs" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+
+                                        <Button fx:id="getPriceBt" defaultButton="true" mnemonicParsing="false" onAction="#refreshStandardPrice" text="刷取标准价">
+                                            <styleClass>
+                                                <String fx:value="btn-xs" />
+                                                <String fx:value="btn-info" />
+                                            </styleClass>
+                                        </Button>
+
+                                    </items>
+                                </ToolBar>
+                            </top>
+                            <center>
+                                <TableView fx:id="tableView" prefHeight="340.0" prefWidth="${root.width}">
+                                    <columns>
+                                        <TableColumn fx:id="mColumnSelect" prefWidth="70" sortable="false" style="-fx-alignment:CENTER" text="选择">
+                                            <graphic>
+                                                <CheckBox fx:id="mselectAll" mnemonicParsing="false" onAction="#selectAll" />
+                                            </graphic>
+                                        </TableColumn>
+                                        <TableColumn fx:id="mColLineItem" prefWidth="50" resizable="true" text="行项目" />
+                                        <TableColumn fx:id="mColMaterialDesc" prefWidth="200" resizable="true" text="物料描述" />
+                                        <TableColumn fx:id="mColMaterialNo" prefWidth="100" resizable="true" text="物料号" />
+                                        <TableColumn fx:id="mColMnemonicCode" prefWidth="100" resizable="true" text="助记码" />
+                                        <TableColumn fx:id="mColSpecification" prefWidth="100" resizable="true" text="规格型号" />
+                                        <TableColumn fx:id="mColBrand" prefWidth="100" resizable="true" text="品牌" />
+                                        <TableColumn fx:id="mColMaterialGroup" prefWidth="100" resizable="true" text="物料组" />
+                                        <TableColumn fx:id="mColBasicUnit" prefWidth="100" resizable="true" text="基本单位" />
+                                        <TableColumn fx:id="mColOrderQty" prefWidth="100" resizable="true" text="订单数量" />
+                                        <TableColumn fx:id="mColQtyDelivered" prefWidth="100" resizable="true" text="已交货数量（基本单位）" />
+                                        <TableColumn fx:id="mColOpenQty" prefWidth="100" resizable="true" text="未清数量（基本单位）" />
+                                        <TableColumn fx:id="mColOrderUnit" prefWidth="100" resizable="true" text="订单单位" />
+                                        <TableColumn fx:id="mColFactory" prefWidth="100" resizable="true" text="工厂" />
+                                        <TableColumn fx:id="mColInventoryLocation" prefWidth="100" resizable="true" text="库存地点" />
+                                        <TableColumn fx:id="mColshippingPoint" prefWidth="100" resizable="true" text="装运点" />
+                                        <TableColumn fx:id="mColPricingDate" prefWidth="100" resizable="true" text="定价日期" />
+                                        <TableColumn fx:id="mColStandardPrice" prefWidth="100" resizable="true" text="标准价" />
+                                        <TableColumn fx:id="mColManualPrice" prefWidth="100" resizable="true" text="手工价" />
+                                        <TableColumn fx:id="mColOrderBuomQty" prefWidth="100" resizable="true" text="订单基本单位数量" />
+                                        <TableColumn fx:id="mColDiscountRate" prefWidth="100" resizable="true" text="折扣率" />
+                                        <TableColumn fx:id="mColRebateAmount" prefWidth="100" resizable="true" text="返利金额" />
+                                        <TableColumn fx:id="mColAmountBeforeDiscount" prefWidth="100" resizable="true" text="折前金额" />
+                                        <TableColumn fx:id="mColDiscountedAmount" prefWidth="100" resizable="true" text="折后金额" />
+                                        <TableColumn fx:id="mColStorageTemperature" prefWidth="100" resizable="true" text="存储温度" />
+                                        <TableColumn fx:id="mColTaxRate" prefWidth="100" resizable="true" text="税率" />
+                                        <TableColumn fx:id="mColCurrency" prefWidth="100" resizable="true" text="货币" />
+                                        <TableColumn fx:id="mColBatch" prefWidth="100" resizable="true" text="是否批次/序列号管理" />
+                                        <TableColumn fx:id="mColProductionLicense" prefWidth="100" resizable="true" text="生产许可/备案凭证" />
+                                        <TableColumn fx:id="mColFullNameOfManufacturer" prefWidth="100" resizable="true" text="生产厂家全称" />
+                                        <TableColumn fx:id="mColApprovalNo" prefWidth="100" resizable="true" text="批准文号" />
+                                        <TableColumn fx:id="mColCustomerMaterial" prefWidth="100" resizable="true" text="客户物料" />
+                                        <TableColumn fx:id="mColCustomerMaterialDesc" prefWidth="100" resizable="true" text="客户物料描述" />
+                                        <TableColumn fx:id="mColProvincialBiddingCode" prefWidth="100" resizable="true" text="省招标编码" />
+                                        <TableColumn fx:id="mColCityBiddingCode" prefWidth="100" resizable="true" text="市招标编码" />
+                                        <TableColumn fx:id="mColReservedCode" prefWidth="100" resizable="true" text="预留编码" />
+                                        <TableColumn fx:id="mColBusinessLicense" prefWidth="100" resizable="true" text="经营许可证/执业许可证" />
+                                        <TableColumn fx:id="mColProductionRecordCertificate" prefWidth="100" resizable="true" text="客户二类备案凭证" />
+                                        <TableColumn fx:id="mColLastUnitPrice" prefWidth="100" resizable="true" text="上一次单价" />
+                                        <TableColumn fx:id="mColMultiAngleTradeType" prefWidth="100" resizable="true" text="多角贸易类型" />
+                                        <TableColumn fx:id="mColSto1No" prefWidth="100" resizable="true" text="STO1单号" />
+                                        <TableColumn fx:id="mColSto1LineItem" prefWidth="100" resizable="true" text="STO1行项目" />
+                                        <TableColumn fx:id="mColLineItemType" prefWidth="100" resizable="true" text="行项目类型" />
+                                        <TableColumn fx:id="mColLineItemText" prefWidth="100" resizable="true" text="行项目文本" />
+
+                                    </columns>
+                                </TableView>
+                            </center>
+
+                        </BorderPane>
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

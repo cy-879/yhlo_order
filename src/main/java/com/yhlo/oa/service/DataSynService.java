@@ -75,6 +75,19 @@ public interface DataSynService {
     public List<It_Ztsd_012VO> queryZtsd_012ListByParam(It_Ztsd_012VO iz);
     public List<It_Ztsd_012VO> checkZtsd_012Exist(It_Ztsd_012VO iz);
 
+    public String insertZtsd_002(List<It_Ztsd_002VO> list);
+    public String deleteZtsd_002(It_Ztsd_002VO iz);
+    public List<It_Ztsd_002VO> queryZtsd_002ListByParam(It_Ztsd_002VO iz);
+    public List<It_Ztsd_002VO> checkZtsd_002Exist(It_Ztsd_002VO iz);
+
+    public String insertZtsd206(List<Ztsd206_headVO> headList);
+    public List<Ztsd206_headVO> checkZtsd206_headExist(Ztsd206_headVO zt);
+    public List<Ztsd206_ItemVO> checkZtsd206_itemExist(Ztsd206_ItemVO zi);
+    public List<Ztsd206_kunnr_ecVO> checkZtsd206_kunnr_ecExist(Ztsd206_kunnr_ecVO zk);
+
+
+
+
 
 
 

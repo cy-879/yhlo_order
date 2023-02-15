@@ -20,7 +20,7 @@ public class T001lVO {
     private String zsap_tabel;
     @ApiModelProperty(value = "表描述")
     private String zsap_tabletxt;
-    @ApiModelProperty(value = "语言")
+    @ApiModelProperty(value = "工厂")
     private String werks;
     @ApiModelProperty(value = "仓位")
     private String lgort;

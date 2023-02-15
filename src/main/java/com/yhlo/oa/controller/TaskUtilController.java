@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.yhlo.oa.entity.*;
 import com.yhlo.oa.service.iml.DataSynServiceImpl;
 import com.yhlo.oa.util.CommonUtil;
+import com.yhlo.oa.util.Convert;
 import com.yhlo.oa.util.DateUtils;
 import com.yhlo.oa.webservice.GetSapConfigTableInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,8 @@ public class TaskUtilController {
 
     private String startDate = DateUtils.dateTime();
     private String endDate = DateUtils.dateTime();
-    private String JSONSTR1 = "<![CDATA[[{\"ERSDA_FROM\":\"20220301\",\"ERSDA_TO\":\"20220407\"}]]]>";//
+    private String JSONSTR1 = "<![CDATA[[{\"ERSDA_FROM\":\""+startDate+"\",\"ERSDA_TO\":\""+endDate+"\"}]]]>";
+   // private String JSONSTR1 = "<![CDATA[[{\"ERSDA_FROM\":\"20220301\",\"ERSDA_TO\":\"20220407\"}]]]>";
 
     @Autowired
     private DataSynServiceImpl dataSynService;
@@ -47,62 +49,62 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_MaraVO ma = new It_MaraVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ma.setMatnr(job.get("MATNR").toString());
-                        ma.setMaktx(job.get("MAKTX").toString());
-                        ma.setMtart(job.get("MTART").toString());
-                        ma.setMatkl(job.get("MATKL").toString());
-                        ma.setRaube(job.get("RAUBE").toString());
-                        ma.setBismt(job.get("BISMT").toString());
-                        ma.setSpart(job.get("SPART").toString());
-                        ma.setPrdha(job.get("PRDHA").toString());
-                        ma.setMeins(job.get("MEINS").toString());
-                        ma.setMstae(job.get("MSTAE").toString());
-                        ma.setXchpf(job.get("XCHPF").toString());
-                        ma.setExtwg(job.get("EXTWG").toString());
-                        ma.setMbrsh(job.get("MBRSH").toString());
-                        ma.setMhdrz(job.get("MHDRZ").toString());
-                        ma.setMhdhb(job.get("MHDHB").toString());
-                        ma.setMtpos_mara(job.get("MTPOS_MARA").toString());
-                        ma.setZggxh(job.get("ZGGXH").toString());
-                        ma.setZcus01(job.get("ZCUS01").toString());
-                        ma.setZcus02(job.get("ZCUS02").toString());
-                        ma.setZcus02_1(job.get("ZCUS02_1").toString());
-                        ma.setZcus02_2(job.get("ZCUS02_2").toString());
-                        ma.setZcus03(job.get("ZCUS03").toString());
-                        ma.setZcus04(job.get("ZCUS04").toString());
-                        ma.setZcus05(job.get("ZCUS05").toString());
-                        ma.setZcus06(job.get("ZCUS06").toString());
-                        ma.setZcus07(job.get("ZCUS07").toString());
-                        ma.setZcus08(job.get("ZCUS08").toString());
-                        ma.setZcus09(job.get("ZCUS09").toString());
-                        ma.setZcus10(job.get("ZCUS10").toString());
-                        ma.setZcus11(job.get("ZCUS11").toString());
-                        ma.setZcus12(job.get("ZCUS12").toString());
-                        ma.setZcus13(job.get("ZCUS13").toString());
-                        ma.setZcus14(job.get("ZCUS14").toString());
-                        ma.setZcus15(job.get("ZCUS15").toString());
-                        ma.setZcus16(job.get("ZCUS16").toString());
-                        ma.setZcus17(job.get("ZCUS17").toString());
-                        ma.setZcus18(job.get("ZCUS18").toString());
-                        ma.setZcus19(job.get("ZCUS19").toString());
-                        ma.setZcus20(job.get("ZCUS20").toString());
-                        ma.setZcus21(job.get("ZCUS21").toString());
-                        ma.setZcus22(job.get("ZCUS22").toString());
-                        ma.setZcus23(job.get("ZCUS23").toString());
-                        ma.setZcus24(job.get("ZCUS24").toString());
-                        ma.setZcus25(job.get("ZCUS25").toString());
-                        ma.setZcus26(job.get("ZCUS26").toString());
-                        ma.setZcus27(job.get("ZCUS27").toString());
-                        ma.setZcus28(job.get("ZCUS28").toString());
-                        ma.setZcus29(job.get("ZCUS29").toString());
-                        ma.setZcus30(job.get("ZCUS30").toString());
-                        ma.setZcus31(job.get("ZCUS31").toString());
-                        ma.setZcus32(job.get("ZCUS32").toString());
-                        ma.setZcus33(job.get("ZCUS33").toString());
-                        ma.setZcus34(job.get("ZCUS34").toString());
-                        ma.setZcus35(job.get("ZCUS35").toString());
-                        ma.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ma.setMatnr(job.getString("MATNR"));
+                        ma.setMaktx(job.getString("MAKTX"));
+                        ma.setMtart(job.getString("MTART"));
+                        ma.setMatkl(job.getString("MATKL"));
+                        ma.setRaube(job.getString("RAUBE"));
+                        ma.setBismt(job.getString("BISMT"));
+                        ma.setSpart(job.getString("SPART"));
+                        ma.setPrdha(job.getString("PRDHA"));
+                        ma.setMeins(job.getString("MEINS"));
+                        ma.setMstae(job.getString("MSTAE"));
+                        ma.setXchpf(job.getString("XCHPF"));
+                        ma.setExtwg(job.getString("EXTWG"));
+                        ma.setMbrsh(job.getString("MBRSH"));
+                        ma.setMhdrz(job.getString("MHDRZ"));
+                        ma.setMhdhb(job.getString("MHDHB"));
+                        ma.setMtpos_mara(job.getString("MTPOS_MARA"));
+                        ma.setZggxh(job.getString("ZGGXH"));
+                        ma.setZcus01(job.getString("ZCUS01"));
+                        ma.setZcus02(job.getString("ZCUS02"));
+                        ma.setZcus02_1(job.getString("ZCUS02_1"));
+                        ma.setZcus02_2(job.getString("ZCUS02_2"));
+                        ma.setZcus03(job.getString("ZCUS03"));
+                        ma.setZcus04(job.getString("ZCUS04"));
+                        ma.setZcus05(job.getString("ZCUS05"));
+                        ma.setZcus06(job.getString("ZCUS06"));
+                        ma.setZcus07(job.getString("ZCUS07"));
+                        ma.setZcus08(job.getString("ZCUS08"));
+                        ma.setZcus09(job.getString("ZCUS09"));
+                        ma.setZcus10(job.getString("ZCUS10"));
+                        ma.setZcus11(job.getString("ZCUS11"));
+                        ma.setZcus12(job.getString("ZCUS12"));
+                        ma.setZcus13(job.getString("ZCUS13"));
+                        ma.setZcus14(job.getString("ZCUS14"));
+                        ma.setZcus15(job.getString("ZCUS15"));
+                        ma.setZcus16(job.getString("ZCUS16"));
+                        ma.setZcus17(job.getString("ZCUS17"));
+                        ma.setZcus18(job.getString("ZCUS18"));
+                        ma.setZcus19(job.getString("ZCUS19"));
+                        ma.setZcus20(job.getString("ZCUS20"));
+                        ma.setZcus21(job.getString("ZCUS21"));
+                        ma.setZcus22(job.getString("ZCUS22"));
+                        ma.setZcus23(job.getString("ZCUS23"));
+                        ma.setZcus24(job.getString("ZCUS24"));
+                        ma.setZcus25(job.getString("ZCUS25"));
+                        ma.setZcus26(job.getString("ZCUS26"));
+                        ma.setZcus27(job.getString("ZCUS27"));
+                        ma.setZcus28(job.getString("ZCUS28"));
+                        ma.setZcus29(job.getString("ZCUS29"));
+                        ma.setZcus30(job.getString("ZCUS30"));
+                        ma.setZcus31(job.getString("ZCUS31"));
+                        ma.setZcus32(job.getString("ZCUS32"));
+                        ma.setZcus33(job.getString("ZCUS33"));
+                        ma.setZcus34(job.getString("ZCUS34"));
+                        ma.setZcus35(job.getString("ZCUS35"));
+                        ma.setCreate_time(job.getString("ZLAEDA_TIME"));
 
                         List<It_MaraVO> maList = dataSynService.checkMaraExist(ma);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
@@ -139,17 +141,18 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_MvkeVO to = new It_MvkeVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        to.setMatnr(job.get("MATNR").toString());
-                        to.setVkorg(job.get("VKORG").toString());
-                        to.setVtweg(job.get("VTWEG").toString());
-                        to.setVrkme(job.get("VRKME").toString());
-                        to.setMtpos(job.get("MTPOS").toString());
-                        to.setDwerk(job.get("DWERK").toString());
-                        to.setKtgrm(job.get("KTGRM").toString());
-                        to.setLvorm(job.get("LVORM").toString());
-                        to.setVmsta(job.get("VMSTA").toString());
-                        to.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        to.setMatnr(job.getString("MATNR"));
+                        to.setVkorg(job.getString("VKORG"));
+                        to.setVtweg(job.getString("VTWEG"));
+                        to.setVrkme(job.getString("VRKME"));
+                        to.setMtpos(job.getString("MTPOS"));
+                        to.setDwerk(job.getString("DWERK"));
+                        to.setKtgrm(job.getString("KTGRM"));
+                        to.setLvorm(job.getString("LVORM"));
+                        to.setVmsta(job.getString("VMSTA"));
+                        to.setTaxm1(job.getString("TAXM1"));
+                        to.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_MvkeVO> mvList = dataSynService.checkExist(to);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(mvList.size()<=0){
@@ -183,16 +186,16 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_MbewVO mb = new It_MbewVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        mb.setMatnr(job.get("MATNR").toString());
-                        mb.setBwkey(job.get("BWKEY").toString());
-                        mb.setBklas(job.get("BKLAS").toString());
-                        mb.setLvorm(job.get("LVORM").toString());
-                        mb.setVprsv(job.get("VPRSV").toString());
-                        mb.setVerpr(job.get("VERPR").toString().toString());
-                        mb.setStprs(job.get("STPRS").toString().toString());
-                        mb.setPeinh(job.get("PEINH").toString().toString());
-                        mb.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        mb.setMatnr(job.getString("MATNR"));
+                        mb.setBwkey(job.getString("BWKEY"));
+                        mb.setBklas(job.getString("BKLAS"));
+                        mb.setLvorm(job.getString("LVORM"));
+                        mb.setVprsv(job.getString("VPRSV"));
+                        mb.setVerpr(job.getString("VERPR"));
+                        mb.setStprs(job.getString("STPRS"));
+                        mb.setPeinh(job.getString("PEINH"));
+                        mb.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_MbewVO> mbList = dataSynService.checkMbewExist(mb);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(mbList.size()<=0){
@@ -225,12 +228,12 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_MarmVO ma = new It_MarmVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ma.setMatnr(job.get("MATNR").toString());
-                        ma.setMeinh(job.get("MEINH").toString());
-                        ma.setUmrez(job.get("UMREZ").toString());
-                        ma.setUmren(job.get("UMREN").toString());
-                        ma.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ma.setMatnr(job.getString("MATNR"));
+                        ma.setMeinh(job.getString("MEINH"));
+                        ma.setUmrez(job.getString("UMREZ"));
+                        ma.setUmren(job.getString("UMREN"));
+                        ma.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_MarmVO> maList = dataSynService.checkMarmExist(ma);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -264,13 +267,13 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_MardVO ma = new It_MardVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ma.setMatnr(job.get("MATNR").toString());
-                        ma.setWerks(job.get("WERKS").toString());
-                        ma.setLgort(job.get("LGORT").toString());
-                        ma.setLvorm(job.get("LVORM").toString());
-                        ma.setLabst(job.get("LABST").toString());
-                        ma.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ma.setMatnr(job.getString("MATNR"));
+                        ma.setWerks(job.getString("WERKS"));
+                        ma.setLgort(job.getString("LGORT"));
+                        ma.setLvorm(job.getString("LVORM"));
+                        ma.setLabst(job.getString("LABST"));
+                        ma.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_MardVO> maList = dataSynService.checkMardExist(ma);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -303,15 +306,15 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_MarcVO ma = new It_MarcVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ma.setMatnr(job.get("MATNR").toString());
-                        ma.setWerks(job.get("WERKS").toString());
-                        ma.setLvorm(job.get("LVORM").toString());
-                        ma.setXchpf(job.get("XCHPF").toString());
-                        ma.setXchar(job.get("XCHAR").toString());
-                        ma.setLadgr(job.get("LADGR").toString());
-                        ma.setSernp(job.get("SERNP").toString());
-                        ma.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ma.setMatnr(job.getString("MATNR"));
+                        ma.setWerks(job.getString("WERKS"));
+                        ma.setLvorm(job.getString("LVORM"));
+                        ma.setXchpf(job.getString("XCHPF"));
+                        ma.setXchar(job.getString("XCHAR"));
+                        ma.setLadgr(job.getString("LADGR"));
+                        ma.setSernp(job.getString("SERNP"));
+                        ma.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_MarcVO> maList = dataSynService.checkMarcExist(ma);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -345,34 +348,34 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_But000VO ib = new It_But000VO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ib.setPartner(job.get("PARTNER").toString());
-                        ib.setBu_group(job.get("BU_GROUP").toString());
-                        ib.setName_org1(job.get("NAME_ORG1").toString());
-                        ib.setName_org2(job.get("NAME_ORG2").toString());
-                        ib.setName_org3(job.get("NAME_ORG3").toString());
-                        ib.setName_org4(job.get("NAME_ORG4").toString());
-                        ib.setBu_sort1(job.get("BU_SORT1").toString());
-                        ib.setBu_sort2(job.get("BU_SORT2").toString());
-                        ib.setZynum(job.get("ZYNUM").toString());
-                        ib.setZyfzdat(job.get("ZYFZDAT").toString());
-                        ib.setZyyxdat(job.get("ZYYXDAT").toString());
-                        ib.setZelnum(job.get("ZELNUM").toString());
-                        ib.setZelfzdat(job.get("ZELFZDAT").toString());
-                        ib.setZjynum(job.get("ZJYNUM").toString());
-                        ib.setZjyfzdat(job.get("ZJYFZDAT").toString());
-                        ib.setZjyyxdat(job.get("ZJYYXDAT").toString());
-                        ib.setZyyfzdat(job.get("ZYYFZDAT").toString());
-                        ib.setZscbapz(job.get("ZSCBAPZ").toString());
-                        ib.setZscbarq(job.get("ZSCBARQ").toString());
-                        ib.setZfr(job.get("ZFR").toString());
-                        ib.setCrusr(job.get("CRUSR").toString());
-                        ib.setCrdat(job.get("CRDAT").toString());
-                        ib.setCrtim(job.get("CRTIM").toString());
-                        ib.setChusr(job.get("CHUSR").toString());
-                        ib.setChdat(job.get("CHDAT").toString());
-                        ib.setChtim(job.get("CHTIM").toString());
-                        //ib.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ib.setPartner(job.getString("PARTNER"));
+                        ib.setBu_group(job.getString("BU_GROUP"));
+                        ib.setName_org1(job.getString("NAME_ORG1"));
+                        ib.setName_org2(job.getString("NAME_ORG2"));
+                        ib.setName_org3(job.getString("NAME_ORG3"));
+                        ib.setName_org4(job.getString("NAME_ORG4"));
+                        ib.setBu_sort1(job.getString("BU_SORT1"));
+                        ib.setBu_sort2(job.getString("BU_SORT2"));
+                        ib.setZynum(job.getString("ZYNUM"));
+                        ib.setZyfzdat(job.getString("ZYFZDAT"));
+                        ib.setZyyxdat(job.getString("ZYYXDAT"));
+                        ib.setZelnum(job.getString("ZELNUM"));
+                        ib.setZelfzdat(job.getString("ZELFZDAT"));
+                        ib.setZjynum(job.getString("ZJYNUM"));
+                        ib.setZjyfzdat(job.getString("ZJYFZDAT"));
+                        ib.setZjyyxdat(job.getString("ZJYYXDAT"));
+                        ib.setZyyfzdat(job.getString("ZYYFZDAT"));
+                        ib.setZscbapz(job.getString("ZSCBAPZ"));
+                        ib.setZscbarq(job.getString("ZSCBARQ"));
+                        ib.setZfr(job.getString("ZFR"));
+                        ib.setCrusr(job.getString("CRUSR"));
+                        ib.setCrdat(job.getString("CRDAT"));
+                        ib.setCrtim(job.getString("CRTIM"));
+                        ib.setChusr(job.getString("CHUSR"));
+                        ib.setChdat(job.getString("CHDAT"));
+                        ib.setChtim(job.getString("CHTIM"));
+                        ib.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_But000VO> maList = dataSynService.checkBut000Exist(ib);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -406,26 +409,26 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_Kna1VO ik = new It_Kna1VO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ik.setKunnr(job.get("KUNNR").toString());
-                        ik.setLand1(job.get("LAND1").toString());
-                        ik.setName1(job.get("NAME1").toString());
-                        ik.setName2(job.get("NAME2").toString());
-                        ik.setOrt01(job.get("ORT01").toString());
-                        ik.setPstlz(job.get("PSTLZ").toString());
-                        ik.setRegio(job.get("REGIO").toString());
-                        ik.setStras(job.get("STRAS").toString());
-                        ik.setTelf1(job.get("TELF1").toString());
-                        ik.setTelfx(job.get("TELFX").toString());
-                        ik.setAdrnr(job.get("ADRNR").toString());
-                        ik.setErdat(job.get("ERDAT").toString());
-                        ik.setErnam(job.get("ERNAM").toString());
-                        ik.setKtokd(job.get("KTOKD").toString());
-                        ik.setSpras(job.get("SPRAS").toString());
-                        ik.setTelf2(job.get("TELF2").toString());
-                        ik.setStcd5(job.get("STCD5").toString());
-                        ik.setKukla(job.get("KUKLA").toString());
-                        //ik.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ik.setKunnr(job.getString("KUNNR"));
+                        ik.setLand1(job.getString("LAND1"));
+                        ik.setName1(job.getString("NAME1"));
+                        ik.setName2(job.getString("NAME2"));
+                        ik.setOrt01(job.getString("ORT01"));
+                        ik.setPstlz(job.getString("PSTLZ"));
+                        ik.setRegio(job.getString("REGIO"));
+                        ik.setStras(job.getString("STRAS"));
+                        ik.setTelf1(job.getString("TELF1"));
+                        ik.setTelfx(job.getString("TELFX"));
+                        ik.setAdrnr(job.getString("ADRNR"));
+                        ik.setErdat(job.getString("ERDAT"));
+                        ik.setErnam(job.getString("ERNAM"));
+                        ik.setKtokd(job.getString("KTOKD"));
+                        ik.setSpras(job.getString("SPRAS"));
+                        ik.setTelf2(job.getString("TELF2"));
+                        ik.setStcd5(job.getString("STCD5"));
+                        ik.setKukla(job.getString("KUKLA"));
+                        ik.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_Kna1VO> maList = dataSynService.checkKna1Exist(ik);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -458,17 +461,17 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_Knb1VO ik = new It_Knb1VO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ik.setKunnr(job.get("KUNNR").toString());
-                        ik.setBukrs(job.get("BUKRS").toString());
-                        ik.setErdat(job.get("ERDAT").toString());
-                        ik.setErnam(job.get("ERNAM").toString());
-                        ik.setAkont(job.get("AKONT").toString());
-                        ik.setZwels(job.get("ZWELS").toString());
-                        ik.setZterm(job.get("ZTERM").toString());
-                        ik.setSperr(job.get("SPERR").toString());
-                        ik.setLoevm(job.get("LOEVM").toString());
-                        //ik.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ik.setKunnr(job.getString("KUNNR"));
+                        ik.setBukrs(job.getString("BUKRS"));
+                        ik.setErdat(job.getString("ERDAT"));
+                        ik.setErnam(job.getString("ERNAM"));
+                        ik.setAkont(job.getString("AKONT"));
+                        ik.setZwels(job.getString("ZWELS"));
+                        ik.setZterm(job.getString("ZTERM"));
+                        ik.setSperr(job.getString("SPERR"));
+                        ik.setLoevm(job.getString("LOEVM"));
+                        ik.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_Knb1VO> maList = dataSynService.checkKnb1Exist(ik);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -501,39 +504,39 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_KnvvVO ik = new It_KnvvVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ik.setKunnr(job.get("KUNNR").toString());
-                        ik.setVkorg(job.get("VKORG").toString());
-                        ik.setVtweg(job.get("VTWEG").toString());
-                        ik.setSpart(job.get("SPART").toString());
-                        ik.setErnam(job.get("ERNAM").toString());
-                        ik.setErdat(job.get("ERDAT").toString());
-                        ik.setBegru(job.get("BEGRU").toString());
-                        ik.setLoevm(job.get("LOEVM").toString());
-                        ik.setVersg(job.get("VERSG").toString());
-                        ik.setAufsd(job.get("AUFSD").toString());
-                        ik.setKalks(job.get("KALKS").toString());
-                        ik.setKdgrp(job.get("KDGRP").toString());
-                        ik.setBzirk(job.get("BZIRK").toString());
-                        ik.setKonda(job.get("KONDA").toString());
-                        ik.setPltyp(job.get("PLTYP").toString());
-                        ik.setInco1(job.get("INCO1").toString());
-                        ik.setInco2(job.get("INCO2").toString());
-                        ik.setLifsd(job.get("LIFSD").toString());
-                        ik.setKzazu(job.get("KZAZU").toString());
-                        ik.setVsbed(job.get("VSBED").toString());
-                        ik.setFaksd(job.get("FAKSD").toString());
-                        ik.setWaers(job.get("WAERS").toString());
-                        ik.setKlabc(job.get("KLABC").toString());
-                        ik.setKtgrd(job.get("KTGRD").toString());
-                        ik.setZterm(job.get("ZTERM").toString());
-                        ik.setVwerk(job.get("VWERK").toString());
-                        ik.setVkgrp(job.get("VKGRP").toString());
-                        ik.setVkbur(job.get("VKBUR").toString());
-                        ik.setPrfre(job.get("PRFRE").toString());
-                        ik.setKkber(job.get("KKBER").toString());
-                        ik.setPodkz(job.get("PODKZ").toString());
-                        //ik.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ik.setKunnr(job.getString("KUNNR"));
+                        ik.setVkorg(job.getString("VKORG"));
+                        ik.setVtweg(job.getString("VTWEG"));
+                        ik.setSpart(job.getString("SPART"));
+                        ik.setErnam(job.getString("ERNAM"));
+                        ik.setErdat(job.getString("ERDAT"));
+                        ik.setBegru(job.getString("BEGRU"));
+                        ik.setLoevm(job.getString("LOEVM"));
+                        ik.setVersg(job.getString("VERSG"));
+                        ik.setAufsd(job.getString("AUFSD"));
+                        ik.setKalks(job.getString("KALKS"));
+                        ik.setKdgrp(job.getString("KDGRP"));
+                        ik.setBzirk(job.getString("BZIRK"));
+                        ik.setKonda(job.getString("KONDA"));
+                        ik.setPltyp(job.getString("PLTYP"));
+                        ik.setInco1(job.getString("INCO1"));
+                        ik.setInco2(job.getString("INCO2"));
+                        ik.setLifsd(job.getString("LIFSD"));
+                        ik.setKzazu(job.getString("KZAZU"));
+                        ik.setVsbed(job.getString("VSBED"));
+                        ik.setFaksd(job.getString("FAKSD"));
+                        ik.setWaers(job.getString("WAERS"));
+                        ik.setKlabc(job.getString("KLABC"));
+                        ik.setKtgrd(job.getString("KTGRD"));
+                        ik.setZterm(job.getString("ZTERM"));
+                        ik.setVwerk(job.getString("VWERK"));
+                        ik.setVkgrp(job.getString("VKGRP"));
+                        ik.setVkbur(job.getString("VKBUR"));
+                        ik.setPrfre(job.getString("PRFRE"));
+                        ik.setKkber(job.getString("KKBER"));
+                        ik.setPodkz(job.getString("PODKZ"));
+                        ik.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_KnvvVO> maList = dataSynService.checkKnvvExist(ik);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -566,20 +569,20 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_KnvpVO ik = new It_KnvpVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ik.setKunnr(job.get("KUNNR").toString());
-                        ik.setVkorg(job.get("VKORG").toString());
-                        ik.setVtweg(job.get("VTWEG").toString());
-                        ik.setSpart(job.get("SPART").toString());
-                        ik.setParvw(job.get("PARVW").toString());
-                        ik.setParza(job.get("PARZA").toString());
-                        ik.setKunn2(job.get("KUNN2").toString());
-                        ik.setLifnr(job.get("LIFNR").toString());
-                        ik.setPernr(job.get("PERNR").toString());
-                        ik.setParnr(job.get("PARNR").toString());
-                        ik.setKnref(job.get("KNREF").toString());
-                        ik.setDefpa(job.get("DEFPA").toString());
-                        //ik.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ik.setKunnr(job.getString("KUNNR"));
+                        ik.setVkorg(job.getString("VKORG"));
+                        ik.setVtweg(job.getString("VTWEG"));
+                        ik.setSpart(job.getString("SPART"));
+                        ik.setParvw(job.getString("PARVW"));
+                        ik.setParza(job.getString("PARZA"));
+                        ik.setKunn2(job.getString("KUNN2"));
+                        ik.setLifnr(job.getString("LIFNR"));
+                        ik.setPernr(job.getString("PERNR"));
+                        ik.setParnr(job.getString("PARNR"));
+                        ik.setKnref(job.getString("KNREF"));
+                        ik.setDefpa(job.getString("DEFPA"));
+                        ik.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_KnvpVO> maList = dataSynService.checkKnvpExist(ik);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -613,18 +616,18 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_AdrcVO ia = new It_AdrcVO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        ia.setAddrnumber(job.get("ADDRNUMBER").toString());
-                        ia.setName1(job.get("NAME1").toString());
-                        ia.setName2(job.get("NAME2").toString());
-                        ia.setName3(job.get("NAME3").toString());
-                        ia.setName4(job.get("NAME4").toString());
-                        ia.setStr_suppl1(job.get("STR_SUPPL1").toString());
-                        ia.setStr_suppl2(job.get("STR_SUPPL2").toString());
-                        ia.setStr_suppl3(job.get("STR_SUPPL3").toString());
-                        ia.setLocation(job.get("LOCATION").toString());
-                        ia.setRemark(job.get("REMARK").toString());
-                        //ik.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        ia.setAddrnumber(job.getString("ADDRNUMBER"));
+                        ia.setName1(job.getString("NAME1"));
+                        ia.setName2(job.getString("NAME2"));
+                        ia.setName3(job.getString("NAME3"));
+                        ia.setName4(job.getString("NAME4"));
+                        ia.setStr_suppl1(job.getString("STR_SUPPL1"));
+                        ia.setStr_suppl2(job.getString("STR_SUPPL2"));
+                        ia.setStr_suppl3(job.getString("STR_SUPPL3"));
+                        ia.setLocation(job.getString("LOCATION"));
+                        ia.setRemark(job.getString("REMARK"));
+                        ia.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_AdrcVO> maList = dataSynService.checkAdrcExist(ia);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -658,23 +661,23 @@ public class TaskUtilController {
                 for(int i=0;i<objects.size();i++){
                     It_Ztsd_012VO iz = new It_Ztsd_012VO();
                     JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
-                    if(job.get("TYPE").equals("S")){
-                        iz.setKunnr(job.get("KUNNR").toString());
-                        iz.setVkorg(job.get("VKORG").toString());
-                        iz.setVtweg(job.get("VTWEG").toString());
-                        iz.setMatnr(job.get("MATNR").toString());
-                        iz.setName1(job.get("NAME1").toString());
-                        iz.setArktx(job.get("ARKTX").toString());
-                        iz.setKdmat(job.get("KDMAT").toString());
-                        iz.setPostx(job.get("POSTX").toString());
-                        iz.setZkdmat_2(job.get("ZKDMAT_2").toString());
-                        iz.setZkdmat_3(job.get("ZKDMAT_3").toString());
-                        iz.setZkdmat_4(job.get("ZKDMAT_4").toString());
-                        iz.setZernam1(job.get("ZERNAM1").toString());
-                        iz.setZerdat1(job.get("ZERDAT1").toString());
-                        iz.setZernam2(job.get("ZERNAM2").toString());
-                        iz.setZerdat2(job.get("ZERDAT2").toString());
-                        //ik.setCreate_time(job.get("ZLAEDA_TIME").toString());
+                    if(job.getString("TYPE").equals("S")){
+                        iz.setKunnr(job.getString("KUNNR"));
+                        iz.setVkorg(job.getString("VKORG"));
+                        iz.setVtweg(job.getString("VTWEG"));
+                        iz.setMatnr(job.getString("MATNR"));
+                        iz.setName1(job.getString("NAME1"));
+                        iz.setArktx(job.getString("ARKTX"));
+                        iz.setKdmat(job.getString("KDMAT"));
+                        iz.setPostx(job.getString("POSTX"));
+                        iz.setZkdmat_2(job.getString("ZKDMAT_2"));
+                        iz.setZkdmat_3(job.getString("ZKDMAT_3"));
+                        iz.setZkdmat_4(job.getString("ZKDMAT_4"));
+                        iz.setZernam1(job.getString("ZERNAM1"));
+                        iz.setZerdat1(job.getString("ZERDAT1"));
+                        iz.setZernam2(job.getString("ZERNAM2"));
+                        iz.setZerdat2(job.getString("ZERDAT2"));
+                        iz.setCreate_time(job.getString("ZLAEDA_TIME"));
                         List<It_Ztsd_012VO> maList = dataSynService.checkZtsd_012Exist(iz);
                         //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
                         if(maList.size()<=0){
@@ -692,6 +695,177 @@ public class TaskUtilController {
                     log.info("客户物料数据新增成功");
                 }
             }
+        }
+    }
+
+
+    @Scheduled(cron = "${kafka.cron.global_customer}") // cron表达式：每隔10分钟执行一次
+    public void insertZtsd_002() {
+        log.info("执行客户分配多角贸易代码同步任务~");
+
+        String result = GetSapConfigTableInfo.sendRequest("SD142", JSONSTR1);
+        List<It_Ztsd_002VO> dataList = new ArrayList<It_Ztsd_002VO>();
+        if(!"".equals(result)&& !"error".equals(result) ){
+            JSONArray objects = JSON.parseArray(result);
+            if(objects.size()>0){
+                for(int i=0;i<objects.size();i++){
+                    It_Ztsd_002VO iz = new It_Ztsd_002VO();
+                    JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                    if(job.getString("TYPE").equals("S")){
+                        iz.setKunnr(job.getString("KUNNR"));
+                        iz.setVkorg(job.getString("VKORG"));
+                        iz.setKnumh(job.getString("KNUMH"));
+                        iz.setName1(job.getString("NAME1"));
+                        iz.setC_default(job.getString("C_DEFAULT"));
+                        iz.setName2(job.getString("NAME2"));
+                        iz.setDatab(job.getString("DATAB"));
+                        iz.setDatbi(job.getString("DATBI"));
+                        iz.setLoevm_ko(job.getString("LOEVM_KO"));
+                        iz.setZernam1(job.getString("ZERNAM1"));
+                        iz.setZerdat1(job.getString("ZERDAT1"));
+                        iz.setZernam2(job.getString("ZERNAM2"));
+                        iz.setZerdat2(job.getString("ZERDAT2"));
+                        iz.setCreate_time(job.getString("ZERDAT2"));
+                        List<It_Ztsd_002VO> maList = dataSynService.checkZtsd_002Exist(iz);
+                        //按唯一键和最后修改日期去查是否在本地数据库存在，如果存在，表示已经添加过，此时不添加
+                        if(maList.size()<=0){
+                            dataList.add(iz);
+                        }
+                    }
+                }
+            }
+
+            if(dataList.size()>0){
+                String rs =  dataSynService.insertZtsd_002(dataList);
+                if(rs.indexOf("error")!=-1){
+                    log.info("客户分配多角贸易代码新增失败"+rs);
+                }else{
+                    log.info("客户分配多角贸易代码新增成功");
+                }
+            }
+        }
+    }
+
+
+    @Scheduled(cron = "${kafka.cron.global_Rebate}") // cron表达式：每隔10分钟执行一次
+    public void insertZtsd206() {
+
+        log.info("执行返利策略同步任务~");
+
+        List<Ztsd206_headVO> headList = new ArrayList<Ztsd206_headVO>();
+
+        String param = "<![CDATA[[{\"ZDATE1\":\""+startDate+"\",\"ZDATE2\":\""+endDate+"\"}]]]>";
+
+        String result = GetSapConfigTableInfo.sendRequest("SD140",param);
+
+        if(!"".equals(result)&& !"error".equals(result) ){
+            JSONArray objects = JSON.parseArray(result);
+            if(objects.size()>0){
+                for(int i=0;i<objects.size();i++){
+                    Ztsd206_headVO zh = new Ztsd206_headVO();
+                    JSONObject job = objects.getJSONObject(i);   // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                    if(job.getString("TYPE").equals("Y")){
+                        zh.setZzbname(job.getString("ZZBNAME"));
+                        zh.setZzbname_txt(job.getString("ZZBNAME_TXT"));
+                        zh.setZcont(job.getString("ZCONT"));
+                        zh.setZcont_txt(job.getString("ZCONT_TXT"));
+                        zh.setKunnr(job.getString("KUNNR"));
+                        zh.setName1(job.getString("NAME1"));
+                        zh.setVkorg(job.getString("VKORG"));
+                        zh.setVtext(job.getString("VTEXT"));
+                        zh.setZrebate(Convert.toFloat(job.get("ZREBATE"),0f));
+                        zh.setZrebate_used(Convert.toFloat(job.get("ZREBATE_USED"),0f));
+                        zh.setZrebate_last(Convert.toFloat(job.get("ZREBATE_LAST"),0f));
+                        zh.setDatab(job.getString("DATAB"));
+                        zh.setDatbi(job.getString("DATBI"));
+                        zh.setZkfrst(job.getString("ZKFRST"));
+                        zh.setZzkl(Convert.toFloat(job.get("ZZKL"),0f));
+                        zh.setZname(job.getString("ZNAME"));
+                        zh.setZname1(job.getString("ZNAME1"));
+                        zh.setZsh(job.getString("ZSH"));
+                        zh.setZdate_sh(job.getString("ZDATE_SH"));
+                        zh.setZdate(job.getString("ZDATE"));
+                        zh.setZdate1(job.getString("ZDATE1"));
+                        zh.setZtime(job.getString("ZTIME"));
+                        zh.setZtime1(job.getString("ZTIME1"));
+                        zh.setZtime_sh(job.getString("ZTIME_SH"));
+                        zh.setZbase(job.getString("ZBASE"));
+                        zh.setZly(job.getString("ZLY"));
+                        zh.setZoa(job.getString("ZOA"));
+                        zh.setZdel_h(job.getString("ZDEL_H"));
+
+
+                        List<Ztsd206_ItemVO> itemList = new ArrayList<Ztsd206_ItemVO>();
+                        List<Ztsd206_kunnr_ecVO> kunnr_ecList = new ArrayList<Ztsd206_kunnr_ecVO>();
+
+
+                        /*返利策略物料组行*/
+                        JSONArray itemArray = JSON.parseArray(job.getString("ITEM"));
+                        if(itemArray.size()>0){
+                            for(int j=0;j<itemArray.size();j++){
+                                Ztsd206_ItemVO zi = new Ztsd206_ItemVO();
+                                JSONObject itemJob = itemArray.getJSONObject(j);
+
+                                zi.setZzbname(itemJob.getString("ZZBNAME"));
+                                zi.setZposnr(itemJob.getString("ZPOSNR"));
+                                zi.setZzkl(Convert.toFloat(itemJob.get("ZZKL"),0f));
+                                zi.setMatkl(itemJob.getString("MATKL"));
+                                zi.setMatnr(itemJob.getString("MATNR"));
+                                zi.setZdel(itemJob.getString("ZDEL"));
+
+                                List<Ztsd206_ItemVO> ziList = dataSynService.checkZtsd206_itemExist(zi);
+                                //根据返利单号+物料组去查，如果存在了，则不增加
+                                if(ziList.size()<=0){
+                                    itemList.add(zi);
+                                }
+                            }
+                        }
+
+
+                        /*返利策略终端客户行*/
+                        JSONArray kunnr_ecArray = JSON.parseArray(job.getString("KITEM"));
+                        if(kunnr_ecArray.size()>0){
+                            for(int k=0;k<kunnr_ecArray.size();k++){
+                                Ztsd206_kunnr_ecVO zk = new Ztsd206_kunnr_ecVO();
+                                JSONObject kunnr_ecJob = kunnr_ecArray.getJSONObject(k);
+
+                                zk.setZzbname(kunnr_ecJob.getString("ZZBNAME"));
+                                zk.setKunnr_ec(kunnr_ecJob.getString("KUNNR_EC"));
+                                zk.setZzbname_txt(kunnr_ecJob.getString("ZZBNAME_TXT"));
+
+                                List<Ztsd206_kunnr_ecVO> zkList = dataSynService.checkZtsd206_kunnr_ecExist(zk);
+                                //根据返利单号+终端客户去查，如果存在了，则不增加
+                                if(zkList.size()<=0){
+                                    kunnr_ecList.add(zk);
+                                }
+                            }
+                        }
+
+                        zh.setZiList(itemList);
+                        zh.setZkuList(kunnr_ecList);
+
+                        List<Ztsd206_headVO> ztsList = dataSynService.checkZtsd206_headExist(zh);
+                        //根据返利单号去查，如果存在了，则不增加
+                        if(ztsList.size()<=0){
+                            headList.add(zh);
+                        }
+                    }
+                }
+            }
+
+
+            if(headList.size()>0){
+                String rs =  dataSynService.insertZtsd206(headList);
+                if(rs.indexOf("error")!=-1){
+                    log.info("返利策略新增失败"+rs);
+                }else{
+                    log.info("返利策略新增成功");
+                }
+            }else{
+                log.info("无可同步的返利策略数据");
+            }
+        }else{
+            log.info("返利策略获取失败："+result);
         }
     }
 

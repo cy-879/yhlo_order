@@ -478,6 +478,21 @@
     </insert>
 
 
+    <delete id="deleteT142t">
+        truncate table t142t
+    </delete>
+
+    <insert id="insertT142t" parameterType="com.yhlo.oa.entity.T142tVO">
+        insert into t142t (zsap_tabel,zsap_tabletxt,raube,rbtxt)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{raube, jdbcType=VARCHAR},
+                  #{rbtxt, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
 
 
 </mapper>

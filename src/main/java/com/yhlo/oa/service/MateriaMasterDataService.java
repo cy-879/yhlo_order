@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface MateriaMasterDataService {
 
-    public PageInfo<It_MaraVO> geteMaraPageList(Integer currentPage, Integer pageSize,String matnr);
+    public PageInfo<It_MaraVO> getMaraPageList(Integer currentPage, Integer pageSize,String matnr);
+
     public List<It_MaraVO> queryMaraList(String matnr);
 }

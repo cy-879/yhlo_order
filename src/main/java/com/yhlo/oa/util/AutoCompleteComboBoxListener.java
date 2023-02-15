@@ -79,7 +79,7 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
                 list.add(data.get(i));
             }
         }
-        String t = comboBox.getEditor().getText().toUpperCase();
+        String t = comboBox.getEditor().getText();
 
         comboBox.setItems(list);
 
@@ -117,11 +117,17 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
             Map temp = new HashMap();
             @Override
             public String toString(Map object) {
-                temp = object;
-                return String.valueOf(object.get(showName));
+                if(null != object){
+                    temp = object;
+                    return String.valueOf(object.get(showName));
+                }
+              return null;
             }
             @Override
             public Map fromString(String string) {
+                if("".equals(string) || !string.equals(temp.get(showName))){
+                    return null;
+                }
                 return temp;
             }
         });

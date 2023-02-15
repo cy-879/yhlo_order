@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>com.yhlo</groupId>
-    <artifactId>yhlo_oa</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>yhlo_oa</name>
+    <artifactId>yhlo_order</artifactId>
+    <version>0.0.1</version>
+    <name>yhlo_order</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -32,6 +32,38 @@
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>1.7</velocity.version>
+
+
+        <!--自动更新配置-->
+        <app.filename>订单平台</app.filename>
+        <!--运行的主类-->
+       <!-- <app.mainClass>com.yhlo.oa.YhloOaApplication</app.mainClass>-->
+        <app.mainClass>org.springframework.boot.loader.JarLauncher</app.mainClass>
+        <!--FXLauncher运行后文件下载的位置-->
+        <app.cacheDir>./lib</app.cacheDir>
+        <!--更新文件的服务器地址，在这里可以打开下载你的更新jar包就行，tomcat和apache都行-->
+
+        <!-- 本机地址-->
+      <!--  <app.url>http://10.4.4.206:941/app</app.url>-->
+        <!-- 服务器地址-->
+        <app.url>http://192.168.0.140:941/app</app.url>
+
+        <!--编译后的位置，这个位置在Idea里面是target下面的app目录-->
+        <app.dir>${project.build.directory}/app</app.dir>
+        <!-- 本机安装程序将在此文件夹中生成 -->
+        <app.installerdir>${project.build.directory}/installer</app.installerdir>
+        <!-- javapackager使用的应用程序供应商 -->
+        <app.vendor>yhlo</app.vendor>
+        <app.version>1.0</app.version>
+        <!--更新时的提示语-->
+        <app.updateText>正在更新中...</app.updateText>
+        <!--是否接受版本降级-->
+        <app.acceptDowngrade>false</app.acceptDowngrade>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.test.skip>true</maven.test.skip>
+
     </properties>
 
     <dependencies>
@@ -298,11 +330,33 @@
         </dependency>
 
 
+        <!--启动器用于自动拉取更新-->
+        <dependency>
+            <groupId>no.tornado</groupId>
+            <artifactId>fxlauncher</artifactId>
+            <version>1.0.21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.40.11</version>
+        </dependency>
 
 
+        <!-- logstash -->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>5.1</version>
+        </dependency>
     </dependencies>
 
     <build>
+
+        <!--打包后你的代码会以这个名称生成为jar包，以后更改项目代码只需要将这个jar包上传至更新服务器即可-->
+        <finalName>yhlo_order</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -314,9 +368,277 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <!--<mainClass>com.yhlo.oa.YhloOaApplication</mainClass>-->
                 </configuration>
             </plugin>
+
+
+            <!-- javapackager  -->
+            <!--<plugin>
+                <groupId>io.github.fvarrui</groupId>
+                <artifactId>javapackager</artifactId>
+                <version>1.6.7</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.yhlo.oa.YhloOaApplication</mainClass>
+
+                            <bundleJre>true</bundleJre>
+                            <jrePath>C:\Program Files\Java\jre1.8.0_321</jrePath>
+
+                            <generateInstaller>false</generateInstaller>
+                            <administratorRequired>false</administratorRequired>
+                            <platform>windows</platform>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+
+            <plugin>
+                <!-- 使用springboot打包成一个jar -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--jar包保存路径-->
+                    <outputDirectory>${app.dir}</outputDirectory>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <configuration>
+                   <!-- <excludeScope>provided</excludeScope>-->
+                    <outputDirectory>${app.dir}</outputDirectory>
+                    <stripVersion>true</stripVersion>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>no.tornado</groupId>
+                                    <artifactId>fxlauncher</artifactId>
+                                    <version>1.0.20</version>
+                                    <outputDirectory>${app.dir}</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--拷贝依赖jar包到编译目录-->
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludeScope>provided</excludeScope>
+                    <outputDirectory>${app.dir}</outputDirectory>
+                    <stripVersion>true</stripVersion>
+                </configuration>
+            </plugin>-->
+
+            <!--fxlancher打包-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <!-- 生成 app.xml manifest -->
+                <executions>
+                    <execution>
+                        <id>create-manifest</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>fxlauncher.CreateManifest</mainClass>
+                            <arguments>
+                                <argument>${app.url}</argument>
+                                <argument>${app.mainClass}</argument>
+                                <argument>${app.dir}</argument>
+                                <argument>--cache-dir=${app.cacheDir}</argument>
+                                <argument>--update-text=${app.updateText}</argument>
+                                <argument>--accept-downgrade=${app.acceptDowngrade}</argument>
+                                <!--这里可以放你想要更新文件打包进去的文件 比如dll，db之类的，可以事先放在app目录下-->
+                                <argument>--include-extensions=jpg</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <!-- 把app.xml打包进fxlauncher.xml,这样就启动器就不需要依赖app.xml来启动了 -->
+                    <execution>
+                        <id>embed-manifest-in-launcher</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>jar</executable>
+                            <workingDirectory>${app.dir}</workingDirectory>
+                            <arguments>
+                                <argument>uf</argument>
+                                <argument>fxlauncher.jar</argument>
+                                <argument>app.xml</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                     <!--<execution>
+                         <id>installer</id>
+                         <phase>install</phase>
+                         <goals>
+                             <goal>exec</goal>
+                         </goals>
+                         <configuration>
+                             <executable>javapackager</executable>
+                             <arguments>
+                                 <argument>-deploy</argument>
+                                 <argument>-native</argument>
+                                 <argument>-outdir</argument>
+                                 <argument>${app.installerdir}</argument>
+                                 <argument>-outfile</argument>
+                                 <argument>${app.filename}</argument>
+                                 <argument>-srcdir</argument>
+                                 <argument>${app.dir}</argument>
+                                 <argument>-srcfiles</argument>
+                                 <argument>fxlauncher.jar</argument>
+                                 <argument>-appclass</argument>
+                                 <argument>fxlauncher.Launcher</argument>
+                                 <argument>-name</argument>
+                                 <argument>${project.name}</argument>
+                                 <argument>-title</argument>
+                                 <argument>${project.name}</argument>
+                                 <argument>-vendor</argument>
+                                 <argument>${app.vendor}</argument>
+                                 <argument>-BappVersion=${app.version}</argument>
+                                 <argument>-Bidentifier=${project.groupId}.${project.artifactId}</argument>
+                             </arguments>
+                         </configuration>
+                     </execution>-->
+                </executions>
+            </plugin>
+
+
+            <!--编译执行文件-->
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <outputDirectory>${app.dir}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            &lt;!&ndash;拷贝依赖jar包到编译目录&ndash;&gt;
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludeScope>provided</excludeScope>
+                    <outputDirectory>${app.dir}</outputDirectory>
+                    <stripVersion>true</stripVersion>
+                </configuration>
+            </plugin>
+
+            &lt;!&ndash;fxlancher打包&ndash;&gt;
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                &lt;!&ndash; 生成 app.xml manifest &ndash;&gt;
+                <executions>
+                    <execution>
+                        <id>create-manifest</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>fxlauncher.CreateManifest</mainClass>
+                            <arguments>
+                                <argument>${app.url}</argument>
+                                <argument>${app.mainClass}</argument>
+                                <argument>${app.dir}</argument>
+                                <argument>&#45;&#45;cache-dir=${app.cacheDir}</argument>
+                                <argument>&#45;&#45;update-text=${app.updateText}</argument>
+                                <argument>&#45;&#45;accept-downgrade=${app.acceptDowngrade}</argument>
+                                <argument>&#45;&#45;stop-on-update-errors=true</argument>
+                                <argument>&#45;&#45;lingering-update-screen=true</argument>
+                                <argument>&#45;&#45;version=${project.version}</argument>
+                                &lt;!&ndash;这里可以放你想要更新文件打包进去的文件 比如dll，db之类的，可以事先放在app目录下&ndash;&gt;
+                                <argument>&#45;&#45;include-extensions=exe,dll</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    &lt;!&ndash; 把app.xml打包进fxlauncher.xml,这样就启动器就不需要依赖app.xml来启动了 &ndash;&gt;
+                    <execution>
+                        <id>embed-manifest-in-launcher</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>jar</executable>
+                            <workingDirectory>${app.dir}</workingDirectory>
+                            <arguments>
+                                <argument>uf</argument>
+                                <argument>fxlauncher.jar</argument>
+                                <argument>app.xml</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>-->
+
+
         </plugins>
+
     </build>
+
 
 </project>
