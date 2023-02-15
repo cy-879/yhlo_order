@@ -165,7 +165,6 @@ public class PublicDataServiceImpl implements PublicDataService {
                    }
                }
 
-
            }else if(null != srp.getKunnr() && !"".equals(srp.getKunnr()) &&
                    null != srp.getVkorg() && !"".equals(srp.getVkorg()) &&
                    null != srp.getKunnr_ec() && !"".equals(srp.getKunnr_ec())){
@@ -184,6 +183,46 @@ public class PublicDataServiceImpl implements PublicDataService {
                            showList.addAll(ls5);
                        }
                    }
+               }
+
+           }else if(null != srp.getKunnr() && !"".equals(srp.getKunnr()) &&
+                   null != srp.getVkorg() && !"".equals(srp.getVkorg()) &&
+                   null != srp.getMatkl() && !"".equals(srp.getMatkl())){
+
+               List<ShowRebatePolicyInfoVO> ls3 = pdMapper.showRebatePolicyList3(srp.getKunnr(), srp.getVkorg(),
+                       srp.getMatkl());
+               if(ls3.size()>0){
+                   showList.addAll(ls3);
+               }else{
+                   List<ShowRebatePolicyInfoVO> ls4 = pdMapper.showRebatePolicyList4(srp.getKunnr(), srp.getVkorg());
+                   if(ls4.size()>0){
+                       showList.addAll(ls4);
+                   }else{
+                       List<ShowRebatePolicyInfoVO> ls5 = pdMapper.showRebatePolicyList5(srp.getKunnr());
+                       if(ls5.size()>0){
+                           showList.addAll(ls5);
+                       }
+                   }
+               }
+
+           }else if(null != srp.getKunnr() && !"".equals(srp.getKunnr()) &&
+                   null != srp.getVkorg() && !"".equals(srp.getVkorg())){
+
+               List<ShowRebatePolicyInfoVO> ls4 = pdMapper.showRebatePolicyList4(srp.getKunnr(), srp.getVkorg());
+               if(ls4.size()>0){
+                   showList.addAll(ls4);
+               }else{
+                   List<ShowRebatePolicyInfoVO> ls5 = pdMapper.showRebatePolicyList5(srp.getKunnr());
+                   if(ls5.size()>0){
+                       showList.addAll(ls5);
+                   }
+               }
+
+           }else if(null != srp.getKunnr() && !"".equals(srp.getKunnr())){
+
+               List<ShowRebatePolicyInfoVO> ls5 = pdMapper.showRebatePolicyList5(srp.getKunnr());
+               if(ls5.size()>0){
+                   showList.addAll(ls5);
                }
            }
         }
