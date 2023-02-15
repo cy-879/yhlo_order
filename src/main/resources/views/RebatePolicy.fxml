@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" prefHeight="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.RebatePolicyController">
+    <center>
+        <VBox>
+           <children>
+               <HBox prefHeight="200.0" prefWidth="${root.width}">
+                 <children>
+                     <BorderPane prefHeight="200.0" prefWidth="${root.width}">
+                         <top>
+                             <ToolBar prefHeight="30.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+                                 <items>
+                                     <Button fx:id="saveBt" layoutX="80.0" layoutY="470.0" mnemonicParsing="false" onAction="#saveData" text="保存">
+                                         <styleClass>
+                                             <String fx:value="btn-sm" />
+                                             <String fx:value="btn-info" />
+                                         </styleClass>
+                                     </Button>
+                                 </items>
+                             </ToolBar>
+                         </top>
+                         <center>
+                             <AnchorPane prefHeight="170.0" prefWidth="${root.width}">
+                                 <children>
+                                     <Label layoutX="4.0" layoutY="10.0" prefHeight="23.0" prefWidth="72.0" text="返利单名称：" />
+                                     <TextField fx:id="rebateFormNameAssembly" layoutX="76.0" layoutY="9.0" prefWidth="200.0" />
+                                     <Label layoutX="289.0" layoutY="10.0" prefHeight="23.0" prefWidth="73.0" text="返利单编号：" />
+                                     <TextField fx:id="rebateFormNoAssembly" editable="false" layoutX="368.0" layoutY="9.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <Label layoutX="539.0" layoutY="10.0" prefHeight="23.0" prefWidth="63.0" text="返利策略：" />
+                                     <ComboBox fx:id="rebateStrategyAssembly" layoutX="608.0" layoutY="9.0" prefHeight="23.0" prefWidth="200.0" />
+                                     <Label layoutX="817.0" layoutY="10.0" prefHeight="23.0" prefWidth="73.0" text="合同编号：" />
+                                     <TextField fx:id="contractNoAssembly" layoutX="899.0" layoutY="9.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <TextField fx:id="kunnrAssembly" editable="false" layoutX="899.0" layoutY="39.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <Label layoutX="12.0" layoutY="40.0" prefHeight="23.0" prefWidth="62.0" text="销售组织：" />
+                                     <ComboBox fx:id="vkorg_nameAssembly" editable="true" layoutX="76.0" layoutY="39.0" prefHeight="23.0" prefWidth="200.0" />
+                                     <Label layoutX="289.0" layoutY="40.0" prefHeight="23.0" prefWidth="84.0" text="销售组织代码：" />
+                                     <TextField fx:id="vkorgAssembly" editable="false" layoutX="367.0" layoutY="39.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <Label layoutX="540.0" layoutY="40.0" prefHeight="23.0" prefWidth="63.0" text="客户名称：" />
+                                     <ComboBox fx:id="name1Assembly" editable="true" layoutX="609.0" layoutY="39.0" prefHeight="23.0" prefWidth="200.0" />
+                                     <Label layoutX="823.0" layoutY="40.0" prefHeight="23.0" prefWidth="73.0" text="客户代码：" />
+                                     <Label layoutX="9.0" layoutY="70.0" prefHeight="23.0" prefWidth="62.0" text="终端客户：" />
+                                     <ComboBox fx:id="name_ec_nameAssembly" editable="true" layoutX="77.0" layoutY="69.0" prefHeight="23.0" prefWidth="200.0" />
+                                     <Label layoutX="286.0" layoutY="70.0" prefHeight="23.0" prefWidth="84.0" text="终端客户代码：" />
+                                     <TextField fx:id="name_ecAssembly" editable="false" layoutX="368.0" layoutY="69.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <Label layoutX="539.0" layoutY="70.0" prefHeight="23.0" prefWidth="62.0" text="返利额度：" />
+                                     <TextField fx:id="rebateLimitAssembly" layoutX="607.0" layoutY="69.0" prefHeight="23.0" prefWidth="200.0" />
+                                     <Label layoutX="816.0" layoutY="70.0" prefHeight="23.0" prefWidth="84.0" text="返利比例(%)：" />
+                                     <TextField fx:id="z005Assembly" layoutX="898.0" layoutY="69.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <Label layoutX="9.0" layoutY="100.0" prefHeight="23.0" prefWidth="84.0" text="生效时间：" />
+                                     <DatePicker fx:id="takeEffectTimeAssembly" layoutX="77.0" layoutY="99.0" prefHeight="23.0" prefWidth="200.0" />
+                                     <Label layoutX="286.0" layoutY="100.0" prefHeight="23.0" prefWidth="84.0" text="失效时间：" />
+                                     <DatePicker fx:id="failureTimeAssembly" layoutX="368.0" layoutY="99.0" prefHeight="23.0" prefWidth="150.0" />
+                                     <Label layoutX="542.0" layoutY="103.0" prefHeight="23.0" prefWidth="56.0" text="备注：" />
+                                     <TextArea fx:id="remarkAssembly" layoutX="606.0" layoutY="99.0" prefHeight="59.0" prefWidth="440.0" wrapText="true" />
+                                 </children>
+                             </AnchorPane>
+                         </center>
+
+                     </BorderPane>
+                 </children>
+               </HBox>
+               <HBox prefHeight="400.0">
+                   <children>
+                       <BorderPane prefHeight="400.0" prefWidth="${root.width}">
+                           <top>
+                               <ToolBar prefHeight="30.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+                                   <items>
+                                       <Button fx:id="addBt" defaultButton="true" mnemonicParsing="false" onAction="#addDetail" text="添加">
+                                           <styleClass>
+                                               <String fx:value="btn-sm" />
+                                               <String fx:value="btn-info" />
+                                           </styleClass>
+                                       </Button>
+                                       <Button fx:id="delBt" defaultButton="true" mnemonicParsing="false" onAction="#deleteDetail" text="删除">
+                                           <styleClass>
+                                               <String fx:value="btn-sm" />
+                                               <String fx:value="btn-info" />
+                                           </styleClass>
+                                       </Button>
+
+                                   </items>
+                               </ToolBar>
+                           </top>
+                           <center>
+                               <TableView fx:id="tableView" prefHeight="450.0" prefWidth="${root.width}">
+                                   <columns>
+                                       <TableColumn fx:id="mColumnSelect" prefWidth="70" sortable="false" style="-fx-alignment:CENTER" text="选择">
+                                           <graphic>
+                                               <CheckBox fx:id="mselectAll" mnemonicParsing="false" onAction="#selectAll" />
+                                           </graphic>
+                                       </TableColumn>
+                                       <TableColumn fx:id="mColumnXuh" prefWidth="50" resizable="false" text="序号" />
+                                       <TableColumn fx:id="mColumnMatkl_name" prefWidth="200" resizable="false" text="物料组" />
+                                       <TableColumn fx:id="mColumnMatkl" prefWidth="150" resizable="false" text="物料组编号" />
+                                       <TableColumn fx:id="mColumnRemark" prefWidth="300" resizable="false" text="备注" />
+                                   </columns>
+                               </TableView>
+                           </center>
+
+                       </BorderPane>
+                   </children>
+               </HBox>
+
+           </children>
+        </VBox>
+    </center>
+</BorderPane>

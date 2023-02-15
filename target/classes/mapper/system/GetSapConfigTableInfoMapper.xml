@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.GetSapConfigTableInfoMapper">
+
+    <select id="getConfigItem" resultType="com.yhlo.oa.entity.Item">
+        SELECT id as id,
+               itemKey as itemKey,
+               itemValue as itemValue
+        FROM yhlo_item where ttype= "pzsj" order by id
+    </select>
+
+    <insert id="insertTOO1ByBatch" parameterType="com.yhlo.oa.entity.T001VO">
+        insert into t001 (zsap_tabel,zsap_tabletxt,bukrs,butxt)
+        values
+            <foreach collection="list" item="item" index="index" separator=",">(
+                   #{item.zsap_tabel},
+                   #{item.zsap_tabletxt},
+                   #{item.bukrs},
+                   #{item.butxt}
+                )
+            </foreach>
+    </insert>
+
+    <insert id="insertTOO1" parameterType="com.yhlo.oa.entity.T001VO">
+        insert into t001 (zsap_tabel,zsap_tabletxt,bukrs,butxt)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{bukrs, jdbcType=VARCHAR},
+                  #{butxt, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <select id="queryT001List" resultType="com.yhlo.oa.entity.T001VO">
+        SELECT id as id,
+               zsap_tabel   as zsap_tabel,
+               zsap_tabletxt   as zsap_tabletxt,
+               bukrs as bukrs,
+               butxt as butxt
+        FROM t001
+    </select>
+
+    <delete id="deleteTOO1">
+        truncate table t001
+    </delete>
+
+    <delete id="deleteTvko">
+        truncate table tvko
+    </delete>
+
+    <insert id="insertTvko" parameterType="com.yhlo.oa.entity.TvkoVO">
+        insert into tvko (zsap_tabel,zsap_tabletxt,vkorg,bukrs)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{vkorg, jdbcType=VARCHAR},
+                  #{bukrs, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteTvkot">
+        truncate table tvkot
+    </delete>
+
+    <insert id="insertTvkot" parameterType="com.yhlo.oa.entity.TvkotVO">
+        insert into tvkot (zsap_tabel,zsap_tabletxt,spras,vkorg,vtxtk)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{vkorg, jdbcType=VARCHAR},
+                  #{vtxtk, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTvkwz">
+        truncate table tvkwz
+    </delete>
+
+    <insert id="insertTvkwz" parameterType="com.yhlo.oa.entity.TvkwzVO">
+        insert into tvkwz (zsap_tabel,zsap_tabletxt,vkorg,vtweg,werks)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{vkorg, jdbcType=VARCHAR},
+                  #{vtweg, jdbcType=VARCHAR},
+                  #{werks, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTvgrt">
+        truncate table tvgrt
+    </delete>
+
+    <insert id="insertTvgrt" parameterType="com.yhlo.oa.entity.TvgrtVO">
+        insert into tvgrt (zsap_tabel,zsap_tabletxt,spras,vkgrp,bezei)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{vkgrp, jdbcType=VARCHAR},
+                  #{bezei, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTvkbz">
+        truncate table tvkbz
+    </delete>
+
+    <insert id="insertTvkbz" parameterType="com.yhlo.oa.entity.TvkbzVO">
+        insert into tvkbz (zsap_tabel,zsap_tabletxt,vkorg,vkbur)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{vkorg, jdbcType=VARCHAR},
+                  #{vkbur, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteTvbvk">
+        truncate table tvbvk
+    </delete>
+
+    <insert id="insertTvbvk" parameterType="com.yhlo.oa.entity.TvbvkVO">
+        insert into tvbvk (zsap_tabel,zsap_tabletxt,vkbur,vkgrp)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{vkbur, jdbcType=VARCHAR},
+                  #{vkgrp, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTvstt">
+        truncate table tvstt
+    </delete>
+
+    <insert id="insertTvstt" parameterType="com.yhlo.oa.entity.TvsttVO">
+        insert into tvstt (zsap_tabel,zsap_tabletxt,spras,vstel,vtext)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{vstel, jdbcType=VARCHAR},
+                  #{vtext, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTvtwt">
+        truncate table tvtwt
+    </delete>
+
+    <insert id="insertTvtwt" parameterType="com.yhlo.oa.entity.TvtwtVO">
+        insert into tvtwt (zsap_tabel,zsap_tabletxt,spras,vtweg,vtxtk)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{vtweg, jdbcType=VARCHAR},
+                  #{vtxtk, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTspat">
+        truncate table tspat
+    </delete>
+
+    <insert id="insertTspat" parameterType="com.yhlo.oa.entity.TspatVO">
+        insert into tspat (zsap_tabel,zsap_tabletxt,spras,spart,vtxtk)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{spart, jdbcType=VARCHAR},
+                  #{vtxtk, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteTvzbt">
+        truncate table tvzbt
+    </delete>
+
+    <insert id="insertTvzbt" parameterType="com.yhlo.oa.entity.TvzbtVO">
+        insert into tvzbt (zsap_tabel,zsap_tabletxt,spras,zterm,vtext)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{zterm, jdbcType=VARCHAR},
+                  #{vtext, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteT042zt">
+        truncate table t042zt
+    </delete>
+
+    <insert id="insertT042zt" parameterType="com.yhlo.oa.entity.T042ztVO">
+        insert into t042zt (zsap_tabel,zsap_tabletxt,spras,zlsch,text2)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{zlsch, jdbcType=VARCHAR},
+                  #{text2, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT001w">
+        truncate table t001w
+    </delete>
+
+    <insert id="insertT001w" parameterType="com.yhlo.oa.entity.T001wVO">
+        insert into t001w (zsap_tabel,zsap_tabletxt,werks,name1)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{werks, jdbcType=VARCHAR},
+                  #{name1, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT001l">
+        truncate table t001l
+    </delete>
+
+    <insert id="insertT001l" parameterType="com.yhlo.oa.entity.T001lVO">
+        insert into t001l (zsap_tabel,zsap_tabletxt,werks,lgort,lgobe)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{werks, jdbcType=VARCHAR},
+                  #{lgort, jdbcType=VARCHAR},
+                  #{lgobe, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT024e">
+        truncate table t024e
+    </delete>
+
+    <insert id="insertT024e" parameterType="com.yhlo.oa.entity.T024eVO">
+        insert into t024e (zsap_tabel,zsap_tabletxt,ekorg,ekotx)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{ekorg, jdbcType=VARCHAR},
+                  #{ekotx, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteV_024">
+        truncate table v_024
+    </delete>
+
+    <insert id="insertV_024" parameterType="com.yhlo.oa.entity.V_024VO">
+        insert into v_024 (zsap_tabel,zsap_tabletxt,ekgrp,eknam)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{ekgrp, jdbcType=VARCHAR},
+                  #{eknam, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT134t">
+        truncate table t134t
+    </delete>
+
+    <insert id="insertT134t" parameterType="com.yhlo.oa.entity.T134tVO">
+        insert into t134t (zsap_tabel,zsap_tabletxt,spras,mtart,mtbez)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{mtart, jdbcType=VARCHAR},
+                  #{mtbez, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteTwewt">
+        truncate table twewt
+    </delete>
+
+    <insert id="insertTwewt" parameterType="com.yhlo.oa.entity.TwewtVO">
+        insert into twewt (zsap_tabel,zsap_tabletxt,spras,extwg,ewbez)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{extwg, jdbcType=VARCHAR},
+                  #{ewbez, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <delete id="deleteT023t">
+        truncate table t023t
+    </delete>
+
+    <insert id="insertT023t" parameterType="com.yhlo.oa.entity.T023tVO">
+        insert into t023t (zsap_tabel,zsap_tabletxt,spras,matkl,wgbez60)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{matkl, jdbcType=VARCHAR},
+                  #{wgbez60, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT179">
+        truncate table t179
+    </delete>
+
+    <insert id="insertT179" parameterType="com.yhlo.oa.entity.T179VO">
+        insert into t179 (zsap_tabel,zsap_tabletxt,stufe,prodh,vtext)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{stufe, jdbcType=VARCHAR},
+                  #{prodh, jdbcType=VARCHAR},
+                  #{vtext, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT005u">
+        truncate table t005u
+    </delete>
+
+    <insert id="insertT005u" parameterType="com.yhlo.oa.entity.T005uVO">
+        insert into t005u (zsap_tabel,zsap_tabletxt,spras,land1,bland,bezei)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{land1, jdbcType=VARCHAR},
+                  #{bland, jdbcType=VARCHAR},
+                  #{bezei, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT077x">
+        truncate table t077x
+    </delete>
+
+    <insert id="insertT077x" parameterType="com.yhlo.oa.entity.T077xVO">
+        insert into t077x (zsap_tabel,zsap_tabletxt,spras,ktokd,txt30)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{ktokd, jdbcType=VARCHAR},
+                  #{txt30, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT171t">
+        truncate table t171t
+    </delete>
+
+    <insert id="insertT171t" parameterType="com.yhlo.oa.entity.T171tVO">
+        insert into t171t (zsap_tabel,zsap_tabletxt,spras,bzirk,bztxt)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{bzirk, jdbcType=VARCHAR},
+                  #{bztxt, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT189t">
+        truncate table t189t
+    </delete>
+
+    <insert id="insertT189t" parameterType="com.yhlo.oa.entity.T189tVO">
+        insert into t189t (zsap_tabel,zsap_tabletxt,spras,pltyp,ptext)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{pltyp, jdbcType=VARCHAR},
+                  #{ptext, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteCskt">
+        truncate table cskt
+    </delete>
+
+    <insert id="insertCskt" parameterType="com.yhlo.oa.entity.CsktVO">
+        insert into cskt (zsap_tabel,zsap_tabletxt,spras,kostl,ltext)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{kostl, jdbcType=VARCHAR},
+                  #{ltext, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT005t">
+        truncate table t005t
+    </delete>
+
+    <insert id="insertT005t" parameterType="com.yhlo.oa.entity.T005tVO">
+        insert into t005t (zsap_tabel,zsap_tabletxt,spras,land1,landx)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{land1, jdbcType=VARCHAR},
+                  #{landx, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteTvsbt">
+        truncate table tvsbt
+    </delete>
+
+    <insert id="insertTvsbt" parameterType="com.yhlo.oa.entity.TvsbtVO">
+        insert into tvsbt (zsap_tabel,zsap_tabletxt,spras,vsbed,vtext)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{vsbed, jdbcType=VARCHAR},
+                  #{vtext, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteTvaut">
+        truncate table tvaut
+    </delete>
+
+    <insert id="insertTvaut" parameterType="com.yhlo.oa.entity.TvautVO">
+        insert into tvaut (zsap_tabel,zsap_tabletxt,spras,augru,bezei)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{augru, jdbcType=VARCHAR},
+                  #{bezei, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteTvagt">
+        truncate table tvagt
+    </delete>
+
+    <insert id="insertTvagt" parameterType="com.yhlo.oa.entity.TvagtVO">
+        insert into tvagt (zsap_tabel,zsap_tabletxt,spras,abgru,bezei)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},
+                  #{abgru, jdbcType=VARCHAR},
+                  #{bezei, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <delete id="deleteT142t">
+        truncate table t142t
+    </delete>
+
+    <insert id="insertT142t" parameterType="com.yhlo.oa.entity.T142tVO">
+        insert into t142t (zsap_tabel,zsap_tabletxt,raube,rbtxt)
+        values(
+                  #{zsap_tabel, jdbcType=VARCHAR},
+                  #{zsap_tabletxt, jdbcType=VARCHAR},
+                  #{raube, jdbcType=VARCHAR},
+                  #{rbtxt, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+
+
+</mapper>

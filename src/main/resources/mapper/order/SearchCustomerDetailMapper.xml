@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.SearchCustomerDetailMapper">
+
+
+
+    <select id="queryKnb1List" resultType="com.yhlo.oa.entity.It_Knb1VO" parameterType="java.lang.String">
+        SELECT id as id,
+               kunnr as kunnr,bukrs as bukrs,erdat as erdat,ernam as ernam,akont as akont,
+               zwels as zwels,zterm as zterm,sperr as sperr,loevm as loevm,
+               create_time as create_time
+        FROM it_knb1 where kunnr = #{kunnr}
+        order by id
+    </select>
+
+
+    <select id="queryKnvvList" resultType="com.yhlo.oa.entity.It_KnvvVO" parameterType="java.lang.String">
+        select kv.id as id,
+               kv.kunnr as kunnr,
+               tv.VTXTK as vkorg,
+               tvt.VTXTK as vtweg,
+               ts.VTXTK as spart,
+               kv.ernam as ernam,
+               kv.erdat as erdat,
+               kv.begru as begru,
+               kv.loevm as loevm,
+               kv.versg as versg,
+               kv.aufsd as aufsd,
+               kv.kalks as kalks,
+               kv.kdgrp as kdgrp,
+               t1.BZTXT as bzirk,
+               kv.konda as konda,
+               t18.PTEXT as pltyp,
+               kv.inco1 as inco1,
+               kv.inco2 as inco2,
+               kv.lifsd as lifsd,
+               kv.kzazu as kzazu,
+               kv.vsbed as vsbed,
+               kv.faksd as faksd,
+               kv.waers as waers,
+               kv.klabc	as klabc,
+               kv.ktgrd as ktgrd,
+               tvz.VTEXT as zterm,
+               t0.NAME1 as vwerk,
+               tvg.BEZEI as vkgrp,
+               tvk.BEZEI as vkbur,
+               kv.prfre as prfre,
+               kv.kkber as kkber,
+               kv.podkz as podkz,
+               create_time as create_time
+
+        from  it_knvv kv left join tvkot tv on kv.vkorg = tv.VKORG
+                         left join tvtwt tvt on kv.vtweg = tvt.VTWEG
+                         left join tspat ts on kv.spart = ts.SPART
+                         left join t171t t1 on kv.bzirk = t1.BZIRK
+                         left join t189t t18 on kv.pltyp = t18.PLTYP
+                         left join tvzbt tvz on kv.zterm = tvz.ZTERM
+                         left join t001w t0 on kv.vwerk = t0.WERKS
+                         left join tvgrt tvg on kv.vkgrp = tvg.VKGRP
+                         left join tvkbt tvk on kv.vkbur = tvk.VKBUR
+
+        where kv.kunnr = #{kunnr}
+        order by kv.id
+    </select>
+
+
+    <select id="queryKnvpList" resultType="com.yhlo.oa.entity.It_KnvpVO" parameterType="java.lang.String">
+
+        select kp.id as id,
+               kp.kunnr as kunnr,
+               tv.VTXTK as tvkot,
+               tvt.VTXTK as vtweg,
+               ts.VTXTK as spart,
+               kp.parvw as parvw,
+               kp.parza as parza,
+               kp.kunn2 as kunn2,
+               kp.lifnr as lifnr,
+               kp.pernr as pernr,
+               kp.PARNR as parnr,
+               kp.knref as knref,
+               kp.defpa as defpa,
+               kp.create_time as create_time
+
+        FROM it_knvp kp left join tvkot tv on kp.vkorg = tv.VKORG
+                        left join TVTWT tvt on kp.vtweg = tvt.VTWEG
+                        left join TSPAT ts on kp.spart = ts.SPART
+        where kp.kunnr = #{kunnr}
+        order by kp.id
+    </select>
+
+
+    <select id="queryAdrcList" resultType="com.yhlo.oa.entity.It_AdrcVO" parameterType="java.lang.String">
+        SELECT id as id,
+               addrnumber as addrnumber,name1 as name1,name2 as name2,name3 as name3,name4 as name4,
+               str_suppl1 as str_suppl1,str_suppl2 as str_suppl2,str_suppl3 as str_suppl3,
+               location as location,remark as remark,
+               create_time as create_time
+        FROM it_adrc where addrnumber = #{addrnumber}
+        order by id
+    </select>
+
+
+    <select id="queryZtsdList" resultType="com.yhlo.oa.entity.It_Ztsd_012VO" parameterType="java.lang.String">
+
+        select zt.id as id,
+               zt.kunnr as kunnr,
+               tvk.VTXTK as tvkot,
+               tvt.VTXTK as vtweg,
+               zt.matnr as matnr,
+               zt.name1 as name1,
+               zt.arktx as arktx,
+               zt.kdmat as kdmat,
+               zt.postx as postx,
+               zt.zkdmat_2 as zkdmat_2,
+               zt.zkdmat_3 as zkdmat_3,
+               zt.zkdmat_4 as zkdmat_4,
+               zt.zernam1 as zernam1,
+               zt.zerdat1 as zerdat1,
+               zt.zernam2 as zernam2,
+               zt.zerdat2 as zerdat2,
+               zt.create_time as create_time
+
+        FROM it_ztsd_012 zt left join tvkot tvk on zt.vkorg = tvk.VKORG
+                            left join tvtwt tvt on zt.vtweg = tvt.VTWEG
+        where zt.kunnr = #{kunnr}
+        order by zt.id
+    </select>
+
+
+</mapper>

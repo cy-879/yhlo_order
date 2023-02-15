@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="root" prefHeight="450" prefWidth="800" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.SearchCustomerDetailController">
+
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="searchTable" mnemonicParsing="false" onAction="#searchTable" text="查询">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="exportOrder" mnemonicParsing="false" text="导出">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeView" text="关闭">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-danger" />
+                    </styleClass>
+                </Button>
+            </items>
+        </ToolBar>
+    </top>
+
+
+    <center>
+        <VBox prefHeight="400.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="30.0" prefWidth="${root.width}" style="-fx-background-color: #5bc0de">
+                   <children>
+                       <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="76.0" text="主表信息" textAlignment="CENTER">
+                           <HBox.margin>
+                               <Insets bottom="10.0" left="10.0" top="10.0" />
+                           </HBox.margin>
+                         <font>
+                            <Font size="14.0" />
+                         </font>
+                       </Label>
+                   </children>
+                </HBox>
+                <HBox prefHeight="70.0" prefWidth="${root.width}">
+                   <children>
+                       <AnchorPane prefHeight="65.0" prefWidth="800.0">
+                           <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="11.0" prefHeight="15.0" prefWidth="82.0" text="客户编码：" textAlignment="CENTER">
+                               <HBox.margin>
+                                   <Insets bottom="10.0" left="10.0" top="10.0" />
+                               </HBox.margin>
+                           </Label>
+                           <TextField fx:id="kunnrTextField" disable="true" layoutX="88.0" layoutY="8.0" prefHeight="23.0" prefWidth="300.0" />
+
+                           <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="409.0" layoutY="11.0" prefHeight="15.0" prefWidth="82.0" text="客户名称：" textAlignment="CENTER" />
+                           <TextField fx:id="name1TextField" disable="true" layoutX="491.0" layoutY="7.0" prefHeight="23.0" prefWidth="300.0" />
+
+                           <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="43.0" prefHeight="15.0" prefWidth="82.0" text="客户账户组：" textAlignment="CENTER" />
+                           <TextField fx:id="ktokdTextField" disable="true" layoutX="88.0" layoutY="39.0" prefHeight="23.0" prefWidth="300.0" />
+
+                           <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="409.0" layoutY="42.0" prefHeight="15.0" prefWidth="82.0" text="地址编码：" textAlignment="CENTER" />
+                           <TextField fx:id="adrnrTextField" disable="true" layoutX="491.0" layoutY="38.0" prefHeight="23.0" prefWidth="300.0" />
+
+                       </AnchorPane>
+                   </children>
+                </HBox>
+                <HBox prefHeight="300.0" prefWidth="${root.width}">
+                   <children>
+                      <TabPane fx:id="tabPane" prefHeight="300.0" prefWidth="${root.width}" tabClosingPolicy="UNAVAILABLE">
+                        <tabs>
+                          <Tab fx:id="companyCodeTab" text="公司代码">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="800.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="800.0">
+                                      <content>
+                                          <TableView fx:id="companyCodeTableView" prefHeight="256.0" prefWidth="795.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="saleTab" text="销售">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="800.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="800.0">
+                                      <content>
+                                          <TableView fx:id="saleTableView" prefHeight="256.0" prefWidth="795.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="cooperativePartnerTab" text="合作伙伴">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="800.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="800.0">
+                                      <content>
+                                          <TableView fx:id="cooperativePartnerTableView" prefHeight="256.0" prefWidth="795.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="addrTab" text="地址">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="800.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="800.0">
+                                      <content>
+                                          <TableView fx:id="addrTableView" prefHeight="256.0" prefWidth="795.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                          <Tab fx:id="customerMaterialTab" text="客户物料">
+                            <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="800.0">
+                                 <children>
+                                    <ScrollPane layoutX="3.0" layoutY="3.0" prefHeight="260.0" prefWidth="800.0">
+                                      <content>
+                                          <TableView fx:id="customerMaterialTableView" prefHeight="256.0" prefWidth="795.0">
+
+                                          </TableView>
+                                      </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                            </content>
+                          </Tab>
+
+                        </tabs>
+                      </TabPane>
+                   </children>
+                </HBox>
+            </children>
+        </VBox>
+
+    </center>
+
+
+    <stylesheets>
+        <URL value="@/css/bootstrapfx.css" />
+    </stylesheets>
+</BorderPane>

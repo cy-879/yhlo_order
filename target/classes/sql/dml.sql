@@ -1,0 +1,16 @@
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038597966427058176', NULL, NULL, '2022-04-24 09:46:35');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038598314394906624', NULL, NULL, '2022-04-24 09:47:56');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038598679857197056', NULL, NULL, '2022-04-24 09:49:27');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038598921797234688', NULL, NULL, '2022-04-24 09:50:22');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038599246138568704', NULL, NULL, '2022-04-24 09:51:34');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038599323389259776', NULL, NULL, '2022-04-24 09:51:53');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038599382222761984', NULL, NULL, '2022-04-24 09:52:07');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038599650440114176', NULL, NULL, '2022-04-24 09:53:11');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038601794325049344', NULL, NULL, '2022-04-24 10:01:46');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038603746316382208', NULL, NULL, '2022-04-24 10:09:35');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4038623551924727808', NULL, NULL, '2022-04-24 11:28:18');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4039047739714039808', NULL, NULL, '2022-04-25 15:33:44');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4039048126424674304', NULL, NULL, '2022-04-25 15:35:16');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4039063998115606528', NULL, NULL, '2022-04-25 16:38:21');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4039064398667444224', NULL, NULL, '2022-04-25 16:39:59');
+INSERT INTO `ruoyi`.`order_info`(`order_no`, `status`, `crate_by`, `crate_time`) VALUES ('N4039065626470248448', NULL, NULL, '2022-04-25 16:44:48');

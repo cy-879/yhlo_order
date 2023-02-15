@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.UserManagementController">
+
+    <left>
+        <TableView fx:id="tableView" layoutX="30.0" prefHeight="300" prefWidth="600.0">
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin></TableView>
+
+    </left>
+
+    <center>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
+            <children>
+                <Label layoutX="48.0" layoutY="38.0" text="用户ID" /><!--x:35 y:35-->
+                <TextField fx:id="userIdAssembly" editable="false" layoutX="124.0" layoutY="31.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="79.0" text="姓名" /><!--x:35 y:35-->
+                <TextField fx:id="userNameAssembly" layoutX="124.0" layoutY="72.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="122.0" text="工号" />
+                <TextField fx:id="loginNameAssembly" layoutX="124.0" layoutY="115.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="164.0" text="密码" />
+                <TextField fx:id="passwordAssembly" layoutX="124.0" layoutY="157.0" prefHeight="30.0" prefWidth="270.0" />
+                <Label layoutX="48.0" layoutY="206.0" text="用户状态" />
+                <RadioButton fx:id="enableAssembly" layoutX="124.0" layoutY="204.0" mnemonicParsing="false" text="启用">
+                   <toggleGroup>
+                      <ToggleGroup fx:id="userStatu" />
+                   </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="disableAssembly" layoutX="201.0" layoutY="204.0" mnemonicParsing="false" text="停用" toggleGroup="$userStatu" />
+                <Label layoutX="48.0" layoutY="251.0" text="用户类型" />
+                <RadioButton fx:id="businessUsersAssembly" layoutX="124.0" layoutY="251.0" mnemonicParsing="false" text="商务用户">
+               <toggleGroup>
+                  <ToggleGroup fx:id="userType" />
+               </toggleGroup></RadioButton>
+                <RadioButton fx:id="financialUsersAssembly" layoutX="200.0" layoutY="251.0" mnemonicParsing="false" text="财务用户" toggleGroup="$userType" />
+                <RadioButton fx:id="systemAdminAssembly" layoutX="283.0" layoutY="251.0" mnemonicParsing="false" text="系统管理员" toggleGroup="$userType" />
+                <Button fx:id="addBt" layoutX="104.0" layoutY="321.0" onAction="#toAddUser" text="新增">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+                <Button fx:id="updateBt" layoutX="204.0" layoutY="321.0" onAction="#toEditUser" text="修改">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="emptyBt" layoutX="304.0" layoutY="321.0" onAction="#toEmpty" text="清空">
+                    <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+            </children>
+        </AnchorPane>
+    </center>
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+            <items>
+
+                <Button fx:id="searchTableBt" mnemonicParsing="false" onAction="#loadTable" text="查询">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+            </items>
+        </ToolBar>
+    </top>
+
+</BorderPane>

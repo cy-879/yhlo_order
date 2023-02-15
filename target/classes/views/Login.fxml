@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 引入JavaFX工具相关类 -->
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<!-- 创建一个GridPane网格式面板组件 -->
+
+<GridPane alignment="center" hgap="10" prefHeight="275.0" prefWidth="404.0" styleClass="root" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.LoginController">
+   <!-- 通过相关标签创建一个模拟登录的“用户名”和“密码”的组件 -->
+   <Text id="welcome-text" text="Welcome" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+   <Label text="用户名:"  GridPane.columnIndex="0" GridPane.rowIndex="1" />
+   <TextField fx:id="textUserAccount" text="cy" promptText="请输入用户名" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   <Label text="密   码:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+   <PasswordField fx:id="textPassword" text="123456"  promptText="请输入密码" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <!-- 通过HBox嵌入一个可调控位置的盒子组件-->
+   <HBox alignment="bottom_right" prefHeight="23.0" prefWidth="31.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+     <!-- <Button alignment="BASELINE_LEFT" onAction="#reset" prefHeight="23.0" prefWidth="58.0" text="重   置" />-->
+      <!-- 在HBox盒子中装入一个 Button登录按钮，同时注册监听器 -->
+      <Button defaultButton="true" onAction="#login" prefHeight="23.0" prefWidth="69.0" text="登     录">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-primary" />
+         </styleClass>
+      </Button>
+   </HBox>
+
+   <!-- 加入名为application.css的样式表文件  -->
+   <stylesheets>
+      <URL value="@/css/login.css" />
+   </stylesheets>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+
+</GridPane>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="root" prefHeight="600" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.CustomerMasterDataController">
+
+    <top>
+        <ToolBar prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button fx:id="searchTableBt" defaultButton="true" mnemonicParsing="false" onAction="#loadTable" text="查询">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+
+                <Button fx:id="exportAllMateriaBt" mnemonicParsing="false" text="导出" onAction="#exportAllCustomer">
+                    <styleClass>
+                        <String fx:value="btn-sm" />
+                        <String fx:value="btn-info" />
+                    </styleClass>
+                </Button>
+            </items>
+        </ToolBar>
+    </top>
+
+
+    <center>
+
+        <VBox prefHeight="550.0" prefWidth="${root.width}" BorderPane.alignment="CENTER">
+         <children>
+             <HBox prefHeight="30.0" prefWidth="${root.width}">
+                 <Label fx:id="codeLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="客户编号：" textAlignment="CENTER">
+                     <HBox.margin>
+                         <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                 </Label>
+                 <TextField fx:id="kunnrTextField" prefWidth="180.0">
+                     <HBox.margin>
+                         <Insets bottom="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                 </TextField>
+
+                 <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="100.0" text="客户名称：" textAlignment="CENTER">
+                     <HBox.margin>
+                         <Insets bottom="10.0" left="10.0" top="10.0" />
+                     </HBox.margin>
+                 </Label>
+                 <TextField fx:id="name1TextField" prefWidth="180.0">
+                     <HBox.margin>
+                         <Insets bottom="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                 </TextField>
+             </HBox>
+            <HBox prefHeight="260.0" prefWidth="${root.width}">
+               <children>
+                  <TableView fx:id="tableView" prefHeight="260.0" prefWidth="${root.width}">
+                      <columns>
+                          <TableColumn fx:id="mColumnSelect" prefWidth="58" sortable="false" style="-fx-alignment:CENTER" text="选择">
+                          <graphic>
+                              <CheckBox fx:id="mselectAll" mnemonicParsing="false" onAction="#selectAll" />
+                          </graphic>
+                          </TableColumn>
+                      </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="${root.width}">
+               <children>
+                  <AnchorPane prefHeight="30" prefWidth="${root.width}">
+                     <children>
+                        <ChoiceBox fx:id="selectPage" layoutX="10.0" layoutY="5.0" prefHeight="20.0" prefWidth="86.0" />
+                        <Label layoutX="106.0" layoutY="5.0" prefHeight="20.0" prefWidth="21.0" text="共" />
+                        <TextField fx:id="totalPageText" editable="false" layoutX="133.0" layoutY="5.0" prefHeight="20.0" prefWidth="42.0" />
+                         <Label layoutX="181.0" layoutY="5.0" prefHeight="20.0" prefWidth="23.0" text="页" />
+                         <Button fx:id="btnPrev" layoutX="204.0" layoutY="5.0" mnemonicParsing="false" onAction="#prevPage" prefHeight="20.0" prefWidth="63.0" text="上一页">
+                             <styleClass>
+                                 <String fx:value="btn-xs" />
+                                 <String fx:value="btn-info" />
+                             </styleClass>
+                         </Button>
+                         <HBox fx:id="pageNoHBox" alignment="CENTER" layoutX="273.0" layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="417.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                             <GridPane.margin>
+                                 <Insets bottom="750.0" left="240.0" top="160.0" />
+                             </GridPane.margin>
+                         </HBox>
+                         <Button fx:id="btnNext" layoutX="694.0" layoutY="5.0" mnemonicParsing="false" onAction="#nextPage" prefHeight="20.0" prefWidth="65.0" text="下一页">
+                             <styleClass>
+                                 <String fx:value="btn-xs" />
+                                 <String fx:value="btn-info" />
+                             </styleClass>
+                         </Button>
+                         <Label layoutX="766.0" layoutY="5.0" prefHeight="20.0" prefWidth="29.0" text="前往" />
+                         <TextField fx:id="toPageNoText" editable="false" layoutX="807.0" layoutY="5.0" prefHeight="20.0" prefWidth="43.0" />
+                         <Label layoutX="857.0" layoutY="5.0" prefHeight="20.0" prefWidth="33.0" text="页,共" />
+                         <TextField fx:id="totalCountText" editable="false" layoutX="899.0" layoutY="5.0" prefHeight="20.0" prefWidth="45.0" />
+                         <Button layoutX="953.0" layoutY="5.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="39.0" text="条" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+
+             <HBox prefHeight="220.0" prefWidth="${root.width}">
+                 <children>
+                     <TabPane fx:id="tabPane" prefHeight="220.0" prefWidth="${root.width}" tabClosingPolicy="UNAVAILABLE">
+                         <tabs>
+                             <Tab fx:id="companyCodeTab" text="公司代码">
+                                 <content>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="${root.width}">
+                                         <children>
+                                             <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="210.0" prefWidth="${root.width}">
+                                                 <content>
+                                                     <TableView fx:id="companyCodeTableView" prefHeight="190.0" prefWidth="${root.width}">
+
+                                                     </TableView>
+                                                 </content>
+                                             </ScrollPane>
+                                         </children>
+                                     </AnchorPane>
+                                 </content>
+                             </Tab>
+
+                             <Tab fx:id="saleTab" text="销售">
+                                 <content>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="${root.width}">
+                                         <children>
+                                             <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="210.0" prefWidth="${root.width}">
+                                                 <content>
+                                                     <TableView fx:id="saleTableView" prefHeight="190.0" prefWidth="${root.width}">
+
+                                                     </TableView>
+                                                 </content>
+                                             </ScrollPane>
+                                         </children>
+                                     </AnchorPane>
+                                 </content>
+                             </Tab>
+
+                             <Tab fx:id="cooperativePartnerTab" text="合作伙伴">
+                                 <content>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="${root.width}">
+                                         <children>
+                                             <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="210.0" prefWidth="${root.width}">
+                                                 <content>
+                                                     <TableView fx:id="cooperativePartnerTableView" prefHeight="190.0" prefWidth="${root.width}">
+
+                                                     </TableView>
+                                                 </content>
+                                             </ScrollPane>
+                                         </children>
+                                     </AnchorPane>
+                                 </content>
+                             </Tab>
+
+                             <Tab fx:id="addrTab" text="地址">
+                                 <content>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="${root.width}">
+                                         <children>
+                                             <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="210.0" prefWidth="${root.width}">
+                                                 <content>
+                                                     <TableView fx:id="addrTableView" prefHeight="190.0" prefWidth="${root.width}">
+
+                                                     </TableView>
+                                                 </content>
+                                             </ScrollPane>
+                                         </children>
+                                     </AnchorPane>
+                                 </content>
+                             </Tab>
+
+                             <Tab fx:id="customerMaterialTab" text="客户物料">
+                                 <content>
+                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="${root.width}">
+                                         <children>
+                                             <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="210.0" prefWidth="${root.width}">
+                                                 <content>
+                                                     <TableView fx:id="customerMaterialTableView" prefHeight="190.0" prefWidth="${root.width}">
+
+                                                     </TableView>
+                                                 </content>
+                                             </ScrollPane>
+                                         </children>
+                                     </AnchorPane>
+                                 </content>
+                             </Tab>
+
+                         </tabs>
+                     </TabPane>
+                 </children>
+             </HBox>
+
+         </children>
+        </VBox>
+    </center>
+
+
+    <stylesheets>
+        <URL value="@/css/bootstrapfx.css" />
+    </stylesheets>
+</BorderPane>

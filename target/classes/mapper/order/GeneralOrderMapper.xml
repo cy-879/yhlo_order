@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.GeneralOrderMapper">
+
+    <!--新增订单头信息-->
+    <insert id="insertOrder" parameterType="com.yhlo.oa.entity.GeneralOrderVO" useGeneratedKeys="true" keyProperty="id">
+
+        insert into yhlo_order(
+            orderType,orderReference,ddsSalesOrderNo,salesOrg,productGroup,
+            distributionChannel,customerName,customerCode,songdfmc,songdfdm,
+            saleDept,saleGroup,termOfPayment,orderReason,endCustomer,salesman,
+            preparedBy,documentDate,totalAmount,amountNotTaxed,
+            shippingConditions,combinationDelivery,pod,approvalStatus,
+           deliveryStatus,orderSummary,shippingRemarks,multiAngleTradeCode,createTime,createBy
+
+        )values(
+           #{orderType, jdbcType=VARCHAR},#{orderReference, jdbcType=VARCHAR},
+           #{ddsSalesOrderNo, jdbcType=VARCHAR},#{salesOrg, jdbcType=VARCHAR},
+           #{productGroup, jdbcType=VARCHAR},#{distributionChannel, jdbcType=VARCHAR},
+           #{customerName, jdbcType=VARCHAR},#{customerCode, jdbcType=VARCHAR},
+           #{songdfmc, jdbcType=VARCHAR},#{songdfdm, jdbcType=VARCHAR},
+           #{saleDept, jdbcType=VARCHAR},#{saleGroup, jdbcType=VARCHAR},
+           #{termOfPayment, jdbcType=VARCHAR},#{orderReason, jdbcType=VARCHAR},
+           #{endCustomer, jdbcType=VARCHAR},#{salesman, jdbcType=VARCHAR},
+           #{preparedBy, jdbcType=VARCHAR},#{documentDate, jdbcType=VARCHAR},
+           #{totalAmount, jdbcType=FLOAT},#{amountNotTaxed, jdbcType=FLOAT},
+           #{shippingConditions, jdbcType=VARCHAR},
+           #{combinationDelivery, jdbcType=VARCHAR},#{pod, jdbcType=VARCHAR},
+           '待审批','未交货',
+           #{orderSummary, jdbcType=VARCHAR},#{shippingRemarks, jdbcType=VARCHAR},
+           #{multiAngleTradeCode, jdbcType=VARCHAR},
+           sysdate(),#{createBy, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--新增明细-->
+    <insert id="insertOrderDetails" parameterType="com.yhlo.oa.entity.GeneralOrderDetailVO">
+
+
+        insert into yhlo_order_detail(
+             ddsSalesOrderNo,lineItem,mnemonicCode,materialNo,materialDesc,specification,
+             orderQty,qtyDelivered,openQty,orderUnit,basicUnit,factory,factoryCode,
+             inventoryLocation,inventoryLocationCode,shippingPoint,shippingPointCode,
+             pricingDate,standardPrice,manualPrice,orderBuomQty,
+             discountRate,rebateAmount,amountBeforeDiscount,discountedAmount,
+             storageTemperature,storageTemperatureCode,taxRate,currency,batch,
+             productionLicense,fullNameOfManufacturer,approvalNo,customerMaterial,
+             customerMaterialDesc,provincialBiddingCode,cityBiddingCode,reservedCode,
+             brand,materialGroup,materialGroupCode,businessLicense,productionRecordCertificate,
+             claim,lastUnitPrice,multiAngleTradeCode,multiAngleTradeType,sto1No,sto1LineItem,
+             lineItemType,lineItemTypeCode,lineItemText,createTime,createBy
+
+        )values(
+            #{ddsSalesOrderNo, jdbcType=VARCHAR},#{lineItem, jdbcType=VARCHAR},
+            #{mnemonicCode, jdbcType=VARCHAR},#{materialNo, jdbcType=VARCHAR},
+            #{materialDesc, jdbcType=VARCHAR},#{specification, jdbcType=VARCHAR},
+            #{orderQty, jdbcType=DECIMAL},#{qtyDelivered, jdbcType=DECIMAL},
+            #{openQty, jdbcType=DECIMAL},#{orderUnit, jdbcType=VARCHAR},
+            #{basicUnit, jdbcType=VARCHAR},#{factory, jdbcType=VARCHAR},
+            #{factoryCode, jdbcType=VARCHAR},#{inventoryLocation, jdbcType=VARCHAR},
+            #{inventoryLocationCode, jdbcType=VARCHAR},
+            #{shippingPoint, jdbcType=VARCHAR},#{shippingPointCode, jdbcType=VARCHAR},
+            #{pricingDate, jdbcType=VARCHAR},#{standardPrice, jdbcType=DECIMAL},
+            #{manualPrice, jdbcType=DECIMAL},#{orderBuomQty, jdbcType=DECIMAL},
+            #{discountRate, jdbcType=DECIMAL},#{rebateAmount, jdbcType=DECIMAL},
+            #{amountBeforeDiscount, jdbcType=DECIMAL},#{discountedAmount, jdbcType=DECIMAL},
+            #{storageTemperature, jdbcType=VARCHAR},#{storageTemperatureCode, jdbcType=VARCHAR},
+            #{taxRate, jdbcType=VARCHAR},#{currency, jdbcType=VARCHAR},
+            #{batch, jdbcType=VARCHAR},#{productionLicense, jdbcType=VARCHAR},
+            #{fullNameOfManufacturer, jdbcType=VARCHAR},#{approvalNo, jdbcType=VARCHAR},
+            #{customerMaterial, jdbcType=VARCHAR},#{customerMaterialDesc, jdbcType=VARCHAR},
+            #{provincialBiddingCode, jdbcType=VARCHAR},#{cityBiddingCode, jdbcType=VARCHAR},
+            #{reservedCode, jdbcType=VARCHAR},#{brand, jdbcType=VARCHAR},
+            #{materialGroup, jdbcType=VARCHAR},#{materialGroupCode, jdbcType=VARCHAR},
+            #{businessLicense, jdbcType=VARCHAR},#{productionRecordCertificate, jdbcType=VARCHAR},
+            '',#{lastUnitPrice, jdbcType=DECIMAL},
+            #{multiAngleTradeCode, jdbcType=VARCHAR},#{multiAngleTradeType, jdbcType=VARCHAR},
+            #{sto1No, jdbcType=VARCHAR},#{sto1LineItem, jdbcType=VARCHAR},
+            #{lineItemType, jdbcType=VARCHAR},#{lineItemTypeCode, jdbcType=VARCHAR},
+            #{lineItemText, jdbcType=VARCHAR},
+            sysdate(),#{createBy, jdbcType=VARCHAR}
+        )
+
+    </insert>
+
+
+    <!--通过当前日期查询该日期下是否存在订单-->
+    <select id="checkDdsSalesOrderNoExists" resultType="com.yhlo.oa.entity.GeneralOrderVO" parameterType="java.lang.String">
+        SELECT id as id,
+               ddsSalesOrderNo as ddsSalesOrderNo
+        FROM yhlo_order where 1=1
+
+        <if test="ddsSalesOrderNo != null and ddsSalesOrderNo != '' ">
+            AND ddsSalesOrderNo like "%" #{ddsSalesOrderNo} "%"
+        </if>
+
+        ORDER BY ddsSalesOrderNo DESC
+    </select>
+
+    <!--通过dds订单号获取该订单状态信息-->
+    <select id="getOrderStatus" resultType="com.yhlo.oa.entity.GeneralOrderVO" parameterType="java.lang.String">
+        SELECT
+        om.id AS id,
+        om.orderType AS orderType,
+        om.orderReference AS orderReference,
+        om.sapSalesOrderNo AS sapSalesOrderNo,
+        om.sapPurchaseOrderNo AS sapPurchaseOrderNo,
+        om.ddsSalesOrderNo AS ddsSalesOrderNo,
+        om.salesOrg AS salesOrg,
+        om.productGroup AS productGroup,
+        om.distributionChannel AS distributionChannel,
+        om.customerName AS customerName,
+        om.customerCode AS customerCode,
+        om.songdfmc AS songdfmc,
+        om.songdfdm AS songdfdm,
+        om.saleDept AS saleDept,
+        om.saleGroup AS saleGroup,
+        om.termOfPayment AS termOfPayment,
+        om.orderReason AS orderReason,
+        om.endCustomer AS endCustomer,
+        om.salesman AS salesman,
+        om.preparedBy AS preparedBy,
+        om.documentDate AS documentDate,
+        om.totalAmount AS totalAmount,
+        om.amountNotTaxed AS amountNotTaxed,
+        om.shippingConditions AS shippingConditions,
+        om.combinationDelivery AS combinationDelivery,
+        om.pod AS pod,
+        om.approvalStatus AS approvalStatus,
+        om.deliveryStatus AS deliveryStatus,
+        om.orderSummary AS orderSummary,
+        om.shippingRemarks AS shippingRemarks,
+        om.multiAngleTradeCode AS multiAngleTradeCode,
+        om.createTime AS createTime,
+        om.createBy AS createBy,
+        om.updateTime AS updateTime,
+        om.updateBy AS updateBy
+        FROM
+        yhlo_order om
+        where 1=1 AND om.ddsSalesOrderNo = #{ddsSalesOrderNo}
+
+    </select>
+
+
+    <!--订单头表数据插入历史数据表，修改订单时，先将原来的数据先插入历史数据表，再修改数据-->
+    <insert id="insertOrderHistory" parameterType="com.yhlo.oa.entity.GeneralOrderHistoryVO" useGeneratedKeys="true" keyProperty="id">
+
+        insert into yhlo_order_history
+            (orderType,orderReference,sapSalesOrderNo,sapPurchaseOrderNo,ddsSalesOrderNo,
+             salesOrg,productGroup,distributionChannel,customerName,customerCode,songdfmc,songdfdm,saleDept,
+             saleGroup,termOfPayment,orderReason,endCustomer,salesman,preparedBy,documentDate,totalAmount,
+             amountNotTaxed,shippingConditions,combinationDelivery,pod,approvalStatus,deliveryStatus,orderSummary,
+             shippingRemarks,multiAngleTradeCode,createTime,createBy,updateTime,updateBy,operatRemark)
+
+        select orderType,orderReference,sapSalesOrderNo,sapPurchaseOrderNo,ddsSalesOrderNo,
+               salesOrg,productGroup,distributionChannel,customerName,customerCode,songdfmc,songdfdm,saleDept,
+               saleGroup,termOfPayment,orderReason,endCustomer,salesman,preparedBy,documentDate,totalAmount,
+               amountNotTaxed,shippingConditions,combinationDelivery,pod,approvalStatus,deliveryStatus,orderSummary,
+               shippingRemarks,multiAngleTradeCode,createTime,createBy,sysdate(),#{updateBy},#{operatRemark}
+        from yhlo_order yo where yo.ddsSalesOrderNo = #{ddsSalesOrderNo}
+
+    </insert>
+
+
+    <!--订单明细数据插入历史数据表，修改订单时，先将原来的数据先插入历史数据表，再修改数据-->
+    <insert id="insertOrderDetailsHistory" parameterType="com.yhlo.oa.entity.GeneralOrderDetailHistoryVO">
+
+        insert into yhlo_order_detail_history(
+            orderDataId,
+            ddsSalesOrderNo,lineItem,mnemonicCode,materialNo,materialDesc,specification,
+            orderQty,qtyDelivered,openQty,orderUnit,basicUnit,factory,factoryCode,
+            inventoryLocation,inventoryLocationCode,shippingPoint,shippingPointCode,
+            pricingDate,standardPrice,manualPrice,orderBuomQty,
+            discountRate,rebateAmount,amountBeforeDiscount,discountedAmount,
+            storageTemperature,storageTemperatureCode,taxRate,currency,batch,
+            productionLicense,fullNameOfManufacturer,approvalNo,customerMaterial,
+            customerMaterialDesc,provincialBiddingCode,cityBiddingCode,reservedCode,
+            brand,materialGroup,materialGroupCode,businessLicense,productionRecordCertificate,
+            claim,lastUnitPrice,multiAngleTradeCode,multiAngleTradeType,sto1No,sto1LineItem,
+            lineItemType,lineItemTypeCode,lineItemText,createTime,createBy,updateTime,updateBy,operatRemark)
+
+
+        select #{orderDataId}, ddsSalesOrderNo,lineItem,mnemonicCode,materialNo,materialDesc,specification,
+               orderQty,qtyDelivered,openQty,orderUnit,basicUnit,factory,factoryCode,
+               inventoryLocation,inventoryLocationCode,shippingPoint,shippingPointCode,
+               pricingDate,standardPrice,manualPrice,orderBuomQty,
+               discountRate,rebateAmount,amountBeforeDiscount,discountedAmount,
+               storageTemperature,storageTemperatureCode,taxRate,currency,batch,
+               productionLicense,fullNameOfManufacturer,approvalNo,customerMaterial,
+               customerMaterialDesc,provincialBiddingCode,cityBiddingCode,reservedCode,
+               brand,materialGroup,materialGroupCode,businessLicense,productionRecordCertificate,
+               claim,lastUnitPrice,multiAngleTradeCode,multiAngleTradeType,sto1No,sto1LineItem,
+               lineItemType,lineItemTypeCode,lineItemText,createTime,createBy,sysdate(),#{updateBy},
+               #{operatRemark}
+
+        from yhlo_order_detail where ddsSalesOrderNo = #{ddsSalesOrderNo}
+
+    </insert>
+
+
+    <!--修改订单头信息-->
+    <update id="updateOrder" parameterType="com.yhlo.oa.entity.GeneralOrderVO">
+        update yhlo_order
+            set
+            orderReference = #{orderReference},
+            salesOrg = #{salesOrg},productGroup = #{productGroup},
+            distributionChannel = #{distributionChannel},customerName = #{customerName},
+            customerCode = #{customerCode},songdfmc = #{songdfmc},
+            songdfdm = #{songdfdm},saleDept = #{saleDept},
+            saleGroup = #{saleGroup},termOfPayment = #{termOfPayment},
+            orderReason = #{orderReason},endCustomer = #{endCustomer},
+            salesman = #{salesman},preparedBy = #{preparedBy},
+            documentDate = #{documentDate},totalAmount = #{totalAmount},
+            amountNotTaxed = #{amountNotTaxed},
+            shippingConditions = #{shippingConditions},combinationDelivery = #{combinationDelivery},
+            pod = #{pod},approvalStatus = '待审批',
+            deliveryStatus = '未交货',orderSummary = #{orderSummary},
+            shippingRemarks = #{shippingRemarks},multiAngleTradeCode = #{multiAngleTradeCode},
+            updateTime = sysdate(),updateBy = #{updateBy}
+        where id = #{id}
+
+
+    </update>
+
+
+    <!--修改订单明细信息-->
+    <update id="updateOrderdetails" parameterType="com.yhlo.oa.entity.GeneralOrderDetailVO">
+        update yhlo_order_detail
+        set
+            mnemonicCode = #{mnemonicCode},materialNo = #{materialNo},
+            materialDesc = #{materialDesc},specification = #{specification},
+            orderQty = #{orderQty},qtyDelivered = #{qtyDelivered},
+            openQty = #{openQty},orderUnit = #{orderUnit},
+            basicUnit = #{basicUnit},factory = #{factory},
+            factoryCode = #{factoryCode},inventoryLocation = #{inventoryLocation},
+            inventoryLocationCode = #{inventoryLocationCode},shippingPoint = #{shippingPoint},
+            shippingPointCode = #{shippingPointCode},pricingDate = #{pricingDate},
+            standardPrice = #{standardPrice},manualPrice = #{manualPrice},
+            orderBuomQty = #{orderBuomQty},discountRate = #{discountRate},
+            rebateAmount = #{rebateAmount},amountBeforeDiscount = #{amountBeforeDiscount},
+            discountedAmount = #{discountedAmount},storageTemperature = #{storageTemperature},
+            storageTemperatureCode = #{storageTemperatureCode},taxRate = #{taxRate},
+            currency = #{currency},batch = #{batch},
+            productionLicense = #{productionLicense},fullNameOfManufacturer = #{fullNameOfManufacturer},
+            approvalNo = #{approvalNo},customerMaterial = #{customerMaterial},
+            customerMaterialDesc = #{customerMaterialDesc},provincialBiddingCode = #{provincialBiddingCode},
+            cityBiddingCode = #{cityBiddingCode},reservedCode = #{reservedCode},
+            brand = #{brand},materialGroup = #{materialGroup},
+            materialGroupCode = #{materialGroupCode},businessLicense = #{businessLicense},
+            productionRecordCertificate = #{productionRecordCertificate},claim = #{claim},
+            lastUnitPrice = #{lastUnitPrice},multiAngleTradeCode = #{multiAngleTradeCode},
+            multiAngleTradeType = #{multiAngleTradeType},sto1No = #{sto1No},
+            sto1LineItem = #{sto1LineItem},lineItemType = #{lineItemType},
+            lineItemTypeCode = #{lineItemTypeCode},lineItemText = #{lineItemText},
+            updateTime = sysdate(),updateBy = #{updateBy}
+        where id = #{id}
+    </update>
+
+    <!--删除订单明细-->
+    <delete id="deleteOrderDetails" parameterType="com.yhlo.oa.entity.GeneralOrderVO">
+        delete from yhlo_order_detail where ddsSalesOrderNo = #{ddsSalesOrderNo}
+    </delete>
+
+
+    <!--查询订单列表-->
+    <select id="getGeneralOrderApprovalList" resultType="com.yhlo.oa.entity.GeneralOrderApprovalVO" parameterType="java.lang.String">
+        select ROW_NUMBER() over(order by om.id) as xuh,
+            om.id as id,
+            om.orderType as orderType,om.orderReference as orderReference,
+            om.sapSalesOrderNo as sapSalesOrderNo,om.sapPurchaseOrderNo as sapPurchaseOrderNo,
+            om.ddsSalesOrderNo as ddsSalesOrderNo,
+            tvk.VTXTK as salesOrg,om.salesOrg as salesOrgCode,
+            ts.VTXTK as productGroup,om.productGroup as productGroupCode,
+            tt.VTXTK as distributionChannel,om.distributionChannel as distributionChannelCode,
+            om.customerName as customerName,om.customerCode as customerCode,
+            om.songdfmc as songdfmc,om.songdfdm as songdfdm,
+            om.saleDept as saleDept,om.saleGroup as saleGroup,
+            om.termOfPayment as termOfPayment,om.orderReason as orderReason,
+            om.endCustomer as endCustomerCode,kn.name1 as endCustomer,
+            om.salesman as salesman,
+            om.preparedBy as preparedBy,om.documentDate as documentDate,
+            om.totalAmount as totalAmount,om.amountNotTaxed as amountNotTaxed,
+            om.shippingConditions as shippingConditions,
+            om.combinationDelivery as combinationDelivery,om.pod as pod,
+            om.approvalStatus as approvalStatus,om.deliveryStatus as deliveryStatus,
+            om.orderSummary as orderSummary,om.shippingRemarks as shippingRemarks,
+            om.multiAngleTradeCode as multiAngleTradeCode,
+            om.createTime as createTime,om.createBy as createBy,
+            om.updateTime as updateTime,om.updateBy as updateBy,
+            od.id as id_detail,od.lineItem as lineItem,
+            od.mnemonicCode as mnemonicCode,od.materialNo as materialNo,
+            od.materialDesc as materialDesc,od.specification as specification,
+            od.orderQty as orderQty,od.qtyDelivered as qtyDelivered,
+            od.openQty as openQty,od.orderUnit as orderUnit,
+            od.basicUnit as basicUnit,od.factory as factory,
+            od.inventoryLocation as inventoryLocation,
+            od.inventoryLocationCode as inventoryLocationCode,
+            od.pricingDate as pricingDate,
+            od.standardPrice as standardPrice,od.manualPrice as manualPrice,
+            od.orderBuomQty as orderBuomQty,od.discountRate as discountRate,
+            od.rebateAmount as rebateAmount,od.amountBeforeDiscount as amountBeforeDiscount,
+            od.discountedAmount as discountedAmount,od.storageTemperature as storageTemperature,
+            od.taxRate as taxRate,od.currency as currency,od.batch as batch,
+            od.productionLicense as productionLicense,od.fullNameOfManufacturer as fullNameOfManufacturer,
+            od.approvalNo as approvalNo,od.customerMaterial as customerMaterial,
+            od.customerMaterialDesc as customerMaterialDesc,od.provincialBiddingCode as provincialBiddingCode,
+            od.cityBiddingCode as cityBiddingCode,od.reservedCode as reservedCode,
+            od.brand as brand,od.materialGroup as materialGroup,
+            od.businessLicense as businessLicense,od.productionRecordCertificate as productionRecordCertificate,
+            od.claim as claim,od.lastUnitPrice as lastUnitPrice,
+            od.multiAngleTradeType as multiAngleTradeType,od.sto1No as sto1No,
+            od.sto1LineItem as sto1LineItem,od.lineItemType as lineItemType,
+            od.lineItemText as lineItemText,od.factoryCode as factoryCode,
+            od.materialGroupCode as materialGroupCode,od.storageTemperatureCode as storageTemperatureCode,
+            od.lineItemTypeCode as lineItemTypeCode,
+            od.shippingPoint as shippingPoint,od.shippingPointCode as shippingPointCode
+
+        from
+
+        yhlo_order om left join yhlo_order_detail od on om.ddsSalesOrderNo = od .ddsSalesOrderNo
+        left join tvkot tvk on om.salesOrg = tvk.VKORG
+        left join it_kna1 kn on om.endCustomer = kn.kunnr
+        left join tspat ts on om.productGroup = ts.spart
+        left join tvtwt tt on om.distributionChannel = tt.VTWEG
+        where 1=1
+
+        <if test="ddsSalesOrderNo != null and ddsSalesOrderNo != '' ">
+            AND om.ddsSalesOrderNo like "%" #{ddsSalesOrderNo} "%"
+        </if>
+
+        <if test="customerName != null and customerName != '' ">
+            AND om.customerName like "%" #{customerName} "%"
+        </if>
+
+        <if test="approvalStatus != null and approvalStatus != '' ">
+            AND om.approvalStatus = #{approvalStatus}
+        </if>
+
+        order by om.ddsSalesOrderNo
+
+    </select>
+
+
+    <update id="updateOrderApprovalStatu" parameterType="com.yhlo.oa.entity.GeneralOrderApprovalVO">
+        update yhlo_order
+            set
+                approvalStatus = #{approvalStatus},
+                updateTime = sysdate(),
+                updateBy = #{updateBy}
+        where id = #{id}
+    </update>
+
+
+    <update id="updateOrderApprovalStatuAndOrderNo" parameterType="com.yhlo.oa.entity.GeneralOrderApprovalVO">
+        update yhlo_order
+        set
+            approvalStatus = #{approvalStatus},
+            sapSalesOrderNo = #{sapSalesOrderNo},
+            updateTime = sysdate(),
+            updateBy = #{updateBy}
+        where id = #{id}
+    </update>
+
+
+    <!--通过DDS订单编号获取订单明细-->
+    <select id="getOrderListByDdsSalesOrderNo" resultType="com.yhlo.oa.entity.GeneralOrderDetailVO" parameterType="java.lang.String">
+        SELECT
+            od.id AS id,od.ddsSalesOrderNo AS ddsSalesOrderNo,
+            od.lineItem AS lineItem,od.mnemonicCode AS mnemonicCode,
+            od.materialNo AS materialNo,od.materialDesc AS materialDesc,
+            od.specification AS specification,od.orderQty AS orderQty,
+            od.qtyDelivered AS qtyDelivered,od.openQty AS openQty,
+            od.orderUnit AS orderUnit,od.basicUnit AS basicUnit,
+            od.factory AS factory,od.inventoryLocation AS inventoryLocation,
+            od.inventoryLocationCode as inventoryLocationCode,
+            od.pricingDate AS pricingDate,od.standardPrice AS standardPrice,
+            od.manualPrice AS manualPrice,od.orderBuomQty AS orderBuomQty,
+            od.discountRate AS discountRate,od.rebateAmount AS rebateAmount,
+            od.amountBeforeDiscount AS amountBeforeDiscount,od.discountedAmount AS discountedAmount,
+            od.storageTemperature AS storageTemperature,od.taxRate AS taxRate,
+            od.currency AS currency,od.batch AS batch,od.productionLicense AS productionLicense,
+            od.fullNameOfManufacturer AS fullNameOfManufacturer,od.approvalNo AS approvalNo,
+            od.customerMaterial AS customerMaterial,od.customerMaterialDesc AS customerMaterialDesc,
+            od.provincialBiddingCode AS provincialBiddingCode,od.cityBiddingCode AS cityBiddingCode,
+            od.reservedCode AS reservedCode,od.brand AS brand,
+            od.materialGroup AS materialGroup,od.businessLicense AS businessLicense,
+            od.productionRecordCertificate AS productionRecordCertificate,od.claim AS claim,
+            od.lastUnitPrice AS lastUnitPrice,od.multiAngleTradeType AS multiAngleTradeType,
+            od.sto1No AS sto1No,od.sto1LineItem AS sto1LineItem,
+            od.lineItemType AS lineItemType,od.lineItemText AS lineItemText,
+            od.factoryCode AS factoryCode,od.materialGroupCode AS materialGroupCode,
+            od.storageTemperatureCode AS storageTemperatureCode,od.lineItemTypeCode AS lineItemTypeCode
+        FROM
+        yhlo_order_detail od
+        WHERE 1=1 and od.ddsSalesOrderNo = #{ddsSalesOrderNo}
+
+        ORDER BY od.ddsSalesOrderNo ASC
+    </select>
+
+
+    <!--获取订单列表-->
+    <select id="getOrderList" resultType="com.yhlo.oa.entity.GeneralOrderVO" parameterType="java.lang.String">
+        SELECT
+            om.id AS id,
+            om.orderType AS orderType,
+            om.orderReference AS orderReference,
+            om.sapSalesOrderNo AS sapSalesOrderNo,
+            om.sapPurchaseOrderNo AS sapPurchaseOrderNo,
+            om.ddsSalesOrderNo AS ddsSalesOrderNo,
+            om.salesOrg AS salesOrg,
+            om.productGroup AS productGroup,
+            om.distributionChannel AS distributionChannel,
+            om.customerName AS customerName,
+            om.customerCode AS customerCode,
+            om.songdfmc AS songdfmc,
+            om.songdfdm AS songdfdm,
+            om.saleDept AS saleDept,
+            om.saleGroup AS saleGroup,
+            om.termOfPayment AS termOfPayment,
+            om.orderReason AS orderReason,
+            om.endCustomer AS endCustomer,
+            om.salesman AS salesman,
+            om.preparedBy AS preparedBy,
+            om.documentDate AS documentDate,
+            om.totalAmount AS totalAmount,
+            om.amountNotTaxed AS amountNotTaxed,
+            om.shippingConditions AS shippingConditions,
+            om.combinationDelivery AS combinationDelivery,
+            om.pod AS pod,
+            om.approvalStatus AS approvalStatus,
+            om.deliveryStatus AS deliveryStatus,
+            om.orderSummary AS orderSummary,
+            om.shippingRemarks AS shippingRemarks,
+            om.multiAngleTradeCode AS multiAngleTradeCode,
+            om.createTime AS createTime,
+            om.createBy AS createBy,
+            om.updateTime AS updateTime,
+            om.updateBy AS updateBy
+        FROM
+            yhlo_order om
+        where 1=1
+
+        <if test="ddsSalesOrderNo != null and ddsSalesOrderNo != '' ">
+            AND om.ddsSalesOrderNo like "%" #{ddsSalesOrderNo} "%"
+        </if>
+
+        ORDER BY om.ddsSalesOrderNo ASC
+
+    </select>
+
+
+    <!--查询订单列表-->
+    <select id="getAllGeneralOrderApprovalList" resultType="com.yhlo.oa.entity.GeneralOrderApprovalVO" >
+        select om.id as id,
+        om.orderType as orderType,om.orderReference as orderReference,
+        om.sapSalesOrderNo as sapSalesOrderNo,om.sapPurchaseOrderNo as sapPurchaseOrderNo,
+        om.ddsSalesOrderNo as ddsSalesOrderNo,om.salesOrg as salesOrg,
+        om.productGroup as productGroup,om.distributionChannel as distributionChannel,
+        om.customerName as customerName,om.customerCode as customerCode,
+        om.songdfmc as songdfmc,om.songdfdm as songdfdm,
+        om.saleDept as saleDept,om.saleGroup as saleGroup,
+        om.termOfPayment as termOfPayment,om.orderReason as orderReason,
+        om.endCustomer as endCustomerCode,kn.name1 as endCustomer,
+        om.salesman as salesman,
+        om.preparedBy as preparedBy,om.documentDate as documentDate,
+        om.totalAmount as totalAmount,om.amountNotTaxed as amountNotTaxed,
+        om.shippingConditions as shippingConditions,
+        om.combinationDelivery as combinationDelivery,om.pod as pod,
+        om.approvalStatus as approvalStatus,om.deliveryStatus as deliveryStatus,
+        om.orderSummary as orderSummary,om.shippingRemarks as shippingRemarks,
+        om.multiAngleTradeCode as multiAngleTradeCode,
+        om.createTime as createTime,om.createBy as createBy,
+        om.updateTime as updateTime,om.updateBy as updateBy,
+        od.id as id_detail,od.lineItem as lineItem,
+        od.mnemonicCode as mnemonicCode,od.materialNo as materialNo,
+        od.materialDesc as materialDesc,od.specification as specification,
+        od.orderQty as orderQty,od.qtyDelivered as qtyDelivered,
+        od.openQty as openQty,od.orderUnit as orderUnit,
+        od.basicUnit as basicUnit,od.factory as factory,
+        od.inventoryLocation as inventoryLocation,
+        od.inventoryLocationCode as inventoryLocationCode,
+        od.pricingDate as pricingDate,
+        od.standardPrice as standardPrice,od.manualPrice as manualPrice,
+        od.orderBuomQty as orderBuomQty,od.discountRate as discountRate,
+        od.rebateAmount as rebateAmount,od.amountBeforeDiscount as amountBeforeDiscount,
+        od.discountedAmount as discountedAmount,od.storageTemperature as storageTemperature,
+        od.taxRate as taxRate,od.currency as currency,od.batch as batch,
+        od.productionLicense as productionLicense,od.fullNameOfManufacturer as fullNameOfManufacturer,
+        od.approvalNo as approvalNo,od.customerMaterial as customerMaterial,
+        od.customerMaterialDesc as customerMaterialDesc,od.provincialBiddingCode as provincialBiddingCode,
+        od.cityBiddingCode as cityBiddingCode,od.reservedCode as reservedCode,
+        od.brand as brand,od.materialGroup as materialGroup,
+        od.businessLicense as businessLicense,od.productionRecordCertificate as productionRecordCertificate,
+        od.claim as claim,od.lastUnitPrice as lastUnitPrice,
+        od.multiAngleTradeType as multiAngleTradeType,od.sto1No as sto1No,
+        od.sto1LineItem as sto1LineItem,od.lineItemType as lineItemType,
+        od.lineItemText as lineItemText,od.factoryCode as factoryCode,
+        od.materialGroupCode as materialGroupCode,od.storageTemperatureCode as storageTemperatureCode,
+        od.lineItemTypeCode as lineItemTypeCode,od.shippingPoint as shippingPoint,od.shippingPointCode as shippingPointCode
+
+        from
+
+        yhlo_order om left join yhlo_order_detail od on om.ddsSalesOrderNo = od.ddsSalesOrderNo
+                      left join it_kna1 kn on om.endCustomer = kn.kunnr
+        where 1=1
+
+        order by om.ddsSalesOrderNo
+
+    </select>
+
+
+
+</mapper>

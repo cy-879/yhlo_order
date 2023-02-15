@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.RolesOrderMapper">
+
+    <insert id="insertOrder" parameterType="com.yhlo.oa.entity.RolesOrderVO">
+        insert into roles_order_info(
+            order_no, contract_order_no,sale_order_no, delivery_party,consignee,
+            total_tax_inclusive_amount,coupon,freight,price_type,sales_organization,create_by, create_time
+        )values(
+                   #{orderNo, jdbcType=VARCHAR},
+                   #{contractOrderNo, jdbcType=VARCHAR},
+                   #{saleOrderNo, jdbcType=VARCHAR},
+                   #{deliveryParty, jdbcType=VARCHAR},
+                   #{consignee, jdbcType=VARCHAR},
+                   #{totalTaxInclusiveAmount, jdbcType=FLOAT},
+                   #{coupon, jdbcType=VARCHAR},
+                   #{freight, jdbcType=FLOAT},
+                   #{priceType, jdbcType=VARCHAR},
+                   #{salesOrganization, jdbcType=VARCHAR},
+                   'CY',
+                   sysdate()
+               )
+    </insert>
+
+    <select id="queryOrderList" resultType="com.yhlo.oa.entity.RolesOrderVO">
+        SELECT ddsSalesOrderNo as orderNo,
+               sapPurchaseOrderNo   as contractOrderNo,
+               sapSalesOrderNo   as saleOrderNo,
+               CRATE_BY as createBy,
+               date_format(CRATE_TIME,'%Y-%m-%d %H:%i:%S') as createTime
+        FROM yhlo_order
+    </select>
+
+
+    <select id="getOrderItem" resultType="com.yhlo.oa.entity.Item">
+        SELECT ddsSalesOrderNo as id,
+               ddsSalesOrderNo as itemKey,
+               ddsSalesOrderNo as itemValue
+        FROM yhlo_order
+    </select>
+</mapper>

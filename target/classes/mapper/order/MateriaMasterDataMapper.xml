@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.MateriaMasterDataMapper">
+
+    <select id="getConfigItem" resultType="com.yhlo.oa.entity.Item" parameterType="java.lang.String">
+        SELECT id as id,
+               itemKey as itemKey,
+               itemValue as itemValue
+        FROM yhlo_item where 1=1
+        <if test="ttype != null and ttype != '' ">
+            AND ttype = #{ttype}
+        </if>
+    </select>
+
+
+
+
+
+    <select id="queryMaraList" resultType="com.yhlo.oa.entity.It_MaraVO" parameterType="java.lang.String">
+        SELECT id as id,
+               matnr as matnr,maktx as maktx,mtart as mtart,matkl as matkl,
+               raube as raube,bismt as bismt,spart as spart,prdha as prdha,
+               meins as meins,mstae as mstae,xchpf as xchpf,extwg as extwg,
+               mbrsh as mbrsh,mhdrz as mhdrz,mhdhb as mhdhb,mtpos_mara as mtpos_mara,
+               zcus01 as zcus01,zcus02 as zcus02,zcus02_1 as zcus02_1,zcus02_2 as zcus02_2,
+               zcus03 as zcus03,zcus04 as zcus04,zcus05 as zcus05,zcus06 as zcus06,zcus07 as zcus07,
+               zcus08 as zcus08,zcus09 as zcus09,zcus10 as zcus10,zcus11 as zcus11,
+               zcus12 as zcus12,zcus13 as zcus13,zcus14 as zcus14,zcus15 as zcus15,
+               zcus16 as zcus16,zcus17 as zcus17,zcus18 as zcus18,zcus19 as zcus19,
+               zcus20 as zcus20,zcus21 as zcus21,zcus22 as zcus22,zcus23 as zcus23,
+               zcus24 as zcus24,zcus25 as zcus25,zcus26 as zcus26,zcus27 as zcus27,
+               zcus28 as zcus28,zcus29 as zcus29,zcus30 as zcus30,zcus31 as zcus31,
+               zcus32 as zcus32,zcus33 as zcus33,zcus34 as zcus34,zcus35 as zcus35,
+               create_time as create_time
+        FROM it_mara where 1=1
+        <if test="matnr != null and matnr != '' ">
+            AND matnr like "%" #{matnr} "%"
+        </if>
+    </select>
+
+
+
+
+
+</mapper>

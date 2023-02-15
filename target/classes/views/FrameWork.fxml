@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="borderPane" prefHeight="600" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.yhlo.oa.controller.FrameWorkController">
+    <top>
+        <MenuBar prefHeight="40.0" prefWidth="800.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="订单">
+
+                   <items>
+                       <Menu mnemonicParsing="false" text="一般订单">
+                           <items>
+                               <Menu mnemonicParsing="false" text="ZOR5 流通子公司订单">
+                                   <items>
+                                       <MenuItem mnemonicParsing="false" text="订单创建" onAction="#generalOrder" />
+                                       <MenuItem mnemonicParsing="false" text="订单审核" onAction="#generalOrderApproval" />
+                                   </items>
+                               </Menu>
+                               <MenuItem mnemonicParsing="false" text="ZRE1 退货订单" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="多角订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZOR3 多角贸易订单（审核）" />
+                               <MenuItem mnemonicParsing="false" onAction="#roles" text="ZRE1 退货订单" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="寄售订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZKB5 寄售发货" />
+                               <MenuItem mnemonicParsing="false" text="ZKA1 寄售拣货退货" />
+                               <MenuItem mnemonicParsing="false" text="ZKB3 寄售发货（多角）" />
+                               <MenuItem mnemonicParsing="false" text="ZKR1 寄售结算退货" />
+                               <MenuItem mnemonicParsing="false" text="ZKE5 寄售结算" />
+                               <MenuItem mnemonicParsing="false" text="ZKR1 寄售结算退货" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="借项订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZDR1 借项凭证请求" />
+                           </items>
+                       </Menu>
+                       <Menu mnemonicParsing="false" text="其他订单">
+                           <items>
+                               <MenuItem mnemonicParsing="false" text="ZFD1 样品订单（审核）" />
+                           </items>
+                       </Menu>
+                      <Menu mnemonicParsing="false" text="销售订单查询" />
+                      <Menu mnemonicParsing="false" text="批量结案" />
+                      <Menu mnemonicParsing="false" text="未清订单" />
+                   </items>
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="交货单管理">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="发货管理" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="报表">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="待开发 " />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="基础数据">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="产品资料" onAction="#productData"/>
+                        <MenuItem mnemonicParsing="false" text="客户资料" onAction="#customerData"/>
+                        <Menu mnemonicParsing="false" text="返利政策">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="新增返利政策" onAction="#rebatePolicy" />
+                                <MenuItem mnemonicParsing="false" text="返利政策列表" onAction="#rebatePolicySearch"/>
+                                <MenuItem mnemonicParsing="false" text="返利单使用记录"  />
+                                <MenuItem mnemonicParsing="false" text="返利单审核列表" onAction="#rebatePolicyApproval" />
+                            </items>
+                        </Menu>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="系统管理">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="用户管理"  onAction="#userManagement"/>
+                        <MenuItem mnemonicParsing="false" onAction="#config" text="配置同步" />
+                        <MenuItem mnemonicParsing="false" onAction="#DataSyn" text="主数据同步" />
+                        <MenuItem mnemonicParsing="false" onAction="#exit" text="退出系统" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="系统">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#homePage" text="返回首页" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#goWebview" text="外部网站" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#OpenNewWindow" text="复制窗口" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <TabPane fx:id="tabPane" prefHeight="560">
+
+        </TabPane>
+        <!--<StackPane>
+            <children>
+                <ScrollPane fx:id="body" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="TOP_LEFT">
+                    <content>
+
+                    </content>
+                </ScrollPane>
+            </children>
+
+        </StackPane>-->
+
+    </center>
+   <bottom>
+
+   </bottom>
+
+
+
+</BorderPane>

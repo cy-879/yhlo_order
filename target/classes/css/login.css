@@ -1,0 +1,36 @@
+/* 为GridPane面板组件根元素添加背景图片 */
+.root {
+    //-fx-background-image: url("../img/background.jpg");
+}
+/* 为label标签组件设置大小、颜色、展示效果 */
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+/* 为id为welcome-text的组件设置大小、字体、颜色、展示效果 */
+#welcome-text {
+    -fx-font-size: 32px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box ,rgba(0,0,0,0.7),6, 0.0 , 0 , 2 );
+}
+/* 为id为actiontarget的组件设置大小、颜色、展示效果 */
+#actiontarget {
+    -fx-fill: FIREBRICK;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+/* 为button标签组件设置大小、颜色、展示效果 */
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box ,rgba(0,0,0,0.6),5, 0.0 , 0 , 1 );
+}
+/* 设置当鼠标移到button按钮时的大小、颜色、展示效果 */
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}

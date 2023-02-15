@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.RebatePolicyMapper">
+
+    <select id="queryCustomerList" resultType="com.yhlo.oa.entity.It_Kna1VO" >
+        SELECT id as id,
+        kunnr as kunnr,land1 as land1,name1 as name1,name2 as name2,ort01 as ort01,
+        pstlz as pstlz,regio as regio,stras as stras,telf1 as telf1,telfx as telfx,
+        adrnr as adrnr,erdat as erdat,ernam as ernam,ktokd as ktokd,spras as spras,
+        telf2 as telf2,stcd5 as stcd5,kukla as kukla,
+        create_time as create_time
+        FROM it_kna1 where 1=1
+
+    </select>
+
+    <select id="querySaleOrgList" resultType="com.yhlo.oa.entity.TvkotVO" >
+        SELECT id as id,
+               spras as spras,vkorg as vkorg,vtxtk as vtxtk
+        FROM TVKOT where 1=1
+
+    </select>
+
+    <select id="querySMaterialGroupList" resultType="com.yhlo.oa.entity.T023tVO" >
+        SELECT id as id,
+               spras as spras,matkl as matkl,wgbez60 as wgbez60
+        FROM T023T where 1=1
+
+    </select>
+
+
+    <insert id="insertRebatePolicy" parameterType="com.yhlo.oa.entity.RebatePolicyVO">
+        insert into yhlo_rebatepolicy(
+            rebateFormName,rebateFormNo, contractNo,rebateStrategy, name1,kunnr,
+            vkorg_name,vkorg,matkl_name,matkl,name_ec_name,name_ec,
+            rebateLimit,z005,unusedQuota,takeEffectTime,failureTime,remark,create_by,create_time,
+            status
+        )values(
+                   #{rebateFormName, jdbcType=VARCHAR},
+                   #{rebateFormNo, jdbcType=VARCHAR},
+                   #{contractNo, jdbcType=VARCHAR},
+                   #{rebateStrategy, jdbcType=VARCHAR},
+                   #{name1, jdbcType=VARCHAR},
+                   #{kunnr, jdbcType=VARCHAR},
+                   #{vkorg_name, jdbcType=VARCHAR},
+                   #{vkorg, jdbcType=VARCHAR},
+                   #{matkl_name, jdbcType=VARCHAR},
+                   #{matkl, jdbcType=VARCHAR},
+                   #{name_ec_name, jdbcType=VARCHAR},
+                   #{name_ec, jdbcType=VARCHAR},
+                   #{rebateLimit, jdbcType=FLOAT},
+                   #{z005, jdbcType=FLOAT},
+                   #{rebateLimit, jdbcType=FLOAT},
+                   #{takeEffectTime, jdbcType=DATE},
+                   #{failureTime, jdbcType=DATE},
+                   #{remark, jdbcType=VARCHAR},
+                   'CY',
+                   sysdate(),
+                   '保存'
+               )
+    </insert>
+
+
+
+    <insert id="insertRebatePolicyDetail" parameterType="com.yhlo.oa.entity.RebatePolicyDetailVO">
+        insert into yhlo_rebatepolicy_detail(
+            rebateFormNo,matkl_name,matkl,rebateLimit,z005,unusedQuota,remark,create_by,create_time,status
+        )values(
+                   #{rebateFormNo, jdbcType=VARCHAR},
+                   #{matkl_name, jdbcType=VARCHAR},
+                   #{matkl, jdbcType=VARCHAR},
+                   #{rebateLimit, jdbcType=FLOAT},
+                   #{z005, jdbcType=FLOAT},
+                   #{rebateLimit, jdbcType=FLOAT},
+                   #{remark, jdbcType=VARCHAR},
+                   'CY',
+                   sysdate(),
+                   '保存'
+               )
+    </insert>
+
+
+    <select id="queryRebatePolicyList" resultType="com.yhlo.oa.entity.RebatePolicyVO" parameterType="java.lang.String">
+        SELECT id as id,
+               rebateFormName as rebateFormName,rebateFormNo as rebateFormNo, contractNo as contractNo,
+               rebateStrategy as rebateStrategy,
+               name1 as name1,kunnr as kunnr,vkorg_name as vkorg_name,vkorg as vkorg,
+               matkl_name as matkl_name,matkl as matkl,name_ec_name asname_ec_name ,
+               name_ec as name_ec,rebateLimit as rebateLimit,z005 as z005,
+               usedQuota as usedQuota,unusedQuota as unusedQuota,
+               takeEffectTime as takeEffectTime,failureTime as failureTime,remark as remark,
+               create_by as create_by,create_time as create_time,
+               status as status,approvalTime as approvalTime,approvalBy as approvalBy
+        FROM yhlo_rebatepolicy where 1=1
+        <if test="rebateFormName != null and rebateFormName != '' ">
+            AND rebateFormName like "%" #{rebateFormName} "%"
+        </if>
+
+        <if test="name1 != null and name1 != '' ">
+            AND name1 like "%" #{name1} "%"
+        </if>
+
+        <if test="status != null and status != '' ">
+            AND status = #{status}
+        </if>
+
+
+    </select>
+
+    <select id="queryRebatePolicyToBeApprovedList" resultType="com.yhlo.oa.entity.RebatePolicyVO" parameterType="java.lang.String">
+        SELECT id as id,
+               rebateFormName as rebateFormName,rebateFormNo as rebateFormNo, contractNo as contractNo,
+               rebateStrategy as rebateStrategy,
+               name1 as name1,kunnr as kunnr,vkorg_name as vkorg_name,vkorg as vkorg,
+               matkl_name as matkl_name,matkl as matkl,name_ec_name asname_ec_name ,
+               name_ec as name_ec,rebateLimit as rebateLimit,z005 as z005,
+               usedQuota as usedQuota,unusedQuota as unusedQuota,
+               takeEffectTime as takeEffectTime,failureTime as failureTime,remark as remark,
+               create_by as create_by,create_time as create_time,
+               status as status,approvalTime as approvalTime,approvalBy as approvalBy
+        FROM yhlo_rebatepolicy where 1=1 and status = '待审核'
+        <if test="rebateFormName != null and rebateFormName != '' ">
+            AND rebateFormName like "%" #{rebateFormName} "%"
+        </if>
+
+        <if test="name1 != null and name1 != '' ">
+            AND name1 like "%" #{name1} "%"
+        </if>
+
+
+    </select>
+
+
+
+    <select id="checkRebateNoExists" resultType="com.yhlo.oa.entity.RebatePolicyVO" parameterType="java.lang.String">
+        SELECT id as id,
+            rebateFormName as rebateFormName,rebateFormNo as rebateFormNo, contractNo as contractNo,
+            rebateStrategy as rebateStrategy,
+            name1 as name1,kunnr as kunnr,vkorg_name as vkorg_name,vkorg as vkorg,
+            matkl_name as matkl_name,matkl as matkl,name_ec_name as name_ec_name ,
+            name_ec as name_ec,rebateLimit as rebateLimit,z005 as z005,
+            usedQuota as usedQuota,unusedQuota as unusedQuota,
+            takeEffectTime as takeEffectTime,failureTime as failureTime,remark as remark,
+            create_by as create_by,create_time as create_time,
+            status as status,approvalTime as approvalTime,approvalBy as approvalBy
+        FROM yhlo_rebatepolicy where 1=1
+        <if test="rebateFormNo != null and rebateFormNo != '' ">
+            AND rebateFormNo like "%" #{rebateFormNo} "%"
+        </if>
+        ORDER BY rebateFormNo DESC
+    </select>
+
+
+    <select id="getRebatePolicyDetailList" resultType="com.yhlo.oa.entity.RebatePolicyDetailVO" parameterType="java.lang.String">
+        SELECT id as id,
+               rebateFormNo as rebateFormNo, matkl_name as matkl_name,
+               matkl as matkl,rebateLimit as rebateLimit,z005 as z005,
+               usedQuota as usedQuota,unusedQuota as unusedQuota,remark as remark
+        FROM yhlo_rebatepolicy_detail where rebateFormNo = #{rebateFormNo}
+    </select>
+
+
+    <update id="submitForApproval" parameterType="com.yhlo.oa.entity.RebatePolicyVO">
+        update yhlo_rebatepolicy set status='待审核' where id=#{id} and status='保存'
+    </update>
+
+    <update id="updateApprovalStatu" parameterType="com.yhlo.oa.entity.RebatePolicyVO">
+        update yhlo_rebatepolicy set status=#{status}  ,approvalTime=sysdate() ,approvalBy='' where id=#{id}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.SearchMaterDetailMapper">
+
+
+
+    <select id="queryMvkeList" resultType="com.yhlo.oa.entity.It_MvkeVO" parameterType="java.lang.String">
+        SELECT mv.id as id,
+               mv.matnr as matnr,
+               tvk.VTXTK as vkorg,
+               tvt.VTXTK as vtweg,
+               mv.vrkme as vrkme,
+               mv.mtpos as mtpos,
+               t0.NAME1 as dwerk,
+               mv.ktgrm as ktgrm,
+               mv.lvorm as lvorm,
+               mv.vmsta as vmsta,
+               mv.taxm1 as taxm1,
+               create_time as create_time
+        FROM
+              it_mvke mv left join tvkot tvk on mv.vkorg = tvk.VKORG
+                         left join tvtwt tvt on mv.VTWEG = tvt.VTWEG
+                         left join t001w t0  on mv.dwerk = t0.WERKS
+              where mv.matnr = #{matnr}
+        order by mv.matnr
+    </select>
+
+
+    <select id="queryMbewList" resultType="com.yhlo.oa.entity.It_MbewVO" parameterType="java.lang.String">
+        SELECT mb.id as id,
+               mb.matnr as matnr,
+               tvk.VTXTK as bwkey,
+               mb.bklas as bklas,
+               mb.lvorm as lvorm,
+               mb.vprsv as vprsv,
+               mb.verpr as verpr,
+               mb.stprs as stprs,
+               mb.peinh as peinh,
+               create_time as create_time
+        FROM
+            it_mbew mb left join tvkot tvk on mb.bwkey = tvk.VKORG
+        where mb.matnr = #{matnr}
+            order by mb.matnr
+
+    </select>
+
+    <select id="queryMarmList" resultType="com.yhlo.oa.entity.It_MarmVO" parameterType="java.lang.String">
+        SELECT ma.id as id,
+               ma.matnr as matnr,
+               ma.meinh as meinh,
+               ma.umrez as umrez,
+               ma.umren as umren,
+               create_time as create_time
+        FROM
+            it_marm ma
+        where 1=1
+            and ma.matnr = #{matnr}
+        order by ma.matnr
+
+    </select>
+
+    <select id="queryMardList" resultType="com.yhlo.oa.entity.It_MardVO" parameterType="java.lang.String">
+        SELECT ma.id as id,
+               ma.matnr as matnr,
+               t0.name1 as werks,
+               tl.LGOBE as lgort,
+               ma.lvorm as lvorm,
+               ma.labst as labst,
+               create_time as create_time
+        FROM
+            it_mard ma left join T001W t0 on ma.werks = t0.werks
+                       left join T001L tl on ma.werks = tl.WERKS and ma.lgort = tl.LGORT
+        where 1=1
+            and ma.matnr = #{matnr}
+        order by ma.matnr
+
+    </select>
+
+
+    <select id="queryMarcList" resultType="com.yhlo.oa.entity.It_MarcVO" parameterType="java.lang.String">
+        SELECT ma.id as id,
+               ma.matnr as matnr,
+               t0.name1 as werks,
+               ma.lvorm as lvorm,
+               ma.xchpf as xchpf,
+               ma.xchar as xchar,
+               ma.ladgr as ladgr,
+               ma.sernp as sernp,
+               create_time as create_time
+        FROM
+            it_marc ma left join T001W t0 on ma.werks = t0.werks
+        where 1=1
+            and ma.matnr = #{matnr}
+        order by ma.matnr
+
+    </select>
+
+
+
+
+
+</mapper>

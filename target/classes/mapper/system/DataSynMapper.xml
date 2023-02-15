@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yhlo.oa.mapper.DataSynMapper">
+
+    <select id="getConfigItem" resultType="com.yhlo.oa.entity.Item" parameterType="java.lang.String">
+        SELECT id as id,
+               itemKey as itemKey,
+               itemValue as itemValue
+        FROM yhlo_item where 1=1
+        <if test="ttype != null and ttype != '' ">
+            AND ttype = #{ttype}
+        </if>
+    </select>
+
+
+    <select id="queryMvkeList" resultType="com.yhlo.oa.entity.It_MvkeVO" >
+        SELECT id as id,
+               matnr as matnr,
+               vkorg as vkorg,
+               vtweg as vtweg,
+               vrkme as vrkme,
+               mtpos as mtpos,
+               dwerk as dwerk,
+               ktgrm as ktgrm,
+               lvorm as lvorm,
+               vmsta as vmsta
+        FROM it_mvke
+    </select>
+
+
+
+
+    <insert id="insertMara" parameterType="com.yhlo.oa.entity.It_MaraVO">
+        insert into it_Mara (matnr,maktx,mtart,matkl,raube,bismt,spart,prdha,meins,mstae,xchpf,extwg,
+                             mbrsh,mhdrz,mhdhb,mtpos_mara,zggxh,zcus01,zcus02,zcus02_1,zcus02_2,
+                             zcus03,zcus04,zcus05,zcus06,zcus07,zcus08,zcus09,zcus10,zcus11,
+                             zcus12,zcus13,zcus14,zcus15,zcus16,zcus17,zcus18,zcus19,
+                             zcus20,zcus21,zcus22,zcus23,zcus24,zcus25,zcus26,zcus27,
+                             zcus28,zcus29,zcus30,zcus31,zcus32,zcus33,zcus34,zcus35,
+                             create_time)
+        values(
+                  #{matnr, jdbcType=VARCHAR},#{maktx, jdbcType=VARCHAR},
+                  #{mtart, jdbcType=VARCHAR},#{matkl, jdbcType=VARCHAR},
+                  #{raube, jdbcType=VARCHAR},#{bismt, jdbcType=VARCHAR},
+                  #{spart, jdbcType=VARCHAR},#{prdha, jdbcType=VARCHAR},
+                  #{meins, jdbcType=VARCHAR},#{mstae, jdbcType=VARCHAR},
+                  #{xchpf, jdbcType=VARCHAR},#{extwg, jdbcType=VARCHAR},
+                  #{mbrsh, jdbcType=VARCHAR},#{mhdrz, jdbcType=VARCHAR},
+                  #{mhdhb, jdbcType=VARCHAR}, #{mtpos_mara, jdbcType=VARCHAR},
+                  #{zggxh, jdbcType=VARCHAR},#{zcus01, jdbcType=VARCHAR},
+                  #{zcus02, jdbcType=VARCHAR},#{zcus02_1, jdbcType=VARCHAR},
+                  #{zcus02_2, jdbcType=VARCHAR},
+                  #{zcus03, jdbcType=VARCHAR},#{zcus04, jdbcType=VARCHAR},
+                  #{zcus05, jdbcType=VARCHAR},#{zcus06, jdbcType=VARCHAR},
+                  #{zcus07, jdbcType=VARCHAR},#{zcus08, jdbcType=VARCHAR},
+                  #{zcus09, jdbcType=VARCHAR},#{zcus10, jdbcType=VARCHAR},
+                  #{zcus11, jdbcType=VARCHAR},#{zcus12, jdbcType=VARCHAR},
+                  #{zcus13, jdbcType=VARCHAR},#{zcus14, jdbcType=VARCHAR},
+                  #{zcus15,  jdbcType=VARCHAR},#{zcus16, jdbcType=VARCHAR},
+                  #{zcus17,  jdbcType=VARCHAR},#{zcus18, jdbcType=VARCHAR},
+                  #{zcus19,  jdbcType=VARCHAR},#{zcus20, jdbcType=VARCHAR},
+                  #{zcus21,  jdbcType=VARCHAR},#{zcus22, jdbcType=VARCHAR},
+                  #{zcus23,  jdbcType=VARCHAR},#{zcus24, jdbcType=VARCHAR},
+                  #{zcus25,  jdbcType=VARCHAR},#{zcus26, jdbcType=VARCHAR},
+                  #{zcus27,  jdbcType=VARCHAR},#{zcus28, jdbcType=VARCHAR},
+                  #{zcus29,  jdbcType=VARCHAR},#{zcus30, jdbcType=VARCHAR},
+                  #{zcus31,  jdbcType=VARCHAR},#{zcus32, jdbcType=VARCHAR},
+                  #{zcus33,  jdbcType=VARCHAR},#{zcus34, jdbcType=VARCHAR},
+                  #{zcus35,  jdbcType=VARCHAR},#{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updatetMara" parameterType="com.yhlo.oa.entity.It_MaraVO">
+        update it_Mara
+            set
+                matnr = #{matnr},maktx = #{maktx},mtart = #{mtart},matkl = #{matkl},
+                raube = #{raube},bismt = #{bismt},spart = #{spart},prdha = #{prdha},
+                meins = #{meins},mstae = #{mstae},xchpf = #{xchpf},extwg = #{extwg},
+                mbrsh = #{mbrsh},mhdrz = #{mhdrz},mhdhb = #{mhdhb},mtpos_mara = #{mtpos_mara},
+                zggxh = #{zggxh},zcus01 = #{zcus01},zcus02 = #{zcus02},zcus02_1 = #{zcus02_1},
+                zcus02_2 = #{zcus02_2},zcus03 = #{zcus03},zcus04 = #{zcus04},zcus05 = #{zcus05},
+                zcus06 = #{zcus06},zcus07 = #{zcus07},zcus08 = #{zcus08},zcus09 = #{zcus09},
+                zcus10 = #{zcus10},zcus11 = #{zcus11},zcus12 = #{zcus12},zcus13 = #{zcus13},
+                zcus14 = #{zcus14},zcus15 = #{zcus15},zcus16 = #{zcus16},zcus17 = #{zcus17},
+                zcus18 = #{zcus18},zcus19 = #{zcus19},zcus20 = #{zcus20},zcus21 = #{zcus21},
+                zcus22 = #{zcus22},zcus23 = #{zcus23},zcus24 = #{zcus24},zcus25 = #{zcus25},
+                zcus26 = #{zcus26},zcus27 = #{zcus27},zcus28 = #{zcus28},zcus29 = #{zcus29},
+                zcus30 = #{zcus30},zcus31 = #{zcus31},zcus32 = #{zcus32},zcus33 = #{zcus33},
+                zcus34 = #{zcus34},zcus35 = #{zcus35},create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+
+    <select id="queryMaraListByParam" resultType="com.yhlo.oa.entity.It_MaraVO" parameterType="com.yhlo.oa.entity.It_MaraVO">
+        SELECT id as id,
+               matnr as matnr,maktx as maktx,mtart as mtart,matkl as matkl,
+               raube as raube,bismt as bismt,spart as spart,prdha as prdha,
+               meins as meins,mstae as mstae,xchpf as xchpf,extwg as extwg,
+               mbrsh as mbrsh,mhdrz as mhdrz,mhdhb as mhdhb,mtpos_mara as mtpos_mara,
+               zcus01 as zcus01,zcus02 as zcus02,zcus02_1 as zcus02_1,zcus02_2 as zcus02_2,
+               zcus03 as zcus03,zcus04 as zcus04,zcus05 as zcus05,zcus06 as zcus06,zcus07 as zcus07,
+               zcus08 as zcus08,zcus09 as zcus09,zcus10 as zcus10,zcus11 as zcus11,
+               zcus12 as zcus12,zcus13 as zcus13,zcus14 as zcus14,zcus15 as zcus15,
+               zcus16 as zcus16,zcus17 as zcus17,zcus18 as zcus18,zcus19 as zcus19,
+               zcus20 as zcus20,zcus21 as zcus21,zcus22 as zcus22,zcus23 as zcus23,
+               zcus24 as zcus24,zcus25 as zcus25,zcus26 as zcus26,zcus27 as zcus27,
+               zcus28 as zcus28,zcus29 as zcus29,zcus30 as zcus30,zcus31 as zcus31,
+               zcus32 as zcus32,zcus33 as zcus33,zcus34 as zcus34,zcus35 as zcus35,
+               create_time as create_time
+        FROM it_mara where matnr = #{matnr}
+    </select>
+
+
+    <select id="checkMaraExist" resultType="com.yhlo.oa.entity.It_MaraVO" parameterType="com.yhlo.oa.entity.It_MaraVO">
+        SELECT id as id,
+               matnr as matnr,maktx as maktx,mtart as mtart,matkl as matkl,
+               raube as raube,bismt as bismt,spart as spart,prdha as prdha,
+               meins as meins,mstae as mstae,xchpf as xchpf,extwg as extwg,
+               mbrsh as mbrsh,mhdrz as mhdrz,mhdhb as mhdhb,mtpos_mara as mtpos_mara,
+               zcus01 as zcus01,zcus02 as zcus02,zcus02_1 as zcus02_1,zcus02_2 as zcus02_2,
+               zcus03 as zcus03,zcus04 as zcus04,zcus05 as zcus05,zcus06 as zcus06,zcus07 as zcus07,
+               zcus08 as zcus08,zcus09 as zcus09,zcus10 as zcus10,zcus11 as zcus11,
+               zcus12 as zcus12,zcus13 as zcus13,zcus14 as zcus14,zcus15 as zcus15,
+               zcus16 as zcus16,zcus17 as zcus17,zcus18 as zcus18,zcus19 as zcus19,
+               zcus20 as zcus20,zcus21 as zcus21,zcus22 as zcus22,zcus23 as zcus23,
+               zcus24 as zcus24,zcus25 as zcus25,zcus26 as zcus26,zcus27 as zcus27,
+               zcus28 as zcus28,zcus29 as zcus29,zcus30 as zcus30,zcus31 as zcus31,
+               zcus32 as zcus32,zcus33 as zcus33,zcus34 as zcus34,zcus35 as zcus35,
+               create_time as create_time
+        FROM it_mara where matnr = #{matnr} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteMara" parameterType="com.yhlo.oa.entity.It_MaraVO">
+        delete from  it_Mara where id = #{id}
+    </delete>
+
+
+
+    <insert id="insertMvke" parameterType="com.yhlo.oa.entity.It_MvkeVO">
+        insert into it_mvke (matnr,vkorg,vtweg,vrkme,mtpos,dwerk,ktgrm,lvorm,vmsta,taxm1,create_time)
+        values(
+                  #{matnr, jdbcType=VARCHAR},
+                  #{vkorg, jdbcType=VARCHAR},
+                  #{vtweg, jdbcType=VARCHAR},
+                  #{vrkme, jdbcType=VARCHAR},
+                  #{mtpos, jdbcType=VARCHAR},
+                  #{dwerk, jdbcType=VARCHAR},
+                  #{ktgrm, jdbcType=VARCHAR},
+                  #{lvorm, jdbcType=VARCHAR},
+                  #{vmsta, jdbcType=VARCHAR},
+                  #{taxm1, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateMvke" parameterType="com.yhlo.oa.entity.It_MvkeVO">
+        update it_mvke
+            set
+                matnr = #{matnr}, vkorg = #{vkorg}, vtweg = #{vtweg}, vrkme = #{vrkme},
+                mtpos = #{mtpos}, dwerk = #{dwerk}, ktgrm = #{ktgrm}, lvorm = #{lvorm},
+                vmsta = #{vmsta}, taxm1 = #{taxm1}, create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+    </update>
+
+
+    <select id="queryMvkeListByParam" resultType="com.yhlo.oa.entity.It_MvkeVO" parameterType="com.yhlo.oa.entity.It_MvkeVO">
+        SELECT id as id,
+               matnr as matnr,
+               vkorg as vkorg,
+               vtweg as vtweg,
+               vrkme as vrkme,
+               mtpos as mtpos,
+               dwerk as dwerk,
+               ktgrm as ktgrm,
+               lvorm as lvorm,
+               vmsta as vmsta,
+               taxm1 as taxm1,
+               create_time as create_time
+        FROM it_mvke where matnr = #{matnr} and vkorg = #{vkorg} and vtweg = #{vtweg}
+    </select>
+
+
+    <select id="checkExist" resultType="com.yhlo.oa.entity.It_MvkeVO" parameterType="com.yhlo.oa.entity.It_MvkeVO">
+        SELECT id as id,
+               matnr as matnr,
+               vkorg as vkorg,
+               vtweg as vtweg,
+               vrkme as vrkme,
+               mtpos as mtpos,
+               dwerk as dwerk,
+               ktgrm as ktgrm,
+               lvorm as lvorm,
+               vmsta as vmsta,
+               taxm1 as taxm1,
+               create_time as create_time
+        FROM it_mvke where matnr = #{matnr} and vkorg = #{vkorg} and vtweg = #{vtweg} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteMvke" parameterType="com.yhlo.oa.entity.It_MvkeVO">
+        delete from  it_mvke where id = #{id}
+    </delete>
+
+
+    <insert id="insertMbew" parameterType="com.yhlo.oa.entity.It_MbewVO">
+        insert into it_mbew (matnr,bwkey,bklas,lvorm,vprsv,verpr,stprs,peinh,create_time)
+        values(
+                  #{matnr, jdbcType=VARCHAR},
+                  #{bwkey, jdbcType=VARCHAR},
+                  #{bklas, jdbcType=VARCHAR},
+                  #{lvorm, jdbcType=VARCHAR},
+                  #{vprsv, jdbcType=VARCHAR},
+                  #{verpr, jdbcType=VARCHAR},
+                  #{stprs, jdbcType=VARCHAR},
+                  #{peinh, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateMbew" parameterType="com.yhlo.oa.entity.It_MbewVO">
+        update it_mbew
+            set
+                matnr = #{matnr}, bwkey = #{bwkey}, bklas = #{bklas},lvorm = #{lvorm},
+                vprsv = #{vprsv}, verpr = #{verpr}, stprs = #{stprs},peinh = #{peinh},
+                create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+
+    <select id="queryMbewListByParam" resultType="com.yhlo.oa.entity.It_MbewVO" parameterType="com.yhlo.oa.entity.It_MbewVO">
+        SELECT id as id,
+               matnr as matnr,
+               bwkey as bwkey,
+               bklas as bklas,
+               lvorm as lvorm,
+               vprsv as vprsv,
+               verpr as verpr,
+               stprs as stprs,
+               peinh as peinh,
+               create_time as create_time
+        FROM it_mbew where matnr = #{matnr} and bwkey = #{bwkey}
+    </select>
+
+
+    <select id="checkMbewExist" resultType="com.yhlo.oa.entity.It_MbewVO" parameterType="com.yhlo.oa.entity.It_MbewVO">
+        SELECT id as id,
+               matnr as matnr,
+               bwkey as bwkey,
+               bklas as bklas,
+               lvorm as lvorm,
+               vprsv as vprsv,
+               verpr as verpr,
+               stprs as stprs,
+               peinh as peinh,
+               create_time as create_time
+        FROM it_mbew where matnr = #{matnr} and bwkey = #{bwkey} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteMbew" parameterType="com.yhlo.oa.entity.It_MbewVO">
+        delete from  it_mbew where id = #{id}
+    </delete>
+
+
+    <insert id="insertMarm" parameterType="com.yhlo.oa.entity.It_MarmVO">
+        insert into it_marm (matnr,meinh,umrez,umren,create_time)
+        values(
+                  #{matnr, jdbcType=VARCHAR},
+                  #{meinh, jdbcType=VARCHAR},
+                  #{umrez, jdbcType=VARCHAR},
+                  #{umren, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateMarm" parameterType="com.yhlo.oa.entity.It_MarmVO">
+        update it_marm
+            set
+                matnr = #{matnr}, meinh = #{meinh}, umrez = #{umrez},umren = #{umren},
+                create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+
+    <select id="queryMarmListByParam" resultType="com.yhlo.oa.entity.It_MarmVO" parameterType="com.yhlo.oa.entity.It_MarmVO">
+        SELECT id as id,
+               matnr as matnr,
+               meinh as meinh,
+               umrez as umrez,
+               umren as umren,
+               create_time as create_time
+        FROM it_marm where matnr = #{matnr} and meinh = #{meinh}
+    </select>
+
+
+    <select id="checkMarmExist" resultType="com.yhlo.oa.entity.It_MarmVO" parameterType="com.yhlo.oa.entity.It_MarmVO">
+        SELECT id as id,
+               matnr as matnr,
+               meinh as meinh,
+               umrez as umrez,
+               umren as umren,
+               create_time as create_time
+        FROM it_marm where matnr = #{matnr} and meinh = #{meinh} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteMarm" parameterType="com.yhlo.oa.entity.It_MarmVO">
+        delete from  it_marm where id = #{id}
+    </delete>
+
+
+    <insert id="insertMard" parameterType="com.yhlo.oa.entity.It_MardVO">
+        insert into it_mard (matnr,werks,lgort,lvorm,labst,create_time)
+        values(
+                  #{matnr, jdbcType=VARCHAR},
+                  #{werks, jdbcType=VARCHAR},
+                  #{lgort, jdbcType=VARCHAR},
+                  #{lvorm, jdbcType=VARCHAR},
+                  #{labst, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateMard" parameterType="com.yhlo.oa.entity.It_MardVO">
+        update it_mard
+        set
+            matnr = #{matnr}, werks = #{werks}, lgort = #{lgort},lvorm = #{lvorm},
+            labst = #{labst}, create_time = #{create_time},
+            last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+    <select id="queryMardListByParam" resultType="com.yhlo.oa.entity.It_MardVO" parameterType="com.yhlo.oa.entity.It_MardVO">
+        SELECT id as id,
+               matnr as matnr,
+               werks as werks,
+               lgort as lgort,
+               lvorm as lvorm,
+               labst as labst,
+               create_time as create_time
+        FROM it_mard where matnr = #{matnr} and werks = #{werks} and lgort = #{lgort}
+    </select>
+
+
+    <select id="checkMardExist" resultType="com.yhlo.oa.entity.It_MardVO" parameterType="com.yhlo.oa.entity.It_MardVO">
+        SELECT id as id,
+               matnr as matnr,
+               werks as werks,
+               lgort as lgort,
+               lvorm as lvorm,
+               labst as labst,
+               create_time as create_time
+        FROM it_mard where matnr = #{matnr} and werks = #{werks} and lgort = #{lgort} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteMard" parameterType="com.yhlo.oa.entity.It_MardVO">
+        delete from  it_mard where id = #{id}
+    </delete>
+
+
+    <insert id="insertMarc" parameterType="com.yhlo.oa.entity.It_MarcVO">
+        insert into it_marc (matnr,werks,lvorm,xchpf,xchar,ladgr,sernp,create_time)
+        values(
+                  #{matnr, jdbcType=VARCHAR},
+                  #{werks, jdbcType=VARCHAR},
+                  #{lvorm, jdbcType=VARCHAR},
+                  #{xchpf, jdbcType=VARCHAR},
+                  #{xchar, jdbcType=VARCHAR},
+                  #{ladgr, jdbcType=VARCHAR},
+                  #{sernp, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateMarc" parameterType="com.yhlo.oa.entity.It_MarcVO">
+        update it_marc
+        set
+            matnr = #{matnr}, werks = #{werks}, lvorm = #{lvorm},xchpf = #{xchpf},
+            xchar = #{xchar}, ladgr = #{ladgr}, sernp = #{sernp},create_time = #{create_time},
+            last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+    <select id="queryMarcListByParam" resultType="com.yhlo.oa.entity.It_MarcVO" parameterType="com.yhlo.oa.entity.It_MarcVO">
+        SELECT id as id,
+               matnr as matnr,
+               werks as werks,
+               lvorm as lvorm,
+               xchpf as xchpf,
+               xchar as xchar,
+               ladgr as ladgr,
+               sernp as sernp,
+               create_time as create_time
+        FROM it_marc where matnr = #{matnr} and werks = #{werks}
+    </select>
+
+
+    <select id="checkMarcExist" resultType="com.yhlo.oa.entity.It_MarcVO" parameterType="com.yhlo.oa.entity.It_MarcVO">
+        SELECT id as id,
+               matnr as matnr,
+               werks as werks,
+               lvorm as lvorm,
+               xchpf as xchpf,
+               xchar as xchar,
+               ladgr as ladgr,
+               sernp as sernp,
+               create_time as create_time
+        FROM it_marc where matnr = #{matnr} and werks = #{werks} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteMarc" parameterType="com.yhlo.oa.entity.It_MarcVO">
+        delete from  it_marc where id = #{id}
+    </delete>
+
+
+    <insert id="insertBut000" parameterType="com.yhlo.oa.entity.It_But000VO">
+        insert into it_but000 (partner,bu_group,name_org1,name_org2,name_org3,name_org4,bu_sort1,
+                               bu_sort2,zynum,zyfzdat,zyyxdat,zelnum,zelfzdat,zjynum,zjyfzdat,
+                               zjyyxdat,zyyfzdat,zscbapz,zscbarq,zfr,crusr,crdat,crtim,chusr,
+                               chdat,chtim,create_time)
+        values(
+                  #{partner, jdbcType=VARCHAR},#{bu_group, jdbcType=VARCHAR},
+                  #{name_org1, jdbcType=VARCHAR},#{name_org2, jdbcType=VARCHAR},
+                  #{name_org3, jdbcType=VARCHAR},#{name_org4, jdbcType=VARCHAR},
+                  #{bu_sort1, jdbcType=VARCHAR},#{bu_sort2, jdbcType=VARCHAR},
+                  #{zynum, jdbcType=VARCHAR},#{zyfzdat, jdbcType=VARCHAR},
+                  #{zyyxdat, jdbcType=VARCHAR},#{zelnum, jdbcType=VARCHAR},
+                  #{zelfzdat, jdbcType=VARCHAR}, #{zjynum, jdbcType=VARCHAR},
+                  #{zjyfzdat, jdbcType=VARCHAR},#{zjyyxdat, jdbcType=VARCHAR},
+                  #{zyyfzdat, jdbcType=VARCHAR},#{zscbapz, jdbcType=VARCHAR},
+                  #{zscbarq, jdbcType=VARCHAR},#{zfr, jdbcType=VARCHAR},
+                  #{crusr, jdbcType=VARCHAR},#{crdat, jdbcType=VARCHAR},
+                  #{crtim, jdbcType=VARCHAR},#{chusr, jdbcType=VARCHAR},
+                  #{chdat, jdbcType=VARCHAR}, #{chtim, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateBut000" parameterType="com.yhlo.oa.entity.It_But000VO">
+        update it_but000
+            set
+                partner = #{partner}, bu_group = #{bu_group}, name_org1 = #{name_org1},name_org2 = #{name_org2},
+                name_org3 = #{name_org3}, name_org4 = #{name_org4}, bu_sort1 = #{bu_sort1},bu_sort2 = #{bu_sort2},
+                zynum = #{zynum}, zyfzdat = #{zyfzdat}, zyyxdat = #{zyyxdat},zelnum = #{zelnum},
+                zelfzdat = #{zelfzdat}, zjynum = #{zjynum}, zjyfzdat = #{zjyfzdat},zjyyxdat = #{zjyyxdat},
+                zyyfzdat = #{zyyfzdat}, zscbapz = #{zscbapz}, zscbarq = #{zscbarq},zfr = #{zfr},
+                crusr = #{crusr}, crdat = #{crdat}, crtim = #{crtim},chusr = #{chusr},
+                chdat = #{chdat}, chtim = #{chtim}, create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+    <select id="queryBut000ListByParam" resultType="com.yhlo.oa.entity.It_But000VO" parameterType="com.yhlo.oa.entity.It_But000VO">
+        SELECT id as id,
+               partner as partner,bu_group as bu_group,name_org1 as name_org1,name_org2 as name_org2,
+               name_org3 as name_org3,name_org4 as name_org4,bu_sort1 as bu_sort1,bu_sort2 as bu_sort2,
+               zynum as zynum,zyfzdat as zyfzdat,zyyxdat as zyyxdat,zelnum as zelnum,
+               zelfzdat as zelfzdat,zjynum as zjynum,zjyfzdat as zjyfzdat,zjyyxdat as zjyyxdat,
+               zyyfzdat as zyyfzdat,zscbapz as zscbapz,zscbarq as zscbarq,zfr as zfr,crusr as crusr,
+               crdat as crdat,crtim as crtim,chusr as chusr,chdat as chdat,chtim as chtim,
+               create_time as create_time
+        FROM it_but000 where partner = #{partner} and bu_group = #{bu_group}
+    </select>
+
+
+    <select id="checkBut000Exist" resultType="com.yhlo.oa.entity.It_But000VO" parameterType="com.yhlo.oa.entity.It_But000VO">
+        SELECT id as id,
+               partner as partner,bu_group as bu_group,name_org1 as name_org1,name_org2 as name_org2,
+               name_org3 as name_org3,name_org4 as name_org4,bu_sort1 as bu_sort1,bu_sort2 as bu_sort2,
+               zynum as zynum,zyfzdat as zyfzdat,zyyxdat as zyyxdat,zelnum as zelnum,
+               zelfzdat as zelfzdat,zjynum as zjynum,zjyfzdat as zjyfzdat,zjyyxdat as zjyyxdat,
+               zyyfzdat as zyyfzdat,zscbapz as zscbapz,zscbarq as zscbarq,zfr as zfr,crusr as crusr,
+               crdat as crdat,crtim as crtim,chusr as chusr,chdat as chdat,chtim as chtim,
+               create_time as create_time
+        FROM it_but000 where partner = #{partner} and bu_group = #{bu_group} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteBut000" parameterType="com.yhlo.oa.entity.It_But000VO">
+        delete from  it_but000 where id = #{id}
+    </delete>
+
+
+    <insert id="insertKna1" parameterType="com.yhlo.oa.entity.It_Kna1VO">
+        insert into it_kna1 (kunnr,land1,name1,name2,ort01,pstlz,regio,stras,
+                             telf1,telfx,adrnr,erdat,ernam,ktokd,spras,
+                             telf2,stcd5,kukla,create_time)
+        values(
+                  #{kunnr, jdbcType=VARCHAR},#{land1, jdbcType=VARCHAR},
+                  #{name1, jdbcType=VARCHAR},#{name2, jdbcType=VARCHAR},
+                  #{ort01, jdbcType=VARCHAR},#{pstlz, jdbcType=VARCHAR},
+                  #{regio, jdbcType=VARCHAR},#{stras, jdbcType=VARCHAR},
+                  #{telf1, jdbcType=VARCHAR},#{telfx, jdbcType=VARCHAR},
+                  #{adrnr, jdbcType=VARCHAR},#{erdat, jdbcType=VARCHAR},
+                  #{ernam, jdbcType=VARCHAR}, #{ktokd, jdbcType=VARCHAR},
+                  #{spras, jdbcType=VARCHAR},#{telf2, jdbcType=VARCHAR},
+                  #{stcd5, jdbcType=VARCHAR},#{kukla, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateKna1" parameterType="com.yhlo.oa.entity.It_Kna1VO">
+        update it_kna1
+            set
+                kunnr = #{kunnr}, land1 = #{land1}, name1 = #{name1},name2 = #{name2},
+                ort01 = #{ort01}, pstlz = #{pstlz}, regio = #{regio},stras = #{stras},
+                telf1 = #{telf1}, telfx = #{telfx}, adrnr = #{adrnr},erdat = #{erdat},
+                ernam = #{ernam}, ktokd = #{ktokd}, spras = #{spras},telf2 = #{telf2},
+                stcd5 = #{stcd5}, kukla = #{kukla}, create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+
+    <select id="queryKna1ListByParam" resultType="com.yhlo.oa.entity.It_Kna1VO" parameterType="com.yhlo.oa.entity.It_Kna1VO">
+        SELECT id as id,
+               kunnr as kunnr,land1 as land1,name1 as name1,name2 as name2,ort01 as ort01,
+               pstlz as pstlz,regio as regio,stras as stras,telf1 as telf1,telfx as telfx,
+               adrnr as adrnr,erdat as erdat,ernam as ernam,ktokd as ktokd,spras as spras,
+               telf2 as telf2,stcd5 as stcd5,kukla as kukla,
+               create_time as create_time
+        FROM it_kna1 where kunnr = #{kunnr}
+    </select>
+
+
+    <select id="checkKna1Exist" resultType="com.yhlo.oa.entity.It_Kna1VO" parameterType="com.yhlo.oa.entity.It_Kna1VO">
+        SELECT id as id,
+               kunnr as kunnr,land1 as land1,name1 as name1,name2 as name2,ort01 as ort01,
+               pstlz as pstlz,regio as regio,stras as stras,telf1 as telf1,telfx as telfx,
+               adrnr as adrnr,erdat as erdat,ernam as ernam,ktokd as ktokd,spras as spras,
+               telf2 as telf2,stcd5 as stcd5,kukla as kukla,
+               create_time as create_time
+        FROM it_kna1 where kunnr = #{kunnr} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteKna1" parameterType="com.yhlo.oa.entity.It_Kna1VO">
+        delete from  it_kna1 where id = #{id}
+    </delete>
+
+
+
+    <insert id="insertKnb1" parameterType="com.yhlo.oa.entity.It_Knb1VO">
+        insert into it_knb1 (kunnr,bukrs,erdat,ernam,akont,zwels,zterm,sperr,
+                             loevm,create_time)
+        values(
+                  #{kunnr, jdbcType=VARCHAR},#{bukrs, jdbcType=VARCHAR},
+                  #{erdat, jdbcType=VARCHAR},#{ernam, jdbcType=VARCHAR},
+                  #{akont, jdbcType=VARCHAR},#{zwels, jdbcType=VARCHAR},
+                  #{zterm, jdbcType=VARCHAR},#{sperr, jdbcType=VARCHAR},
+                  #{loevm, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateKnb1" parameterType="com.yhlo.oa.entity.It_Knb1VO">
+        update it_knb1
+            set
+                kunnr = #{kunnr}, bukrs = #{bukrs}, erdat = #{erdat},ernam = #{ernam},
+                akont = #{akont}, zwels = #{zwels}, zterm = #{zterm},sperr = #{sperr},
+                loevm = #{loevm}, create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+    <select id="queryKnb1ListByParam" resultType="com.yhlo.oa.entity.It_Knb1VO" parameterType="com.yhlo.oa.entity.It_Knb1VO">
+        SELECT id as id,
+               kunnr as kunnr,bukrs as bukrs,erdat as erdat,ernam as ernam,akont as akont,
+               zwels as zwels,zterm as zterm,sperr as sperr,loevm as loevm,
+               create_time as create_time
+        FROM it_knb1 where kunnr = #{kunnr} and bukrs = #{bukrs}
+    </select>
+
+
+    <select id="checkKnb1Exist" resultType="com.yhlo.oa.entity.It_Knb1VO" parameterType="com.yhlo.oa.entity.It_Knb1VO">
+        SELECT id as id,
+               kunnr as kunnr,bukrs as bukrs,erdat as erdat,ernam as ernam,akont as akont,
+               zwels as zwels,zterm as zterm,sperr as sperr,loevm as loevm,
+               create_time as create_time
+        FROM it_knb1 where kunnr = #{kunnr} and bukrs = #{bukrs} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteKnb1" parameterType="com.yhlo.oa.entity.It_Knb1VO">
+        delete from  it_knb1 where id = #{id}
+    </delete>
+
+
+
+    <insert id="insertKnvv" parameterType="com.yhlo.oa.entity.It_KnvvVO">
+        insert into it_knvv (kunnr,vkorg,vtweg,spart,ernam,erdat,begru,loevm,
+                             versg,aufsd,kalks,kdgrp,bzirk,konda,pltyp,inco1,
+                             inco2,lifsd,kzazu,vsbed,faksd,waers,klabc,ktgrd,
+                             zterm,vwerk,vkgrp,vkbur,prfre,kkber,podkz,create_time)
+        values(
+                  #{kunnr, jdbcType=VARCHAR},#{vkorg, jdbcType=VARCHAR},
+                  #{vtweg, jdbcType=VARCHAR},#{spart, jdbcType=VARCHAR},
+                  #{ernam, jdbcType=VARCHAR},#{erdat, jdbcType=VARCHAR},
+                  #{begru, jdbcType=VARCHAR},#{loevm, jdbcType=VARCHAR},
+                  #{versg, jdbcType=VARCHAR},#{aufsd, jdbcType=VARCHAR},
+                  #{kalks, jdbcType=VARCHAR},#{kdgrp, jdbcType=VARCHAR},
+                  #{bzirk, jdbcType=VARCHAR},#{konda, jdbcType=VARCHAR},
+                  #{pltyp, jdbcType=VARCHAR},#{inco1, jdbcType=VARCHAR},
+                  #{inco2, jdbcType=VARCHAR},#{lifsd, jdbcType=VARCHAR},
+                  #{kzazu, jdbcType=VARCHAR},#{vsbed, jdbcType=VARCHAR},
+                  #{faksd, jdbcType=VARCHAR},#{waers, jdbcType=VARCHAR},
+                  #{klabc, jdbcType=VARCHAR},#{ktgrd, jdbcType=VARCHAR},
+                  #{zterm, jdbcType=VARCHAR},#{vwerk, jdbcType=VARCHAR},
+                  #{vkgrp, jdbcType=VARCHAR},#{vkbur, jdbcType=VARCHAR},
+                  #{prfre, jdbcType=VARCHAR},#{kkber, jdbcType=VARCHAR},
+                  #{podkz, jdbcType=VARCHAR},#{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateKnvv" parameterType="com.yhlo.oa.entity.It_KnvvVO">
+        update it_knvv
+            set
+                kunnr = #{kunnr},vkorg = #{vkorg},vtweg = #{vtweg},spart = #{spart},
+                ernam = #{ernam},erdat = #{erdat},begru = #{begru},loevm = #{loevm},
+                versg = #{versg},aufsd = #{aufsd},kalks = #{kalks},kdgrp = #{kdgrp},
+                bzirk = #{bzirk},konda = #{konda},pltyp = #{pltyp},inco1 = #{inco1},
+                inco2 = #{inco2},lifsd = #{lifsd},kzazu = #{kzazu},vsbed = #{vsbed},
+                faksd = #{faksd},waers = #{waers},klabc = #{klabc},ktgrd = #{ktgrd},
+                zterm = #{zterm},vwerk = #{vwerk},vkgrp = #{vkgrp},vkbur = #{vkbur},
+                prfre = #{prfre},kkber = #{kkber},podkz = #{podkz},create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+
+    </update>
+
+
+    <select id="queryKnvvListByParam" resultType="com.yhlo.oa.entity.It_KnvvVO" parameterType="com.yhlo.oa.entity.It_KnvvVO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,vtweg as vtweg,spart as spart,ernam as ernam,
+               erdat as erdat,begru as begru,loevm as loevm,versg as versg,aufsd as aufsd,
+               kalks as kalks,kdgrp as kdgrp,bzirk as bzirk,konda as konda,pltyp as pltyp,
+               inco1 as inco1,inco2 as inco2,lifsd as lifsd,kzazu as kzazu,vsbed as vsbed,
+               faksd as faksd,waers as waers,klabc as klabc,ktgrd as ktgrd,zterm as zterm,
+               vwerk as vwerk,vkgrp as vkgrp,vkbur as vkbur,prfre as prfre,kkber as kkber,
+               podkz as podkz,create_time as create_time
+        FROM it_knvv where kunnr = #{kunnr} and vkorg = #{vkorg} and vtweg = #{vtweg} and spart = #{spart}
+    </select>
+
+
+    <select id="checkKnvvExist" resultType="com.yhlo.oa.entity.It_KnvvVO" parameterType="com.yhlo.oa.entity.It_KnvvVO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,vtweg as vtweg,spart as spart,ernam as ernam,
+               erdat as erdat,begru as begru,loevm as loevm,versg as versg,aufsd as aufsd,
+               kalks as kalks,kdgrp as kdgrp,bzirk as bzirk,konda as konda,pltyp as pltyp,
+               inco1 as inco1,inco2 as inco2,lifsd as lifsd,kzazu as kzazu,vsbed as vsbed,
+               faksd as faksd,waers as waers,klabc as klabc,ktgrd as ktgrd,zterm as zterm,
+               vwerk as vwerk,vkgrp as vkgrp,vkbur as vkbur,prfre as prfre,kkber as kkber,
+               podkz as podkz,create_time as create_time
+        FROM it_knvv where kunnr = #{kunnr} and vkorg = #{vkorg} and vtweg = #{vtweg} and spart = #{spart} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteKnvv" parameterType="com.yhlo.oa.entity.It_KnvvVO">
+        delete from  it_knvv where id = #{id}
+    </delete>
+
+
+
+    <insert id="insertKnvp" parameterType="com.yhlo.oa.entity.It_KnvpVO">
+        insert into it_knvp (kunnr,vkorg,vtweg,spart,parvw,parza,kunn2,lifnr,
+                             pernr,parnr,knref,defpa,create_time)
+        values(
+                  #{kunnr, jdbcType=VARCHAR},#{vkorg, jdbcType=VARCHAR},
+                  #{vtweg, jdbcType=VARCHAR},#{spart, jdbcType=VARCHAR},
+                  #{parvw, jdbcType=VARCHAR},#{parza, jdbcType=VARCHAR},
+                  #{kunn2, jdbcType=VARCHAR},#{lifnr, jdbcType=VARCHAR},
+                  #{pernr, jdbcType=VARCHAR},#{parnr, jdbcType=VARCHAR},
+                  #{knref, jdbcType=VARCHAR},#{defpa, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateKnvp" parameterType="com.yhlo.oa.entity.It_KnvpVO">
+        update it_knvp
+            set
+                kunnr = #{kunnr}, vkorg = #{vkorg},vtweg = #{vtweg},spart = #{spart},
+                parvw = #{parvw}, parza = #{parza},kunn2 = #{kunn2},lifnr = #{lifnr},
+                pernr = #{pernr}, parnr = #{parnr},knref = #{knref},defpa = #{defpa},
+                create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+    </update>
+
+
+    <select id="queryKnvpListByParam" resultType="com.yhlo.oa.entity.It_KnvpVO" parameterType="com.yhlo.oa.entity.It_KnvpVO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,vtweg as vtweg,spart as spart,parvw as parvw,
+               parza as parza,kunn2 as kunn2,lifnr as lifnr,pernr as pernr,parnr as parnr,
+               knref as knref,defpa as defpa,create_time as create_time
+        FROM it_knvp where kunnr = #{kunnr} and vkorg = #{vkorg} and vtweg = #{vtweg}
+                       and spart = #{spart} and parvw = #{parvw} and parza = #{parza}
+    </select>
+
+
+    <select id="checkKnvpExist" resultType="com.yhlo.oa.entity.It_KnvpVO" parameterType="com.yhlo.oa.entity.It_KnvpVO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,vtweg as vtweg,spart as spart,parvw as parvw,
+               parza as parza,kunn2 as kunn2,lifnr as lifnr,pernr as pernr,parnr as parnr,
+               knref as knref,defpa as defpa,create_time as create_time
+        FROM it_knvp where kunnr = #{kunnr} and vkorg = #{vkorg} and vtweg = #{vtweg}
+                       and spart = #{spart} and parvw = #{parvw} and parza = #{parza} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteKnvp" parameterType="com.yhlo.oa.entity.It_KnvpVO">
+        delete from  it_knvp where id = #{id}
+    </delete>
+
+
+
+    <insert id="insertAdrc" parameterType="com.yhlo.oa.entity.It_AdrcVO">
+        insert into it_adrc (addrnumber,name1,name2,name3,name4,str_suppl1,str_suppl2,str_suppl3,
+                             location,remark,create_time)
+        values(
+                  #{addrnumber, jdbcType=VARCHAR},#{name1, jdbcType=VARCHAR},
+                  #{name2, jdbcType=VARCHAR},#{name3, jdbcType=VARCHAR},
+                  #{name4, jdbcType=VARCHAR},#{str_suppl1, jdbcType=VARCHAR},
+                  #{str_suppl2, jdbcType=VARCHAR},#{str_suppl3, jdbcType=VARCHAR},
+                  #{location, jdbcType=VARCHAR},#{remark, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateAdrc" parameterType="com.yhlo.oa.entity.It_AdrcVO">
+        update it_adrc
+        set
+            addrnumber = #{addrnumber}, name1 = #{name1},name2 = #{name2},name3 = #{name3},
+            name4 = #{name4}, str_suppl1 = #{str_suppl1},str_suppl2 = #{str_suppl2},str_suppl3 = #{str_suppl3},
+            location = #{location}, remark = #{remark},create_time = #{create_time},
+            last_modified_time = sysdate()
+        where id = #{id}
+    </update>
+
+
+    <select id="queryAdrcListByParam" resultType="com.yhlo.oa.entity.It_AdrcVO" parameterType="com.yhlo.oa.entity.It_AdrcVO">
+        SELECT id as id,
+               addrnumber as addrnumber,name1 as name1,name2 as name2,name3 as name3,name4 as name4,
+               str_suppl1 as str_suppl1,str_suppl2 as str_suppl2,str_suppl3 as str_suppl3,
+               location as location,remark as remark,
+               create_time as create_time
+        FROM it_adrc where addrnumber = #{addrnumber}
+    </select>
+
+
+    <select id="checkAdrcExist" resultType="com.yhlo.oa.entity.It_AdrcVO" parameterType="com.yhlo.oa.entity.It_AdrcVO">
+        SELECT id as id,
+               addrnumber as addrnumber,name1 as name1,name2 as name2,name3 as name3,name4 as name4,
+               str_suppl1 as str_suppl1,str_suppl2 as str_suppl2,str_suppl3 as str_suppl3,
+               location as location,remark as remark,
+               create_time as create_time
+        FROM it_adrc where addrnumber = #{addrnumber} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteAdrc" parameterType="com.yhlo.oa.entity.It_AdrcVO">
+        delete from  it_adrc where id = #{id}
+    </delete>
+
+
+
+    <insert id="insertZtsd_012" parameterType="com.yhlo.oa.entity.It_Ztsd_012VO">
+        insert into it_ztsd_012 (kunnr,vkorg,vtweg,matnr,name1,arktx,kdmat,postx,
+                                 zkdmat_2,zkdmat_3,zkdmat_4,zernam1,zerdat1,zernam2,
+                                 zerdat2,create_time)
+        values(
+                  #{kunnr, jdbcType=VARCHAR},#{vkorg, jdbcType=VARCHAR},
+                  #{vtweg, jdbcType=VARCHAR},#{matnr, jdbcType=VARCHAR},
+                  #{name1, jdbcType=VARCHAR},#{arktx, jdbcType=VARCHAR},
+                  #{kdmat, jdbcType=VARCHAR},#{postx, jdbcType=VARCHAR},
+                  #{zkdmat_2, jdbcType=VARCHAR},#{zkdmat_3, jdbcType=VARCHAR},
+                  #{zkdmat_4, jdbcType=VARCHAR},#{zernam1, jdbcType=VARCHAR},
+                  #{zerdat1, jdbcType=VARCHAR},#{zernam2, jdbcType=VARCHAR},
+                  #{zerdat2, jdbcType=VARCHAR},
+                  #{create_time, jdbcType=VARCHAR}
+              )
+    </insert>
+
+    <update id="updateZtsd_012" parameterType="com.yhlo.oa.entity.It_Ztsd_012VO">
+        update it_ztsd_012
+            set
+                kunnr = #{kunnr}, vkorg = #{vkorg},vtweg = #{vtweg},matnr = #{matnr},
+                name1 = #{name1}, arktx = #{arktx},kdmat = #{kdmat},postx = #{postx},
+                zkdmat_2 = #{zkdmat_2}, zkdmat_3 = #{zkdmat_3},zkdmat_4 = #{zkdmat_4},zernam1 = #{zernam1},
+                zerdat1 = #{zerdat1}, zernam2 = #{zernam2},zerdat2 = #{zerdat2},create_time = #{create_time},
+                last_modified_time = sysdate()
+        where id = #{id}
+    </update>
+
+
+    <select id="queryZtsd_012ListByParam" resultType="com.yhlo.oa.entity.It_Ztsd_012VO" parameterType="com.yhlo.oa.entity.It_Ztsd_012VO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,vtweg as vtweg,matnr as matnr,name1 as name1,
+               arktx as arktx,kdmat as kdmat,postx as postx,zkdmat_2 as zkdmat_2,zkdmat_3 as zkdmat_3,
+               zkdmat_4 as zkdmat_4,zernam1 as zernam1,zerdat1 as zerdat1,zernam2 as zernam2,
+               zerdat2 as zerdat2,create_time as create_time
+        FROM it_ztsd_012 where kunnr = #{kunnr} and vkorg = #{vkorg} and vtweg = #{vtweg}
+                           and matnr = #{matnr}
+    </select>
+
+
+    <select id="checkZtsd_012Exist" resultType="com.yhlo.oa.entity.It_Ztsd_012VO" parameterType="com.yhlo.oa.entity.It_Ztsd_012VO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,vtweg as vtweg,matnr as matnr,name1 as name1,
+               arktx as arktx,kdmat as kdmat,postx as postx,zkdmat_2 as zkdmat_2,zkdmat_3 as zkdmat_3,
+               zkdmat_4 as zkdmat_4,zernam1 as zernam1,zerdat1 as zerdat1,zernam2 as zernam2,
+               zerdat2 as zerdat2,create_time as create_time
+        FROM it_ztsd_012 where kunnr = #{kunnr} and vkorg = #{vkorg} and vtweg = #{vtweg}
+                           and matnr = #{matnr} and create_time = #{create_time}
+    </select>
+
+        <delete id="deleteZtsd_012" parameterType="com.yhlo.oa.entity.It_Ztsd_012VO">
+        delete from  it_ztsd_012 where id = #{id}
+    </delete>
+
+
+
+
+    <insert id="insertZtsd_002" parameterType="com.yhlo.oa.entity.It_Ztsd_002VO">
+        insert into it_ztsd_002 (kunnr,vkorg,knumh,name1,c_default,name2,datab,datbi,
+                                 loevm_ko,zernam1,zerdat1,zernam2,zerdat2,create_time
+                                 )
+        values(
+                  #{kunnr, jdbcType=VARCHAR},#{vkorg, jdbcType=VARCHAR},
+                  #{knumh, jdbcType=VARCHAR},#{name1, jdbcType=VARCHAR},
+                  #{c_default, jdbcType=VARCHAR},#{name2, jdbcType=VARCHAR},
+                  #{datab, jdbcType=VARCHAR},#{datbi, jdbcType=VARCHAR},
+                  #{loevm_ko, jdbcType=VARCHAR},#{zernam1, jdbcType=VARCHAR},
+                  #{zerdat1, jdbcType=VARCHAR},#{zernam2, jdbcType=VARCHAR},
+                  #{zerdat2, jdbcType=VARCHAR},#{create_time, jdbcType=VARCHAR}
+
+              )
+    </insert>
+
+    <update id="updateZtsd_002" parameterType="com.yhlo.oa.entity.It_Ztsd_002VO">
+        update it_ztsd_002
+        set
+            kunnr = #{kunnr}, vkorg = #{vkorg},knumh = #{knumh},name1 = #{name1},
+            c_default = #{c_default}, name2 = #{name2},datab = #{datab},datbi = #{datbi},
+            loevm_ko = #{loevm_ko}, zernam1 = #{zernam1},zerdat1 = #{zerdat1},zernam2 = #{zernam2},
+            zerdat2 = #{zerdat2},create_time = #{create_time},
+            last_modified_time = sysdate()
+        where id = #{id}
+    </update>
+
+
+    <select id="queryZtsd_002ListByParam" resultType="com.yhlo.oa.entity.It_Ztsd_002VO" parameterType="com.yhlo.oa.entity.It_Ztsd_002VO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,knumh as knumh,name1 as name1,
+               c_default as c_default,name2 as name2,datab as datab,datbi as datbi,
+               loevm_ko as loevm_ko,zernam1 as zernam1,zerdat1 as zerdat1,zernam2 as zernam2,
+               zerdat2 as zerdat2,create_time as create_time
+        FROM it_ztsd_002 where kunnr = #{kunnr} and vkorg = #{vkorg} and knumh = #{knumh}
+
+    </select>
+
+
+    <select id="checkZtsd_002Exist" resultType="com.yhlo.oa.entity.It_Ztsd_002VO" parameterType="com.yhlo.oa.entity.It_Ztsd_002VO">
+        SELECT id as id,
+               kunnr as kunnr,vkorg as vkorg,knumh as knumh,name1 as name1,
+               c_default as c_default,name2 as name2,datab as datab,datbi as datbi,
+               loevm_ko as loevm_ko,zernam1 as zernam1,zerdat1 as zerdat1,zernam2 as zernam2,
+               zerdat2 as zerdat2,create_time as create_time
+        FROM it_ztsd_002 where kunnr = #{kunnr} and vkorg = #{vkorg}
+                           and knumh = #{knumh} and create_time = #{create_time}
+    </select>
+
+    <delete id="deleteZtsd_002" parameterType="com.yhlo.oa.entity.It_Ztsd_002VO">
+        delete from  it_ztsd_002 where id = #{id}
+    </delete>
+
+
+    <!--通过返利编号校验改返利单是否存在-->
+    <select id="checkZtsd206_headExist" resultType="com.yhlo.oa.entity.Ztsd206_headVO" parameterType="com.yhlo.oa.entity.Ztsd206_headVO">
+        SELECT id as id,
+               zzbname as zzbname,zzbname_txt as zzbname_txt,zcont as zcont,zcont_txt as zcont_txt,
+               kunnr as kunnr,name1 as name1,vkorg as vkorg,vtext as vtext,zrebate as zrebate,
+               zrebate_used as zrebate_used,zrebate_last as zrebate_last,datab as datab,datbi as datbi,
+               zkfrst as zkfrst,zzkl as zzkl,zname as zname,zname1 as zname1,zsh as zsh,
+               zdate_sh as zdate_sh,zdate as zdate,zdate1 as zdate1,ztime as ztime,ztime1 as ztime1,
+               ztime_sh as ztime_sh,zbase as zbase,zly as zly,zoa as zoa,zdel_h as zdel_h
+        FROM yhlo_ztsd206_head where zzbname = #{zzbname}
+    </select>
+
+    <!--添加返利策略-->
+    <insert id="insertZtsd206_head" parameterType="com.yhlo.oa.entity.Ztsd206_headVO">
+        insert into yhlo_ztsd206_head (zzbname,zzbname_txt,zcont,zcont_txt,kunnr,name1,vkorg,vtext,
+                                       zrebate,zrebate_used,zrebate_last,datab,datbi,zkfrst,zzkl,zname,
+                                       zname1,zsh,zdate_sh,zdate,zdate1,ztime,ztime1,ztime_sh,zbase,
+                                       zly,zoa,zdel_h
+        )
+        values(
+                  #{zzbname, jdbcType=VARCHAR},#{zzbname_txt, jdbcType=VARCHAR},
+                  #{zcont, jdbcType=VARCHAR},#{zcont_txt, jdbcType=VARCHAR},
+                  #{kunnr, jdbcType=VARCHAR},#{name1, jdbcType=VARCHAR},
+                  #{vkorg, jdbcType=VARCHAR},#{vtext, jdbcType=VARCHAR},
+                  #{zrebate, jdbcType=FLOAT},#{zrebate_used, jdbcType=FLOAT},
+                  #{zrebate_last, jdbcType=FLOAT},#{datab, jdbcType=VARCHAR},
+                  #{datbi, jdbcType=VARCHAR},#{zkfrst, jdbcType=VARCHAR},
+                  #{zzkl, jdbcType=FLOAT},#{zname, jdbcType=VARCHAR},
+                  #{zname1, jdbcType=FLOAT},#{zsh, jdbcType=VARCHAR},
+                  #{zdate_sh, jdbcType=FLOAT},#{zdate, jdbcType=VARCHAR},
+                  #{zdate1, jdbcType=FLOAT},#{ztime, jdbcType=VARCHAR},
+                  #{ztime1, jdbcType=FLOAT},#{ztime_sh, jdbcType=VARCHAR},
+                  #{zbase, jdbcType=FLOAT},#{zly, jdbcType=VARCHAR},
+                  #{zoa, jdbcType=FLOAT},#{zdel_h, jdbcType=VARCHAR}
+
+              )
+    </insert>
+
+    <!--添加返利策略-物料组行明细-->
+    <insert id="insertZtsd206_item" parameterType="com.yhlo.oa.entity.Ztsd206_ItemVO">
+        insert into yhlo_ztsd206_item (zzbname,zposnr,zzkl,matkl,wgbez,matnr,zdel
+        )
+        values(
+                  #{zzbname, jdbcType=VARCHAR},#{zposnr, jdbcType=VARCHAR},
+                  #{zzkl, jdbcType=FLOAT},#{matkl, jdbcType=VARCHAR},
+                  #{wgbez, jdbcType=VARCHAR},#{matnr, jdbcType=VARCHAR},
+                  #{zdel, jdbcType=VARCHAR}
+
+              )
+    </insert>
+
+
+    <!--添加返利策略-终端客户行明细-->
+    <insert id="insertZtsd206_kunnr_ec" parameterType="com.yhlo.oa.entity.Ztsd206_kunnr_ecVO">
+        insert into yhlo_ztsd206_kunnr_ec (zzbname,kunnr_ec,zzbname_txt
+        )
+        values(
+                  #{zzbname, jdbcType=VARCHAR},#{kunnr_ec, jdbcType=VARCHAR},
+                  #{zzbname_txt, jdbcType=VARCHAR}
+              )
+    </insert>
+
+
+    <!--通过返利编号+物料组 校验改返利单是否在物料组行表中存在-->
+    <select id="checkZtsd206_itemExist" resultType="com.yhlo.oa.entity.Ztsd206_ItemVO" parameterType="com.yhlo.oa.entity.Ztsd206_ItemVO">
+        SELECT id as id,
+               zzbname as zzbname,zposnr as zposnr,zzkl as zzkl,matkl as matkl,
+               wgbez as wgbez,matnr as matnr,zdel as zdel
+        FROM yhlo_ztsd206_item where zzbname = #{zzbname} and matkl = #{matkl}
+    </select>
+
+    <!--通过返利编号+终端客户 校验改返利单是否在终端客户行表中存在-->
+    <select id="checkZtsd206_kunnr_ecExist" resultType="com.yhlo.oa.entity.Ztsd206_kunnr_ecVO" parameterType="com.yhlo.oa.entity.Ztsd206_kunnr_ecVO">
+        SELECT id as id,
+               zzbname as zzbname,kunnr_ec as kunnr_ec,zzbname_txt as zzbname_txt
+        FROM yhlo_ztsd206_kunnr_ec where zzbname = #{zzbname} and kunnr_ec = #{kunnr_ec}
+    </select>
+
+
+
+</mapper>

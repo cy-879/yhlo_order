@@ -1,0 +1,19 @@
+Index: src/main/resources/application.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>server:\r\n  port: 8080\r\n  servlet:\r\n    context-path: /\r\n\r\n# 日志log\r\nlogging:\r\n  # ָ日志文件配置\r\n  config: classpath:log4j2.xml\r\n\r\nspring:\r\n  datasource:\r\n    type: com.alibaba.druid.pool.DruidDataSource\r\n    driverClassName: com.mysql.cj.jdbc.Driver\r\n    druid:\r\n      url: jdbc:mysql://localhost:3306/ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8\r\n      username: root\r\n      password: root\r\n      # 初始连接数\r\n      initialSize: 5\r\n      # 最小连接池数量\r\n      minIdle: 10\r\n      # 最大连接池数量\r\n      maxActive: 20\r\n      # 配置获取连接等待超时的时间\r\n      maxWait: 60000\r\n      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒\r\n      timeBetweenEvictionRunsMillis: 60000\r\n      # 配置一个连接在池中最小生存的时间，单位是毫秒\r\n      minEvictableIdleTimeMillis: 300000\r\n      # 配置一个连接在池中最大生存的时间，单位是毫秒\r\n      maxEvictableIdleTimeMillis: 900000\r\n\r\n# MyBatis\r\nmybatis:\r\n  # 搜索指定包别名\r\n  typeAliasesPackage: com.ruoyi.**.domain\r\n  # 配置mapper的扫描，找到所有的mapper.xml映射文件\r\n  mapperLocations: classpath*:mapper/**/*Mapper.xml\r\n  # 加载全局的配置文件\r\n  configLocation: classpath:mybatis/mybatis-config.xml
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/application.yml b/src/main/resources/application.yml
+--- a/src/main/resources/application.yml	(revision 7e8c76382e76e0a8267ba1e50c43b1b09022d40a)
++++ b/src/main/resources/application.yml	(date 1650780442806)
+@@ -34,7 +34,7 @@
+ # MyBatis
+ mybatis:
+   # 搜索指定包别名
+-  typeAliasesPackage: com.ruoyi.**.domain
++  typeAliasesPackage: com.yhlo.**.domain
+   # 配置mapper的扫描，找到所有的mapper.xml映射文件
+   mapperLocations: classpath*:mapper/**/*Mapper.xml
+   # 加载全局的配置文件
