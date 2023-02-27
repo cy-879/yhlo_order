@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f6e58a1b-6fc6-4da5-8bec-76e4818d69c1" name="Default Changelist" comment="代码提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/yhlo/oa/controller/GeneralOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yhlo/oa/controller/GeneralOrderController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,12 +84,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/img/icon" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15390813" />
     <property name="project.structure.side.proportion" value="0.30576715" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.VCS" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -442,7 +441,9 @@
       <workItem from="1676250867930" duration="20597000" />
       <workItem from="1676364593278" duration="2809000" />
       <workItem from="1676367433800" duration="1576000" />
-      <workItem from="1676421776627" duration="8455000" />
+      <workItem from="1676421776627" duration="14294000" />
+      <workItem from="1676541803105" duration="255000" />
+      <workItem from="1676865453450" duration="1232000" />
     </task>
     <task id="LOCAL-00001" summary="代码提交">
       <created>1649928556763</created>
@@ -542,7 +543,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676425799275</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="代码提交">
+      <created>1676442992169</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1676442992169</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
