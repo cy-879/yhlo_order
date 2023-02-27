@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f6e58a1b-6fc6-4da5-8bec-76e4818d69c1" name="Default Changelist" comment="代码提交">
+      <change afterPath="$PROJECT_DIR$/data/ordermg.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +85,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15390813" />
@@ -96,11 +97,11 @@
       <recent name="com.yhlo.oa.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ideaWorkspace\yhlo_order\data" />
       <recent name="D:\ideaWorkspace\yhlo_order\src\main\resources\img\icon" />
       <recent name="D:\ideaWorkspace\yhlo_order\src\main\resources\views" />
       <recent name="D:\ideaWorkspace\yhlo_order\src\main\resources" />
       <recent name="D:\ideaWorkspace\yhlo_oa\src\main\resources\img" />
-      <recent name="D:\ideaWorkspace\yhlo_oa\src\main\resources\img\icon" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ideaWorkspace\yhlo_oa\src\main\resources\mapper\order" />
@@ -444,6 +445,7 @@
       <workItem from="1676421776627" duration="14294000" />
       <workItem from="1676541803105" duration="255000" />
       <workItem from="1676865453450" duration="1232000" />
+      <workItem from="1677460899795" duration="339000" />
     </task>
     <task id="LOCAL-00001" summary="代码提交">
       <created>1649928556763</created>
@@ -550,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676442992169</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="代码提交">
+      <created>1677461096170</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1677461096170</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
